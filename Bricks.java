@@ -130,15 +130,14 @@ public class Bricks {
 	public Boolean checkBricks(Boolean down, int x, int y) {
 		
 		if (y < ((brickHeight + 5) * (getNumRows() - 1))) {
-			if (!this.checkActive(x)) {
 			//if (!down) 
-				for (int count = 0; count < this.numCols; count++) 
-	    			for (int counter = 0; counter < this.numRows; counter++) {
-	    				setBrickX(count).setBrickY(counter);
-	    				this.checkActive(x);
-	    			}
-	    		
-				return true;
+			for (int count = 0; count < this.numCols; count++) 
+    			for (int counter = 0; counter < this.numRows; counter++) {
+    				setBrickX(count).setBrickY(counter);
+    				this.checkActive(x);
+    			}
+    		
+			return true;
 		}
 		
 		return down;
