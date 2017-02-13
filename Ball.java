@@ -95,19 +95,28 @@ public class Ball {
 	}
 	
 	public Ball checkRight(int appletWidth) {
-		if ((this.getX() + width + 2) > appletWidth) this.right = false; 
+		if ((this.getX() + width + 2) > appletWidth) {
+			this.right = false;
+			incX = ThreadLocalRandom.current().nextInt(1, 5);
+		}
 		
 		return this;
 	}
 	
 	public Ball checkLeft() {
-		if (this.getX() <= 0) this.right = true; 
+		if (this.getX() <= 0) {
+			this.right = true;
+			incX = ThreadLocalRandom.current().nextInt(1, 5);
+		}
 		
 		return this;
 	}
 	
 	public Ball checkBottom(int appletHeight) {
-		if ((this.getY() + height + 2) > appletHeight) this.down = false;
+		if ((this.getY() + height + 2) > appletHeight) {
+			this.down = false;
+			incX = ThreadLocalRandom.current().nextInt(1, 5);
+		}
 		
 		return this;
 	}
@@ -115,7 +124,7 @@ public class Ball {
 	public void calculateLocation(int numRows, int appletWidth, int appletHeight) {
 		
 		// Randomize the angle of the ball between 1 & 3
-		incX = ThreadLocalRandom.current().nextInt(1, 3);
+		//incX = ThreadLocalRandom.current().nextInt(1, 5);
 		
 		// check location start and whether ball hits edges
 		checkStart().checkLeft().checkRight(appletWidth).checkBottom(appletHeight);
