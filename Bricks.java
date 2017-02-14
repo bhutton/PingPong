@@ -120,7 +120,12 @@ public class Bricks {
 	}
 	
 	public void checkActive(int x) {
-		if (this.getX() >= x-60 && this.getX() <= x+120) setInActive();
+		if (this.getX() >= x-60 && this.getX() <= x+120) {
+			setInActive();
+			
+		}
+		
+		//return false;
 	}
 	
 	public int wallHeight() {
@@ -129,15 +134,24 @@ public class Bricks {
 	
 	public Boolean checkBricks(Boolean down, int x, int y) {
 		
+		//Boolean isActive = false;
+		
+		if (y <= 0) return true;
+		
 		if (y < ((brickHeight + 5) * (getNumRows() - 1))) {
-			//if (!down) 
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
     				setBrickX(count).setBrickY(counter);
+    				getActive();
+    				
     				this.checkActive(x);
+
     			}
     		
-			return true;
+			
+			//if (isActive) return down; 
+			
+			//return down;
 		}
 		
 		return down;
