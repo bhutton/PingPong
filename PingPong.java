@@ -108,12 +108,14 @@ public class PingPong extends Applet implements Runnable {
 	    	
 	    	bricks.setRowLoc(0);
 	    	
-		    for (int counter = 5; counter <= bricks.wallHeight(); counter += 55) {
+		    for (int counter = 5; counter <= bricks.wallHeight()*8; counter += 55) {
 		    	
 		    	// Set Y Coordinate of Brick
 		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(counter);
 		    	
-		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), count, counter, null) : null; 		    	
+		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), count, counter, null) : null;
+		    	
+		    	if (!isActive) System.out.println(isActive);
 		    			    	
 		    	bricks.incRowLoc();
 		    }
@@ -121,6 +123,13 @@ public class PingPong extends Applet implements Runnable {
 		    bricks.incColLoc();
 	    }
 	    
+	    //System.out.println("num rows = " + bricks.getNumRows());
+	    
+	    
+	    
 	    bricks.setNumRows().setNumCols();
+	    //bricks.decRowLoc();
+	    
+	    System.out.println("num rows = " + bricks.getNumRows());
 	}
 }

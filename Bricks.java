@@ -87,9 +87,7 @@ public class Bricks {
 		return this.takenBricks[brickX][brickY][1];
 	}
 	
-	public void setInActive() {
-		this.takenBricks[brickX][brickY][2] = 1;
-	}
+	
 	
 	public Bricks setColLoc(int x) {
 		brickX = x;
@@ -115,18 +113,16 @@ public class Bricks {
 		brickY++;
 	}
 	
+	public void decRowLoc() {
+		brickY--;
+	}
+	
+	
 	public int getRowLoc() {
 		return brickY;
 	}
 	
-	public void checkActive(int x) {
-		if (this.getX() >= x-60 && this.getX() <= x+120) {
-			setInActive();
-			
-		}
-		
-		//return false;
-	}
+	
 	
 	public int wallHeight() {
 		return getNumRows() * 5;
@@ -138,13 +134,13 @@ public class Bricks {
 		
 		if (y <= 0) return true;
 		
-		if (y < ((brickHeight + 5) * (getNumRows() - 1))) {
+		if (y < ((brickHeight + 5) * (getNumRows()-1))) {
 			for (int count = 0; count < this.numCols; count++) 
-    			for (int counter = 0; counter < this.numRows; counter++) {
+    			for (int counter = this.numRows; counter >= 0; counter--) {
     				setBrickX(count).setBrickY(counter);
     				getActive();
     				
-    				this.checkActive(x);
+    				if (this.checkActive(x)) return true;
 
     			}
     		
@@ -158,9 +154,25 @@ public class Bricks {
 
 	}
 	
+	public Boolean checkActive(int x) {
+		if (this.getX() >= x-60 && this.getX() <= x+120) {
+			setInActive();
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
+	
 	public boolean getActive() {
 		if (this.takenBricks[brickX][brickY][2] == 0) return true;
 		else return false;
+	}
+	
+	public void setInActive() {
+		System.out.println(brickY);
+		this.takenBricks[brickX][brickY][2] = 1;
 	}
 	
 	
