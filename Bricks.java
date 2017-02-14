@@ -136,11 +136,13 @@ public class Bricks {
 		
 		if (y < ((brickHeight + 5) * (getNumRows()-1))) {
 			for (int count = 0; count < this.numCols; count++) 
-    			for (int counter = this.numRows; counter >= 0; counter--) {
+    			//for (int counter = this.numRows+1; counter >= 0; counter--) {
+    			for (int counter = 0; counter < this.numRows; counter++) {
     				setBrickX(count).setBrickY(counter);
     				getActive();
     				
     				if (this.checkActive(x)) return true;
+    				
 
     			}
     		
@@ -171,7 +173,7 @@ public class Bricks {
 	}
 	
 	public void setInActive() {
-		System.out.println(brickY);
+		System.out.println("brickY = " + brickY);
 		this.takenBricks[brickX][brickY][2] = 1;
 	}
 	

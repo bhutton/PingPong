@@ -87,7 +87,8 @@ public class PingPong extends Applet implements Runnable {
 	
 	public void paint(Graphics g) {
 		
-		int brickX = 0, brickY = 0;
+		//int brickX = 0, brickY = 0;
+		int x=0,y=0;
 		Boolean isActive;
 		
 		// Get Windows Dimensions
@@ -101,21 +102,27 @@ public class PingPong extends Applet implements Runnable {
 	    bricks.setColLoc(0).setRowLoc(0);
 	    
 	    // Draw bricks at top of screen
-	    for (int count = 5; count < 800; count += 55) {
+	    //for (int count = 5; count < 800; count += 55) {
+	    for (int count = 0; count < 80; count++) {
+	    	
+	    	x = count * 55;
+	    	
 	    	
 	    	// Set X Coordinate of Brick
-	    	bricks.setBrickX(bricks.getColLoc()).setBrickY(bricks.getRowLoc()).setBrickXCoord(count);
+	    	bricks.setBrickX(bricks.getColLoc()).setBrickY(bricks.getRowLoc()).setBrickXCoord(x);
 	    	
 	    	bricks.setRowLoc(0);
 	    	
-		    for (int counter = 5; counter <= bricks.wallHeight()*8; counter += 55) {
+		    //for (int counter = 5; counter <= bricks.wallHeight()*8; counter += 55) {
+	    	for (int counter = 0; counter < 2; counter++) {
+	    	//for (int counter = bricks.wallHeight()*8; counter >= 5; counter -= 55) {
+	    		
+	    		y = counter * 55;
 		    	
 		    	// Set Y Coordinate of Brick
-		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(counter);
+		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(y);
 		    	
-		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), count, counter, null) : null;
-		    	
-		    	if (!isActive) System.out.println(isActive);
+		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), x, y, null) : null; 		    	
 		    			    	
 		    	bricks.incRowLoc();
 		    }
@@ -123,13 +130,6 @@ public class PingPong extends Applet implements Runnable {
 		    bricks.incColLoc();
 	    }
 	    
-	    //System.out.println("num rows = " + bricks.getNumRows());
-	    
-	    
-	    
 	    bricks.setNumRows().setNumCols();
-	    //bricks.decRowLoc();
-	    
-	    System.out.println("num rows = " + bricks.getNumRows());
 	}
 }
