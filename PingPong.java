@@ -47,16 +47,10 @@ public class PingPong extends Applet implements Runnable {
 	}
 	
 	public void start() {
-		//if (!frozen) {
-		
 		if (animatorThread == null) 
 			animatorThread = new Thread(this);
 		
 		animatorThread.start();
-		
-		
-		//}
-			 
 	}
 
 	public void stop() {
@@ -88,7 +82,7 @@ public class PingPong extends Applet implements Runnable {
 	public void paint(Graphics g) {
 		
 		//int brickX = 0, brickY = 0;
-		int x=0,y=0;
+		int x=5,y=5;
 		Boolean isActive;
 		
 		// Get Windows Dimensions
@@ -99,35 +93,31 @@ public class PingPong extends Applet implements Runnable {
 	    // Draw ball
 	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
 	    
-	    bricks.setColLoc(0).setRowLoc(0);
+	    bricks.setColLoc(0);
 	    
 	    // Draw bricks at top of screen
-	    //for (int count = 5; count < 800; count += 55) {
-	    for (int count = 0; count < 80; count++) {
-	    	
-	    	x = count * 55;
-	    	
-	    	
-	    	// Set X Coordinate of Brick
-	    	bricks.setBrickX(bricks.getColLoc()).setBrickY(bricks.getRowLoc()).setBrickXCoord(x);
+	    for (int count = 0; count < 15; count++) {
 	    	
 	    	bricks.setRowLoc(0);
 	    	
-		    //for (int counter = 5; counter <= bricks.wallHeight()*8; counter += 55) {
+	    	// Set X Coordinate of Brick
+	    	bricks.setBrickX(bricks.getColLoc()).setBrickXCoord(x);;
+	    	
+	    	y = 5;
+	    	
 	    	for (int counter = 0; counter < 2; counter++) {
-	    	//for (int counter = bricks.wallHeight()*8; counter >= 5; counter -= 55) {
-	    		
-	    		y = counter * 55;
-		    	
-		    	// Set Y Coordinate of Brick
+
+	    		// Set Y Coordinate of Brick
 		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(y);
 		    	
 		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), x, y, null) : null; 		    	
 		    			    	
 		    	bricks.incRowLoc();
+		    	y += 55;
 		    }
 		    
 		    bricks.incColLoc();
+		    x += 55;
 	    }
 	    
 	    bricks.setNumRows().setNumCols();
