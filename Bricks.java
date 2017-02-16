@@ -135,21 +135,25 @@ public class Bricks {
 	
 	public Boolean checkBricks(Boolean down, int x, int y) {
 		
-		//Boolean isActive = false;
+		Boolean isActive = false;
 		
 		if (y <= 0) return true;
 		
-		if (y < ((brickHeight + 5) * (getNumRows()-1))) {
+		if (y < ((brickHeight + 5) * (getNumRows()))) {
 			
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
     				setBrickX(count).setBrickY(counter);
     				getActive();
+    			
+    				//if (this.checkActive(x)) return true;
+    				isActive = this.checkActive(x);
     				
-    				if (this.checkActive(x)) return true;
-    				
-    				System.out.println(this.takenBricks[brickX][brickY][2]);
     			}
+			
+			//if (this.checkActive(x)) return true;
+			
+			if (isActive) return true;
 			
 		}
 		
@@ -158,8 +162,7 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x) {
-		System.out.println(this.getX());
-		if (this.getX() >= x-60 && this.getX() <= x+120) {
+		if (this.getX() >= x-5 && this.getX() <= x+60) {
 			setInActive();
 			
 			return true;
@@ -175,9 +178,13 @@ public class Bricks {
 	}
 	
 	public void setInActive() {
-		//System.out.println("brickY = " + brickY);
-		// if Y = 2 is active first
-		this.takenBricks[brickX][brickY][2] = 1;
+		
+		for (int count = this.numRows-1; count >= 0; count--) {
+			if (this.takenBricks[brickX][count][2] == 0) {
+				this.takenBricks[brickX][count][2] = 1;
+				break;
+			}
+		}
 	}
 	
 	
