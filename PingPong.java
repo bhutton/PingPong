@@ -3,11 +3,12 @@ package PingPong;
 import java.applet.Applet;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.*;
 
 import PingPong.Ball;
 import PingPong.Bricks;
 
-public class PingPong extends Applet implements Runnable {
+public class PingPong extends Applet implements KeyListener,Runnable {
 	/**
 	 * 
 	 */
@@ -25,11 +26,16 @@ public class PingPong extends Applet implements Runnable {
 	Ball ball = new Ball(ballImg);
 	Bricks bricks = new Bricks(brickImg);
 	
+	String s = "";
+	
 	
 	public void init(){
 		
 		// Initialize Window Size
 		setSize(800,600);
+		
+		//addKeyListener(new MyListener);
+		addKeyListener( this );
 		
 		/*addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -45,6 +51,19 @@ public class PingPong extends Applet implements Runnable {
 			}
 		});*/
 	}
+	
+	public void keyPressed( KeyEvent e ) { }
+	   public void keyReleased( KeyEvent e ) { }
+	   public void keyTyped( KeyEvent e ) {
+	      char c = e.getKeyChar();
+	 
+	      if ( c != KeyEvent.CHAR_UNDEFINED ) {
+	         s = s + c;
+	         repaint();
+	         e.consume();
+	         
+	      }
+	   }
 	
 	public void start() {
 		if (animatorThread == null) 
@@ -66,7 +85,7 @@ public class PingPong extends Applet implements Runnable {
 	    while (currentThread == animatorThread) {
 	    	
 	    	ball.calculateLocation(bricks.getNumRows(), appletWidth, appletHeight);
-	    	ball.setDirection(bricks.checkBricks(ball.getDown(), ball.getX(), ball.getY()));
+	    	ball.setDirection(bricks.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
 	    	
 	    	repaint();
 	    	
@@ -90,13 +109,12 @@ public class PingPong extends Applet implements Runnable {
 	    appletHeight = appletSize.height;
 	    appletWidth = appletSize.width;
 	   
-	    // Draw ball
-	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
+	    
 	    
 	    bricks.setColLoc(0);
 	    
 	    // Draw bricks at top of screen
-	    for (int count = 0; count < 15; count++) {
+	    for (int count = 0; count < 8; count++) {
 	    	
 	    	bricks.setRowLoc(0);
 	    	
@@ -110,16 +128,24 @@ public class PingPong extends Applet implements Runnable {
 	    		// Set Y Coordinate of Brick
 		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(y);
 		    	
-		    	isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), x, y, null) : null; 		    	
+		    	//isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), x, y, null) : null;
+		    	
+		    	if (bricks.getActive()){
+		    		g.drawImage(bricks.getBrick(), x, y, null);
+		    		g.drawImage(bricks.getBrick(), x+50, y, null);
+		    	}
 		    			    	
 		    	bricks.incRowLoc();
 		    	y += 55;
 		    }
 		    
 		    bricks.incColLoc();
-		    x += 55;
+		    x += 105;
 	    }
 	    
 	    bricks.setNumRows().setNumCols();
+	    
+	    // Draw ball
+	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
 	}
 }

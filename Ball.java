@@ -112,6 +112,15 @@ public class Ball {
 		return this;
 	}
 	
+	public Ball checkTop() {
+		if (this.getY() <= 0) {
+			this.down = true;
+			incX = ThreadLocalRandom.current().nextInt(1, 5);
+		}
+		
+		return this;
+	}
+	
 	public Ball checkBottom(int appletHeight) {
 		if ((this.getY() + height + 2) > appletHeight) {
 			this.down = false;
@@ -127,7 +136,7 @@ public class Ball {
 		//incX = ThreadLocalRandom.current().nextInt(1, 5);
 		
 		// check location start and whether ball hits edges
-		checkStart().checkLeft().checkRight(appletWidth).checkBottom(appletHeight);
+		checkStart().checkLeft().checkRight(appletWidth).checkTop().checkBottom(appletHeight);
     	
     	// Update ball coordinates
     	shiftX().shiftY();

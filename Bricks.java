@@ -16,7 +16,7 @@ public class Bricks {
 				numRows, 
 				numCols, 
 				brickHeight=50, 
-				brickWidth=50, 
+				brickWidth=100, 
 				active=0, 	// The brick should be displayed
 				taken=1;	// The brick should not be displayed
 
@@ -29,7 +29,7 @@ public class Bricks {
 
 	// Initialize array and set all bricks as active
 	public void initializeArray() {
-		for (int count = 0; count < 81; count++) {
+		for (int count = 0; count < 8; count++) {
 			for (int counter = 0; counter < 3; counter++) {
 				this.takenBricks[count][counter][2] = active;
 			}
@@ -152,23 +152,35 @@ public class Bricks {
 	
 	// Check whether ball intersects with an active brick
 	// and if so remove it then reverse direction of ball
-	public Boolean checkBricks(Boolean down, int x, int y) {
+	public Boolean checkBricks(Boolean down, Boolean right, int x, int y) {
 		
-		if (y < ((brickHeight + 5) * (getNumRows()))) {
+		//if (y <= 0) return true;
+		
+		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
     				setBrickX(count).setBrickY(counter);
-    				if (checkActive(x)) return true;
+    				if (checkActive(x, right)) return true;
     			}
 		}
 		
 		return down;
 	}
 	
-	public Boolean checkActive(int x) {
-		int left = x, right = x+brickWidth;
+	public Boolean checkActive(int x, Boolean leftRight) {
+	
+		int left = x-brickWidth, right = x+brickWidth;
+
+		//Boolean direction = leftRight ? left=x, right =  x+brickWidth
 		
-		if (getX() >= left && getX() <= right) return setBrickTaken();	
+		if (leftRight) {
+			left = x;
+			right = x+brickWidth;
+		}
+		
+		if (getX() >= left && getX() <= right) {
+			return setBrickTaken();	
+		}
 		
 		return false;
 	}
