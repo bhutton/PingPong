@@ -7,15 +7,19 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 
-public class Ball {
+public class Ball extends Bricks {
 	int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
 	boolean forward = true, right = true, down = true;
 	
 	BufferedImage imgBall = null;
 	
-	public Ball(String ballImg) {
-		setBallImage(ballImg);
+	public Ball(Boolean down, Boolean right, int x, int y) {
+		super(down,right,x,y);
 	}
+	
+	/*public Ball(String ballImg) {
+		setBallImage(ballImg);
+	}*/
 	
 	public void setBallImage(String ballImg) {
 		try { imgBall = ImageIO.read(new File(ballImg)); } 
@@ -84,8 +88,9 @@ public class Ball {
 		this.down = true;
 	}
 	
-	public void setDirection(boolean UpDown) {
-		this.down = UpDown;
+	public void setDirection() {
+		checkBricks(getDown(), getRight(), getX(), getY());
+		//this.down = UpDown;
 	}
 	
 	public Ball checkStart() {
@@ -130,10 +135,7 @@ public class Ball {
 		return this;
 	}
 	
-	public void calculateLocation(int numRows, int appletWidth, int appletHeight) {
-		
-		// Randomize the angle of the ball between 1 & 3
-		//incX = ThreadLocalRandom.current().nextInt(1, 5);
+	public void calculateLocation(int appletWidth, int appletHeight) {
 		
 		// check location start and whether ball hits edges
 		checkStart().checkLeft().checkRight(appletWidth).checkTop().checkBottom(appletHeight);

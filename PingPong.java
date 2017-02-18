@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
 
-import PingPong.Ball;
-import PingPong.Bricks;
+//import PingPong.Ball;
+//import PingPong.Bricks;
 
 public class PingPong extends Applet implements KeyListener,Runnable {
 	/**
@@ -23,19 +23,41 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	String 	ballImg = "../src/PingPong/ball.png",
 			brickImg = "../src/PingPong/brick-green.png"; 
 	
-	Ball ball = new Ball(ballImg);
-	Bricks bricks = new Bricks(brickImg);
+	
+	Ball ballRef, ball;
+	Bricks brickRef, bricks;
+	
 	
 	String s = "";
 	
+	public void main() {
+		// Get Windows Dimensions
+		Dimension appletSize = this.getSize();
+	    this.appletHeight = appletSize.height;
+	    this.appletWidth = appletSize.width;
+			    
+		bricks = new Bricks(50, 100, 0, 0);
+		ball = new Ball(true, true, 0, 0);
+		
+		bricks.initializeArray();
+		bricks.setBrickImage(brickImg);
+		
+		ballRef = bricks;
+		//brickRef = ball;
+		
+		
+		
+	}
 	
-	public void init(){
+	//public void init(){
+		
+		
 		
 		// Initialize Window Size
-		setSize(800,600);
+		//setSize(800,600);
 		
 		//addKeyListener(new MyListener);
-		addKeyListener( this );
+		//addKeyListener( this );
 		
 		/*addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -50,7 +72,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				}
 			}
 		});*/
-	}
+	//}
 	
 	public void keyPressed( KeyEvent e ) { }
 	   public void keyReleased( KeyEvent e ) { }
@@ -84,8 +106,9 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	    while (currentThread == animatorThread) {
 	    	
-	    	ball.calculateLocation(bricks.getNumRows(), appletWidth, appletHeight);
-	    	ball.setDirection(bricks.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
+	    	ball.calculateLocation(appletWidth, appletHeight);
+	    	//ball.setDirection(bricks.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
+	    	ball.setDirection();
 	    	
 	    	repaint();
 	    	
@@ -105,12 +128,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		Boolean isActive;
 		
 		// Get Windows Dimensions
-		Dimension appletSize = this.getSize();
+		/*Dimension appletSize = this.getSize();
 	    appletHeight = appletSize.height;
-	    appletWidth = appletSize.width;
+	    appletWidth = appletSize.width;*/
 	   
-	    
-	    
 	    bricks.setColLoc(0);
 	    
 	    // Draw bricks at top of screen

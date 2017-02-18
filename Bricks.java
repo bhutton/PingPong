@@ -22,6 +22,16 @@ public class Bricks {
 
 	BufferedImage imgBrick = null;
 	
+	public Bricks(Boolean balldown, Boolean ballright, int x, int y) {
+		setBrickX(x);
+		setBrickY(y);
+		
+		Boolean down = balldown;
+		Boolean right = ballright;
+		
+	}
+	
+	
 	public Bricks(String brickImg) {
 		initializeArray();
 		setBrickImage(brickImg);
@@ -45,6 +55,11 @@ public class Bricks {
 	public BufferedImage getBrick() {
 		return imgBrick;
 	}
+	
+	/*public void Bricks() {
+		
+	}*/
+	
 	
 	// Sets current column position in the bricks array
 	public Bricks setBrickX(int col) {
