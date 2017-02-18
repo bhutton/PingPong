@@ -24,25 +24,28 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			brickImg = "../src/PingPong/brick-green.png"; 
 	
 	
-	Ball ballRef, ball;
-	Bricks brickRef, bricks;
+	//Ball ballRef, ball;
+	//Bricks brickRef, bricks;
+	
+	ball = new Ball(true, true, 0, 0);
 	
 	
 	String s = "";
 	
 	public void main() {
+		setSize(800,600);
 		// Get Windows Dimensions
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 			    
-		bricks = new Bricks(50, 100, 0, 0);
-		ball = new Ball(true, true, 0, 0);
+		//bricks = new Bricks(50, 100, 0, 0);
 		
-		bricks.initializeArray();
-		bricks.setBrickImage(brickImg);
 		
-		ballRef = bricks;
+		//bricks.initializeArray();
+		//bricks.setBrickImage(brickImg);
+		
+		//ballRef = bricks;
 		//brickRef = ball;
 		
 		
@@ -132,10 +135,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    appletHeight = appletSize.height;
 	    appletWidth = appletSize.width;*/
 	   
-	    bricks.setColLoc(0);
+	    //bricks.setColLoc(0);
 	    
 	    // Draw bricks at top of screen
-	    for (int count = 0; count < 8; count++) {
+	    /*for (int count = 0; count < 8; count++) {
 	    	
 	    	bricks.setRowLoc(0);
 	    	
@@ -162,9 +165,9 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    
 		    bricks.incColLoc();
 		    x += 105;
-	    }
+	    }*/
 	    
-	    bricks.setNumRows().setNumCols();
+	    //bricks.setNumRows().setNumCols();
 	    
 	    // Draw ball
 	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
