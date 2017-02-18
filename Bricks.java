@@ -23,7 +23,7 @@ public class Bricks {
 	BufferedImage imgBrick = null;
 	
 	public Bricks(Boolean down, Boolean right, int x, int y) {
-		
+		initializeArray();
 	}
 	
 	public Bricks(String brickImg) {

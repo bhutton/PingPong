@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
 
-//import PingPong.Ball;
-//import PingPong.Bricks;
-
 public class PingPong extends Applet implements KeyListener,Runnable {
 	/**
 	 * 
@@ -24,25 +21,29 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			brickImg = "../src/PingPong/brick-green.png"; 
 	
 	
-	//Ball ballRef, ball;
-	//Bricks brickRef, bricks;
-	
-	ball = new Ball(true, true, 0, 0);
-	
+	Ball ball = new Ball(true, true, 0, 0);	
 	
 	String s = "";
 	
 	public void main() {
+		
+	}
+	
+	public void init() {
 		setSize(800,600);
 		// Get Windows Dimensions
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
+	    
+	    ball.setBallImage(ballImg);
 			    
 		//bricks = new Bricks(50, 100, 0, 0);
 		
 		
 		//bricks.initializeArray();
+	    ball.initializeArray();
+	    ball.setBrickImage(brickImg);
 		//bricks.setBrickImage(brickImg);
 		
 		//ballRef = bricks;
@@ -110,8 +111,11 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    while (currentThread == animatorThread) {
 	    	
 	    	ball.calculateLocation(appletWidth, appletHeight);
-	    	//ball.setDirection(bricks.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
+	    	//ball.setDirection(ball.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
+	    	
 	    	ball.setDirection();
+	    	
+	    	//ball.checkBricks(down, right, x, y);
 	    	
 	    	repaint();
 	    	
@@ -128,7 +132,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		
 		//int brickX = 0, brickY = 0;
 		int x=5,y=5;
-		Boolean isActive;
+		//Boolean isActive;
 		
 		// Get Windows Dimensions
 		/*Dimension appletSize = this.getSize();
@@ -136,38 +140,39 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    appletWidth = appletSize.width;*/
 	   
 	    //bricks.setColLoc(0);
+		ball.setColLoc(0);
 	    
-	    // Draw bricks at top of screen
-	    /*for (int count = 0; count < 8; count++) {
+	    // Draw ball at top of screen
+	    for (int count = 0; count < 8; count++) {
 	    	
-	    	bricks.setRowLoc(0);
+	    	ball.setRowLoc(0);
 	    	
 	    	// Set X Coordinate of Brick
-	    	bricks.setBrickX(bricks.getColLoc()).setBrickXCoord(x);;
+	    	ball.setBrickX(ball.getColLoc()).setBrickXCoord(x);;
 	    	
 	    	y = 5;
 	    	
 	    	for (int counter = 0; counter < 2; counter++) {
 
 	    		// Set Y Coordinate of Brick
-		    	bricks.setBrickY(bricks.getRowLoc()).setBrickYCoord(y);
+		    	ball.setBrickY(ball.getRowLoc()).setBrickYCoord(y);
 		    	
-		    	//isActive = bricks.getActive() ? g.drawImage(bricks.getBrick(), x, y, null) : null;
+		    	//isActive = ball.getActive() ? g.drawImage(ball.getBrick(), x, y, null) : null;
 		    	
-		    	if (bricks.getActive()){
-		    		g.drawImage(bricks.getBrick(), x, y, null);
-		    		g.drawImage(bricks.getBrick(), x+50, y, null);
+		    	if (ball.getActive()){
+		    		g.drawImage(ball.getBrick(), x, y, null);
+		    		g.drawImage(ball.getBrick(), x+50, y, null);
 		    	}
 		    			    	
-		    	bricks.incRowLoc();
+		    	ball.incRowLoc();
 		    	y += 55;
 		    }
 		    
-		    bricks.incColLoc();
+		    ball.incColLoc();
 		    x += 105;
-	    }*/
+	    }
 	    
-	    //bricks.setNumRows().setNumCols();
+	    ball.setNumRows().setNumCols();
 	    
 	    // Draw ball
 	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
