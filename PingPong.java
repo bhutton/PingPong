@@ -25,10 +25,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	String s = "";
 	
-	public void main() {
-		
-	}
-	
 	public void init() {
 		setSize(800,600);
 		// Get Windows Dimensions
@@ -43,6 +39,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		
 		//bricks.initializeArray();
 	    ball.initializeArray();
+	    ball.createWall();
 	    ball.setBrickImage(brickImg);
 		//bricks.setBrickImage(brickImg);
 		
@@ -130,49 +127,21 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	public void paint(Graphics g) {
 		
-		//int brickX = 0, brickY = 0;
 		int x=5,y=5;
-		//Boolean isActive;
-		
-		// Get Windows Dimensions
-		/*Dimension appletSize = this.getSize();
-	    appletHeight = appletSize.height;
-	    appletWidth = appletSize.width;*/
-	   
-	    //bricks.setColLoc(0);
-		ball.setColLoc(0);
+		ball.setRowLoc(0);
 	    
-	    // Draw ball at top of screen
-	    for (int count = 0; count < 8; count++) {
-	    	
-	    	ball.setRowLoc(0);
-	    	
-	    	// Set X Coordinate of Brick
-	    	ball.setBrickX(ball.getColLoc()).setBrickXCoord(x);;
-	    	
-	    	y = 5;
-	    	
-	    	for (int counter = 0; counter < 2; counter++) {
-
-	    		// Set Y Coordinate of Brick
-		    	ball.setBrickY(ball.getRowLoc()).setBrickYCoord(y);
-		    	
-		    	//isActive = ball.getActive() ? g.drawImage(ball.getBrick(), x, y, null) : null;
-		    	
-		    	if (ball.getActive()){
-		    		g.drawImage(ball.getBrick(), x, y, null);
-		    		g.drawImage(ball.getBrick(), x+50, y, null);
+	    // Draw ball at top of screen		
+		for (int row = 0; row < ball.getNumRows(); row++) {
+			ball.setColLoc(0);
+			for (int col = 0; col < ball.getNumCols(); col++) {
+				if (ball.getActive()){
+		    		g.drawImage(ball.getBrick(), ball.getBrickXCoord(), ball.getBrickYCoord(), null);
+		    		g.drawImage(ball.getBrick(), ball.getBrickXCoord()+50, ball.getBrickYCoord(), null);
 		    	}
-		    			    	
-		    	ball.incRowLoc();
-		    	y += 55;
-		    }
-		    
-		    ball.incColLoc();
-		    x += 105;
-	    }
-	    
-	    ball.setNumRows().setNumCols();
+				ball.incColLoc();
+			}
+			ball.incRowLoc();
+		}
 	    
 	    // Draw ball
 	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);

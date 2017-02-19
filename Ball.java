@@ -89,8 +89,10 @@ public class Ball extends Bricks {
 	}
 	
 	public void setDirection() {
-		checkBricks(getDown(), getRight(), getX(), getY());
-		//this.down = UpDown;
+		//checkBricks(getDown(), getRight(), getX(), getY());
+		down = checkBricks(getDown(), getRight(), getX(), getY());
+		
+		//this.down = down;
 	}
 	
 	public Ball checkStart() {
