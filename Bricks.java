@@ -50,28 +50,36 @@ public class Bricks {
 		return imgBrick;
 	}
 	
-	// Sets current column position in the bricks array
+	/*
+	 * Sets current column position in the bricks array
+	 */
 	public Bricks setBrickColumnLocation(int col) {
 		this.brickColumnLocation = col;
 		
 		return this;
 	}
 	
-	// Sets current row position in the bricks array
+	/*
+	 * Sets current row position in the bricks array
+	 */
 	public Bricks setBrickRowLocation(int row) {
 		this.brickRowLocation = row;
 		
 		return this;
 	}
 	
-	// Sets the screen X coordinate for a brick
+	/*
+	 * Sets the screen X coordinate for a brick
+	 */
 	public Bricks setBrickXCoord(int x) {
 		this.takenBricks[brickColumnLocation][brickRowLocation][0] = x;
 		
 		return this;
 	}
 	
-	// Sets the screen Y coordinate for a brick
+	/*
+	 * Sets the screen Y coordinate for a brick
+	 */
 	public Bricks setBrickYCoord(int y) {
 		this.takenBricks[brickColumnLocation][brickRowLocation][1] = y;
 		
@@ -86,19 +94,25 @@ public class Bricks {
 		return this.takenBricks[brickColumnLocation][brickRowLocation][1];
 	}
 	
-	// Enables brick
+	/*
+	 * Enables brick
+	 */
 	public void setBrickEnabled(int enabled) {
 		this.takenBricks[brickColumnLocation][brickRowLocation][2] = enabled;
 	}
 	
-	// Sets number of rows displayed
+	/*
+	 * Sets number of rows displayed 
+	 */
 	public Bricks setNumRows() {
 		this.numRows = brickRowLocation;
 		
 		return this;
 	}
 	
-	// Sets number of columns displayed
+	/*
+	 * Sets number of columns displayed
+	 */
 	public Bricks setNumCols() {
 		this.numCols = brickColumnLocation;
 		
@@ -113,12 +127,16 @@ public class Bricks {
 		return this.numCols;
 	}
 	
-	// Return screen X position of specific brick
+	/*
+	 * Return screen X position of specific brick
+	 */
 	public int getBrickX() {
 		return this.takenBricks[brickColumnLocation][brickRowLocation][0];
 	}
 	
-	// Return screen Y position of specific brick
+	/*
+	 *  Return screen Y position of specific brick
+	 */
 	public int getY() {
 		return this.takenBricks[brickColumnLocation][brickRowLocation][1];
 	}
@@ -162,8 +180,10 @@ public class Bricks {
 		return getNumRows() * 5;
 	}
 	
-	// Check whether ball intersects with an active brick
-	// and if so remove it then reverse direction of ball
+	/*
+	 * Check whether ball intersects with an active brick
+	 * and if so remove it then reverse direction of ball
+	 */
 	public Boolean checkBricks(Boolean down, Boolean right, int x, int y) {
 		
 		if (y < ((brickHeight) * (getNumRows()))) {
@@ -183,6 +203,9 @@ public class Bricks {
 		return down;
 	}
 	
+	/*
+	 * Setup array that holds the x,y coordinates of the wall
+	 */
 	public void createWall() {
 		
 		// Screen coordinates of the individual bricks
@@ -191,48 +214,38 @@ public class Bricks {
 		setColLoc(0);
 	    
 	    for (int col = 0; col < 8; col++) {	    	
-	    	setRowLoc(0);
+	    	setRowLoc(0); 
 	    	y = 5;	
 	    	
 	    	for (int row = 0; row < 2; row++) {
-	    		setBrickYCoord(y);
-	    		setBrickXCoord(x);
-	    		incRowLoc();
-	    		y += 55;		    	
+	    		setBrickYCoord(y).setBrickXCoord(x).incRowLoc(); 
+	    		y += 55;
 		    }
 		    
-		    incColLoc();
-		    x += 105;
+		    incColLoc(); x += 105;
 	    }
 	    
 	    setNumRows().setNumCols();
 	}		   
 	
 	public Boolean checkActive(int x, Boolean leftRight) {
-	
 		int left = x-brickWidth, right = x+brickWidth;
 
-		//Boolean direction = leftRight ? left=x, right =  x+brickWidth
-		
-		if (leftRight) {
-			left = x;
-			right = x+brickWidth;
-		}
-		
-		if (getBrickX() >= left && getBrickX() <= right) {
-			return setBrickTaken();	
-		}
-		
+		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
 		return false;
 	}
 	
-	// Determine whether brick is currently active
+	/*
+	 * Determine whether brick is currently active
+	 */
 	public boolean getActive() {
 		if (this.takenBricks[brickColumnLocation][brickRowLocation][2] == active) return true;
 		return false;
 	}
 	
-	// Sets brick to be removed from screen
+	/*
+	 * Sets brick to be removed from screen
+	 */
 	public Boolean setBrickTaken() {
 		
 		for (int row = this.numRows-1; row >= 0; row--) {

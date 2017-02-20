@@ -27,7 +27,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	public void init() {
 		setSize(853,600);
-		// Get Windows Dimensions
+		
+		// Get Window Dimensions
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
@@ -36,6 +37,24 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    ball.setBrickImage(brickImg);
 	    ball.initializeArray();
 	    ball.createWall();
+	    mouseListener();
+	    
+	}
+	
+	public void mouseListener() {
+		addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+	        
+				if (frozen) {
+					frozen = false;
+					start();
+				} 
+				else {
+					frozen = true;
+					stop();
+				}
+			}
+		});
 	}
 	
 	//public void init(){
@@ -110,7 +129,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	public void paint(Graphics g) {
 		
-		int x=5,y=5;
 		ball.setRowLoc(0);
 	    
 	    // Draw ball at top of screen		
