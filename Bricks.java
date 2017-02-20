@@ -19,6 +19,9 @@ public class Bricks {
 				brickWidth=110, 
 				active=0, 	// The brick should be displayed
 				taken=1;	// The brick should not be displayed
+	
+	private int x,y;
+	private Boolean down,right;
 
 	BufferedImage imgBrick = null;
 	
@@ -184,9 +187,7 @@ public class Bricks {
 	 * Check whether ball intersects with an active brick
 	 * and if so remove it then reverse direction of ball
 	 */
-	public Boolean checkBricks(Boolean down, Boolean right, int x, int y) {
-		
-		 
+	public Boolean checkBricks() {
 		
 		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
@@ -198,6 +199,26 @@ public class Bricks {
 		}
 		
 		return down;
+	}
+	
+	public Bricks setBallX(int x) {
+		this.x = x;
+		return this;
+	}
+	
+	public Bricks setBallY(int y) {
+		this.y = y;
+		return this;
+	}
+	
+	public Bricks setBallDown(Boolean down) {
+		this.down = down;
+		return this;
+	}
+	
+	public Bricks setBallRight(Boolean right) {
+		this.right = right;
+		return this;
 	}
 	
 	/*

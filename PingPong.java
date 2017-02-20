@@ -115,6 +115,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    	
 	    	ball.calculateLocation(appletWidth, appletHeight);
 	    	ball.setDirection();
+	    	//ball.setDown(ball.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
 	    	
 	    	repaint();
 	    	
