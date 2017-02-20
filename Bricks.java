@@ -22,7 +22,7 @@ public class Bricks {
 
 	BufferedImage imgBrick = null;
 	
-	public Bricks(Boolean down, Boolean right, int x, int y) {
+	public Bricks() {
 		initializeArray();
 	}
 	
@@ -186,15 +186,12 @@ public class Bricks {
 	 */
 	public Boolean checkBricks(Boolean down, Boolean right, int x, int y) {
 		
+		 
+		
 		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
-    				this.setBrickColumnLocation(count);
-    				this.setBrickRowLocation(counter);
-    				
-    				
-    				
-    				//checkActive(x, right);
+    				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
     				if (checkActive(x, right)) return true;
     			}

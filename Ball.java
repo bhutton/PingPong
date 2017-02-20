@@ -14,7 +14,7 @@ public class Ball extends Bricks {
 	BufferedImage imgBall = null;
 	
 	public Ball(Boolean down, Boolean right, int x, int y) {
-		super(down,right,x,y);
+		super();
 	}
 	
 	/*public Ball(String ballImg) {
@@ -91,8 +91,6 @@ public class Ball extends Bricks {
 	public void setDirection() {
 		//checkBricks(getDown(), getRight(), getX(), getY());
 		down = checkBricks(getDown(), getRight(), this.getX(), this.getY());
-		
-		//this.down = down;
 	}
 	
 	public Ball checkStart() {
