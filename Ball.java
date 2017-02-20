@@ -89,11 +89,7 @@ public class Ball extends Bricks {
 	}
 	
 	public void setDirection() {
-		setBallX(getX());
-		setBallY(getY());
-		setBallDown(getDown());
-		setBallRight(getRight());
-		
+		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkBricks();
 	}
 	
