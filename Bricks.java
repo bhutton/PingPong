@@ -16,7 +16,7 @@ public class Bricks {
 				numRows, 
 				numCols, 
 				brickHeight=50, 
-				brickWidth=100, 
+				brickWidth=110, 
 				active=0, 	// The brick should be displayed
 				taken=1;	// The brick should not be displayed
 
@@ -114,7 +114,7 @@ public class Bricks {
 	}
 	
 	// Return screen X position of specific brick
-	public int getX() {
+	public int getBrickX() {
 		return this.takenBricks[brickColumnLocation][brickRowLocation][0];
 	}
 	
@@ -169,7 +169,12 @@ public class Bricks {
 		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
-    				setBrickColumnLocation(count).setBrickRowLocation(counter);
+    				this.setBrickColumnLocation(count);
+    				this.setBrickRowLocation(counter);
+    				
+    				
+    				
+    				//checkActive(x, right);
     				
     				if (checkActive(x, right)) return true;
     			}
@@ -185,11 +190,8 @@ public class Bricks {
 		
 		setColLoc(0);
 	    
-	    for (int col = 0; col < 8; col++) {
-	    	
+	    for (int col = 0; col < 8; col++) {	    	
 	    	setRowLoc(0);
-	    	
-	    	//setBrickXCoord(x);
 	    	y = 5;	
 	    	
 	    	for (int row = 0; row < 2; row++) {
@@ -217,7 +219,7 @@ public class Bricks {
 			right = x+brickWidth;
 		}
 		
-		if (getX() >= left && getX() <= right) {
+		if (getBrickX() >= left && getBrickX() <= right) {
 			return setBrickTaken();	
 		}
 		

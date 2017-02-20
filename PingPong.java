@@ -18,7 +18,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	boolean frozen = false; 
 	
 	String 	ballImg = "../src/PingPong/ball.png",
-			brickImg = "../src/PingPong/brick-green.png"; 
+			brickImg = "../src/PingPong/brick.png"; 
 	
 	
 	Ball ball = new Ball(true, true, 0, 0);	
@@ -26,28 +26,16 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	String s = "";
 	
 	public void init() {
-		setSize(800,600);
+		setSize(853,600);
 		// Get Windows Dimensions
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 	    
 	    ball.setBallImage(ballImg);
-			    
-		//bricks = new Bricks(50, 100, 0, 0);
-		
-		
-		//bricks.initializeArray();
+	    ball.setBrickImage(brickImg);
 	    ball.initializeArray();
 	    ball.createWall();
-	    ball.setBrickImage(brickImg);
-		//bricks.setBrickImage(brickImg);
-		
-		//ballRef = bricks;
-		//brickRef = ball;
-		
-		
-		
 	}
 	
 	//public void init(){
@@ -102,17 +90,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	public void run() {
 		
 		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-		
 		Thread currentThread = Thread.currentThread();
 
 	    while (currentThread == animatorThread) {
 	    	
 	    	ball.calculateLocation(appletWidth, appletHeight);
-	    	//ball.setDirection(ball.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
-	    	
 	    	ball.setDirection();
-	    	
-	    	//ball.checkBricks(down, right, x, y);
 	    	
 	    	repaint();
 	    	
@@ -136,7 +119,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			for (int col = 0; col < ball.getNumCols(); col++) {
 				if (ball.getActive()){
 		    		g.drawImage(ball.getBrick(), ball.getBrickXCoord(), ball.getBrickYCoord(), null);
-		    		g.drawImage(ball.getBrick(), ball.getBrickXCoord()+50, ball.getBrickYCoord(), null);
 		    	}
 				ball.incColLoc();
 			}
