@@ -27,16 +27,16 @@ public class Bricks {
 	BufferedImage imgBrick = null;
 	
 	public Bricks() {
-		initializeArray();
+		initializeBrickArray();
 	}
 	
 	public Bricks(String brickImg) {
-		initializeArray();
+		initializeBrickArray();
 		setBrickImage(brickImg);
 	}
 
 	// Initialize array and set all bricks as active
-	public void initializeArray() {
+	public void initializeBrickArray() {
 		for (int count = 0; count < 8; count++) {
 			for (int counter = 0; counter < 3; counter++) {
 				this.takenBricks[count][counter][2] = active;
@@ -50,7 +50,7 @@ public class Bricks {
 		catch (IOException e) { e.printStackTrace(); }
 	}
 	
-	public BufferedImage getBrick() {
+	public BufferedImage getBrickImage() {
 		return imgBrick;
 	}
 	
@@ -279,11 +279,16 @@ public class Bricks {
 	}
 	
 	public void drawWall(Graphics g) {
-		int row,col;
+		int row,col; 
 		
 		for (row = 0, setRowLoc(0); row < getNumRows(); row++, incRowLoc()) 
 			for (col = 0, setColLoc(0); col < getNumCols(); col++, incColLoc()) 
-				if (getActive()) g.drawImage(getBrick(), getBrickXCoord(), getBrickYCoord(), null);
+				if (getActive()) drawBrick(g);
+					
+	}
+	
+	public void drawBrick(Graphics g) {
+		g.drawImage(getBrickImage(), getBrickXCoord(), getBrickYCoord(), null);
 	}
 	
 

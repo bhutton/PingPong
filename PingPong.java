@@ -28,14 +28,13 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	public void init() {
 		setSize(853,600);
 		
-		// Get Window Dimensions
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 	    
 	    ball.setBallImage(ballImg);
 	    ball.setBrickImage(brickImg);
-	    ball.initializeArray();
+	    ball.initializeBrickArray();
 	    ball.createWall();
 	    mouseListener();
 	    
