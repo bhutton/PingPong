@@ -281,11 +281,12 @@ public class Bricks {
 	public void drawWall(Graphics g) {
 		for (brickRowLocation = 0; brickRowLocation < numRows; brickRowLocation++)
 			for (brickColumnLocation = 0; brickColumnLocation < numCols; brickColumnLocation++)
-				if (getActive()) drawBrick(g);
+				drawBrick(g);
 	}
 	
 	public void drawBrick(Graphics g) {
-		g.drawImage(getBrickImage(), getBrickXCoord(), getBrickYCoord(), null);
+		if (getActive()) 
+			g.drawImage(getBrickImage(), getBrickXCoord(), getBrickYCoord(), null);
 	}
 	
 
