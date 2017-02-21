@@ -279,12 +279,9 @@ public class Bricks {
 	}
 	
 	public void drawWall(Graphics g) {
-		int row,col; 
-		
-		for (row = 0, setRowLoc(0); row < getNumRows(); row++, incRowLoc()) 
-			for (col = 0, setColLoc(0); col < getNumCols(); col++, incColLoc()) 
+		for (brickRowLocation = 0; brickRowLocation < numRows; brickRowLocation++)
+			for (brickColumnLocation = 0; brickColumnLocation < numCols; brickColumnLocation++)
 				if (getActive()) drawBrick(g);
-					
 	}
 	
 	public void drawBrick(Graphics g) {
