@@ -113,9 +113,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	    while (currentThread == animatorThread) {
 	    	
-	    	ball.calculateLocation(appletWidth, appletHeight);
-	    	ball.setDirection();
-	    	//ball.setDown(ball.checkBricks(ball.getDown(), ball.getRight(), ball.getX(), ball.getY()));
+	    	ball.calculateCurrentLocation(appletWidth, appletHeight);
+	    	ball.setBallDirectionAfterReachingBricks();
 	    	
 	    	repaint();
 	    	
@@ -129,22 +128,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 	
 	public void paint(Graphics g) {
-		
-		ball.setRowLoc(0);
-	    
-	    // Draw ball at top of screen		
-		for (int row = 0; row < ball.getNumRows(); row++) {
-			ball.setColLoc(0);
-			for (int col = 0; col < ball.getNumCols(); col++) {
-				if (ball.getActive()){
-		    		g.drawImage(ball.getBrick(), ball.getBrickXCoord(), ball.getBrickYCoord(), null);
-		    	}
-				ball.incColLoc();
-			}
-			ball.incRowLoc();
-		}
-	    
-	    // Draw ball
-	    g.drawImage(ball.getBall(), ball.getX(), ball.getY(), null);
+		ball.drawWall(g);
+	    ball.drawBall(g);
 	}
 }

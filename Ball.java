@@ -1,5 +1,6 @@
 package PingPong;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class Ball extends Bricks {
 		this.down = true;
 	}
 	
-	public void setDirection() {
+	public void setBallDirectionAfterReachingBricks() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkBricks();
 	}
@@ -135,13 +136,20 @@ public class Ball extends Bricks {
 		return this;
 	}
 	
-	public void calculateLocation(int appletWidth, int appletHeight) {
-		
-		// check location start and whether ball hits edges
-		checkStart().checkLeft().checkRight(appletWidth).checkTop().checkBottom(appletHeight);
-    	
-    	// Update ball coordinates
-    	shiftX().shiftY();
-  
+	public void calculateCurrentLocation(int appletWidth, int appletHeight) {
+		checkEdges(appletWidth, appletHeight);
+    	updateBallCoordinates();
+	}
+	
+	public void checkEdges(int appletWidth, int appletHeight) {
+		checkStart().checkLeft().checkRight(appletWidth).checkTop().checkBottom(appletHeight);    	
+	}
+	
+	public void updateBallCoordinates() {
+		shiftX().shiftY();
+	}
+	
+	public void drawBall(Graphics g) {
+		g.drawImage(this.imgBall, this.x, this.y, null);
 	}
 }

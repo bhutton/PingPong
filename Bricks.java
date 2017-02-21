@@ -1,5 +1,6 @@
 package PingPong;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -277,6 +278,13 @@ public class Bricks {
 		return false;
 	}
 	
+	public void drawWall(Graphics g) {
+		int row,col;
+		
+		for (row = 0, setRowLoc(0); row < getNumRows(); row++, incRowLoc()) 
+			for (col = 0, setColLoc(0); col < getNumCols(); col++, incColLoc()) 
+				if (getActive()) g.drawImage(getBrick(), getBrickXCoord(), getBrickYCoord(), null);
+	}
 	
 
 }
