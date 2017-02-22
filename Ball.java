@@ -14,6 +14,10 @@ public class Ball extends Bricks {
 	
 	BufferedImage imgBall = null;
 	
+	public Ball() {
+		
+	}
+	
 	public Ball(Boolean down, Boolean right, int x, int y) {
 		super();
 	}
