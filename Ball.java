@@ -14,17 +14,9 @@ public class Ball extends Paddle {
 	
 	BufferedImage imgBall = null;
 	
-	public Ball() {
-		
-	}
-	
 	public Ball(Boolean down, Boolean right, int x, int y) {
 		super();
 	}
-	
-	/*public Ball(String ballImg) {
-		setBallImage(ballImg);
-	}*/
 	
 	public void setBallImage(String ballImg) {
 		try { imgBall = ImageIO.read(new File(ballImg)); } 
@@ -72,10 +64,6 @@ public class Ball extends Paddle {
 		
 		return this;
 	}
-	
-	/*public void setY(int y) {
-		this.y = y;
-	}*/
 	
 	public boolean getRight() {
 		return right;

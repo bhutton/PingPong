@@ -21,7 +21,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	boolean frozen = false; 
 	
 	String 	ballImg = "../src/PingPong/ball.png",
-			brickImg = "../src/PingPong/brick.png"; 
+			brickImg = "../src/PingPong/brick.png",
+			paddleImg = "../src/PingPong/paddle.png"; 
 	
 	
 	Ball game = new Ball(true, true, 0, 0);	
@@ -37,6 +38,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    
 	    game.setBallImage(ballImg);
 	    game.setBrickImage(brickImg);
+	    game.setPaddleImage(paddleImg);
 	    game.setPaddleWidth(200);
 	    game.setPaddleHeight(30);
 	    game.initializeBrickArray();
