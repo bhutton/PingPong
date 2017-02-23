@@ -4,6 +4,9 @@ import java.applet.Applet;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+
 
 public class PingPong extends Applet implements KeyListener,Runnable {
 	/**
@@ -34,10 +37,14 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    
 	    game.setBallImage(ballImg);
 	    game.setBrickImage(brickImg);
+	    game.setPaddleWidth(200);
+	    game.setPaddleHeight(30);
 	    game.initializeBrickArray();
 	    game.createWall();
 	    game.setPaddleLocation(appletHeight, appletWidth);
 	    mouseListener();
+	    addKeyListener(this);
+	    
 	    
 	}
 	
@@ -45,57 +52,27 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 	        
-				if (frozen) {
+				/*if (frozen) {
 					frozen = false;
 					start();
 				} 
 				else {
 					frozen = true;
 					stop();
-				}
+				}*/
 			}
 		});
 	}
 	
-	//public void init(){
-		
-		
-		
-		// Initialize Window Size
-		//setSize(800,600);
-		
-		//addKeyListener(new MyListener);
-		//addKeyListener( this );
-		
-		/*addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-	        
-				if (frozen) {
-					frozen = false;
-					start();
-				} 
-				else {
-					frozen = true;
-					stop();
-				}
-			}
-		});*/
-	//}
 	
-	public void keyPressed( KeyEvent e ) { }
-	   public void keyReleased( KeyEvent e ) { }
-	   public void keyTyped( KeyEvent e ) {
-	      char c = e.getKeyChar();
-	      
-	      if (c == 'e') game.movePaddleLeft();
-	 
-	      if ( c != KeyEvent.CHAR_UNDEFINED ) {
-	         s = s + c;
-	         repaint();
-	         e.consume();
-	         
-	      }
-	   }
+	
+	public void keyPressed( KeyEvent e ) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) game.movePaddleLeft();
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) game.movePaddleRight();
+	}
+	public void keyReleased( KeyEvent e ) {	}
+	public void keyTyped( KeyEvent e ) { }
+   
 	
 	public void start() {
 		if (animatorThread == null) 
@@ -117,6 +94,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    	
 	    	game.calculateCurrentLocation(appletWidth, appletHeight);
 	    	game.setBallDirectionAfterReachingBricks();
+	    	game.setBallDirectionAfterReachingPaddle();
 	    	
 	    	repaint();
 	    	

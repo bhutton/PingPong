@@ -94,6 +94,11 @@ public class Ball extends Paddle {
 		down = checkBricks();
 	}
 	
+	public void setBallDirectionAfterReachingPaddle() {
+		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
+		down = checkPaddle(down, x, y);
+	}
+
 	public Ball checkStart() {
 		if (this.getY() == 0) this.y = ((brickHeight + 5) * 4);
 		

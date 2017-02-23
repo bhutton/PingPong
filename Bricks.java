@@ -12,14 +12,14 @@ public class Bricks {
 	// Contains the x,y coordinates and whether the brick is active or not.
 	private int[][][] takenBricks = new int[225][830][3];
 	
-	private int brickColumnLocation = 0, // Points to the relevant column in the array
-				brickRowLocation = 0, // Points to the relevant row in the array
+	private int brickColumnLocation = 0, 
+				brickRowLocation = 0, 
 				numRows, 
 				numCols, 
 				brickHeight=50, 
 				brickWidth=110, 
-				active=0, 	// The brick should be displayed
-				taken=1;	// The brick should not be displayed
+				brickIsActive=0, 	
+				brickHasBeenTaken=1;
 	
 	private int x,y;
 	private Boolean down,right;
@@ -39,7 +39,7 @@ public class Bricks {
 	public void initializeBrickArray() {
 		for (int count = 0; count < 8; count++) {
 			for (int counter = 0; counter < 3; counter++) {
-				this.takenBricks[count][counter][2] = active;
+				this.takenBricks[count][counter][2] = brickIsActive;
 			}
 		}
 	}
@@ -258,7 +258,7 @@ public class Bricks {
 	 * Determine whether brick is currently active
 	 */
 	public boolean getActive() {
-		if (this.takenBricks[brickColumnLocation][brickRowLocation][2] == active) return true;
+		if (this.takenBricks[brickColumnLocation][brickRowLocation][2] == brickIsActive) return true;
 		return false;
 	}
 	
@@ -268,8 +268,8 @@ public class Bricks {
 	public Boolean setBrickTaken() {
 		
 		for (int row = this.numRows-1; row >= 0; row--) {
-			if (this.takenBricks[brickColumnLocation][row][2] == active) {
-				this.takenBricks[brickColumnLocation][row][2] = taken;
+			if (this.takenBricks[brickColumnLocation][row][2] == brickIsActive) {
+				this.takenBricks[brickColumnLocation][row][2] = brickHasBeenTaken;
 				
 				return true;
 			}
