@@ -25,7 +25,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			paddleImg = "../src/PingPong/paddle.png"; 
 	
 	
-	Ball game = new Ball(true, true, 0, 0);	
+	Ball pp = new Ball(true, true, 0, 0);	
 	
 	String s = "";
 	
@@ -36,14 +36,14 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 	    
-	    game.setBallImage(ballImg);
-	    game.setBrickImage(brickImg);
-	    game.setPaddleImage(paddleImg);
-	    game.setPaddleWidth(200);
-	    game.setPaddleHeight(30);
-	    game.initializeBrickArray();
-	    game.createWall();
-	    game.setPaddleLocation(appletHeight, appletWidth);
+	    pp.setBallImage(ballImg);
+	    pp.setBrickImage(brickImg);
+	    pp.setPaddleImage(paddleImg);
+	    pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+	    pp.initializeBrickArray();
+	    pp.createWall();
+	    pp.setPaddleLocation(appletHeight, appletWidth);
 	    mouseListener();
 	    addKeyListener(this);
 	    
@@ -69,8 +69,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	
 	public void keyPressed( KeyEvent e ) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) game.movePaddleLeft();
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) game.movePaddleRight();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) pp.movePaddleLeft();
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) pp.movePaddleRight();
 	}
 	public void keyReleased( KeyEvent e ) {	}
 	public void keyTyped( KeyEvent e ) { }
@@ -94,9 +94,9 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	    while (currentThread == animatorThread) {
 	    	
-	    	game.calculateCurrentLocation(appletWidth, appletHeight);
-	    	game.setBallDirectionAfterReachingBricks();
-	    	game.setBallDirectionAfterReachingPaddle();
+	    	pp.calculateCurrentLocation(appletWidth, appletHeight);
+	    	pp.setBallDirectionAfterReachingBricks();
+	    	pp.setBallDirectionAfterReachingPaddle();
 	    	
 	    	repaint();
 	    	
@@ -110,8 +110,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 	
 	public void paint(Graphics g) {
-		game.drawWall(g);
-	    game.drawBall(g);
-	    game.drawPaddle(g);
+		pp.drawWall(g);
+	    pp.drawBall(g);
+	    pp.drawPaddle(g);
 	}
 }
