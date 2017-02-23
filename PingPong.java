@@ -21,7 +21,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			brickImg = "../src/PingPong/brick.png"; 
 	
 	
-	Game game = new Game(true, true, 0, 0);	
+	Ball game = new Ball(true, true, 0, 0);	
 	
 	String s = "";
 	
@@ -36,6 +36,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    game.setBrickImage(brickImg);
 	    game.initializeBrickArray();
 	    game.createWall();
+	    game.setPaddleLocation(appletHeight, appletWidth);
 	    mouseListener();
 	    
 	}
@@ -85,6 +86,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	   public void keyReleased( KeyEvent e ) { }
 	   public void keyTyped( KeyEvent e ) {
 	      char c = e.getKeyChar();
+	      
+	      if (c == 'e') game.movePaddleLeft();
 	 
 	      if ( c != KeyEvent.CHAR_UNDEFINED ) {
 	         s = s + c;
@@ -129,5 +132,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	public void paint(Graphics g) {
 		game.drawWall(g);
 	    game.drawBall(g);
+	    game.drawPaddle(g);
 	}
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 
-public class Ball extends Bricks {
+public class Ball extends Paddle {
 	int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
 	boolean forward = true, right = true, down = true;
 	
