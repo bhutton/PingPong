@@ -20,9 +20,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	boolean frozen = false; 
 	
-	String 	ballImg = "../src/PingPong/ball.png",
-			brickImg = "../src/PingPong/brick.png",
-			paddleImg = "../src/PingPong/paddle.png"; 
+	
 	
 	
 	Ball pp = new Ball(true, true, 0, 0);	
@@ -30,6 +28,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	String s = "";
 	
 	public void init() {
+		String 	ballImg = "../src/PingPong/ball.png",
+				brickImg = "../src/PingPong/brick.png",
+				paddleImg = "../src/PingPong/paddle.png"; 
+		
 		setSize(853,600);
 		
 		Dimension appletSize = this.getSize();
