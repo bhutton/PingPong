@@ -44,27 +44,25 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.initializeBrickArray();
 	    pp.createWall();
 	    pp.setPaddleLocation(appletHeight, appletWidth);
-	    mouseListener();
+	    //mouseListener();
 	    addKeyListener(this);
-	    
-	    
 	}
 	
-	public void mouseListener() {
+	/*public void mouseListener() {
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 	        
-				/*if (frozen) {
+				if (frozen) {
 					frozen = false;
 					start();
 				} 
 				else {
 					frozen = true;
 					stop();
-				}*/
+				}
 			}
 		});
-	}
+	}*/
 	
 	
 	

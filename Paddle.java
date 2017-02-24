@@ -51,9 +51,9 @@ public class Paddle extends Bricks {
 	
 	public boolean checkPaddle(Boolean direction, int x, int y) {
 		
-		System.out.println("ball y = " + y);
-		System.out.println("pad y = " + paddleY);
-		if (y >= paddleY-20)
+		System.out.println(y);
+		System.out.println(paddleY);
+		if (y >= paddleY)
 			return false;
 		
 		return direction;
