@@ -52,7 +52,7 @@ public class Paddle extends Bricks {
 	public boolean checkPaddle(Boolean direction, int x, int y) {
 		
 		if (y >= paddleY - (paddleHeight*1.7))
-			if (x >= paddleX && x <= paddleX+paddleWidth)
+			if (x >= paddleX-30 && x <= paddleX+paddleWidth)
 				return false;
 		
 		return direction;
