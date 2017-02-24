@@ -27,6 +27,14 @@ public class Ball extends Paddle {
 		return imgBall;
 	}
 	
+	public void setBallXValue(int x) {
+		this.x = x;
+	}
+	
+	public void setBallYValue(int y) {
+		this.y = y;
+	}
+	
 	public int getX() {
 		return this.x;
 	}
@@ -82,9 +90,11 @@ public class Ball extends Paddle {
 		down = checkBricks();
 	}
 	
-	public void setBallDirectionAfterReachingPaddle() {
+	public Boolean setBallDirectionAfterReachingPaddle() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkPaddle(down, x, y);
+		
+		return down;
 	}
 
 	public Ball checkStart() {
