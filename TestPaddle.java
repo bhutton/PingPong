@@ -52,4 +52,7 @@ public class TestPaddle {
 	    assertEquals(true,pp.setBallDirectionAfterReachingPaddle());
 	}
 	
+	
+	
+	
 }

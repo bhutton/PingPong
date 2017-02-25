@@ -134,5 +134,95 @@ public class TestBall {
 		assertEquals(true, pp.getDown());
 		assertEquals(true, pp.setBallDirectionAfterReachingPaddle());
 	}
+	
+	@Test
+	public void testCheckStart() {
+		int brickHeight = 50;
+		int y = ((brickHeight + 5) * 4);
+		
+		pp.setBallYValue(0);
+		pp.checkStart();
+		
+		assertEquals(y,pp.getY());
+	}
+	
+	@Test
+	public void testCheckBallHitsRightSideOfScreen() {
+		int appletWidth = 800;
+		
+		pp.setBallXValue(800);
+		pp.setRight();
+		pp.checkRight(appletWidth);
+		assertEquals(false, pp.getRight());
+	}
+	
+	@Test
+	public void testCheckBallHitsLeftSideOfScreen() {
+		pp.setBallXValue(0);
+		pp.setLeft();
+		pp.checkLeft();
+		assertEquals(true, pp.getRight());
+	}
+	
+	@Test
+	public void testCheckBallHitsTopOfScreen() {
+		pp.setBallUp();
+		pp.setBallYValue(0);
+		pp.checkTop();
+		assertEquals(true,pp.getDown());
+	}
+	
+	@Test
+	public void testCheckBallHitsBottomOfScreen() {
+		int appletHeight = 600;
+		pp.setBallDown(true);
+		pp.setBallYValue(600);
+		pp.checkBottom(appletHeight);
+		assertEquals(false,pp.getDown());
+	}
+	
+	@Test
+	public void testCheckEdges() {
+		pp.setBallXValue(600);
+		pp.setBallYValue(600);
+		pp.setRight();
+		pp.setDown();
+		
+		assertEquals(true,pp.getRight());
+		assertEquals(true,pp.getDown());
+		
+		pp.checkEdges(600, 600);
+		
+		assertEquals(false,pp.getRight());
+		assertEquals(false,pp.getDown());
+		
+		pp.setBallXValue(0);
+		pp.checkEdges(600, 600);
+		
+		assertEquals(true,pp.getRight());
+		assertEquals(false,pp.getDown());
+		
+		pp.setBallYValue(0);
+		pp.checkEdges(600, 600);
+		assertEquals(true,pp.getRight());
+		assertEquals(false,pp.getDown());
+	}
+	
+	@Test
+	public void testUpdateBallCoordinates() {
+		pp.setBallXValue(600);
+		pp.setBallYValue(600);
+		pp.setRight();
+		pp.setDown();
+		pp.updateBallCoordinates();
+		assertEquals(601,pp.getX());
+		assertEquals(603,pp.getY());
+		
+		pp.setLeft();
+		pp.setBallUp();
+		pp.updateBallCoordinates();
+		assertEquals(600,pp.getX());
+		assertEquals(600,pp.getY());
+	}
 
 }

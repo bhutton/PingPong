@@ -101,6 +101,10 @@ public class Ball extends Paddle {
 		this.right = false;
 	}
 	
+	public void setRight() {
+		this.right = true;
+	}
+	
 	public Boolean setBallDirectionAfterReachingBricks() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkBricks();
