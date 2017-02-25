@@ -43,7 +43,7 @@ public class Ball extends Paddle {
 		return this.x;
 	}
 	
-	public int getY() {
+	public int getBrickY() {
 		return this.y;
 	}
 	
@@ -120,7 +120,7 @@ public class Ball extends Paddle {
 	}
 
 	public Ball checkStart() {
-		if (this.getY() == 0) this.y = ((brickHeight + 5) * 4);
+		if (this.getBrickY() == 0) this.y = ((brickHeight + 5) * 4);
 		
 		return this;
 	}
@@ -144,7 +144,7 @@ public class Ball extends Paddle {
 	}
 	
 	public Ball checkTop() {
-		if (this.getY() <= 0) {
+		if (this.getBrickY() <= 0) {
 			this.down = true;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 		}
@@ -153,7 +153,7 @@ public class Ball extends Paddle {
 	}
 	
 	public Ball checkBottom(int appletHeight) {
-		if ((this.getY() + height + 2) > appletHeight) {
+		if ((this.getBrickY() + height + 2) > appletHeight) {
 			this.down = false;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 		}

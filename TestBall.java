@@ -14,8 +14,6 @@ public class TestBall {
 	
 	private Ball pp = new Ball(true, true, 0, 0);
 	
-	
-
 	@Test
 	public void testSetBallImg() {
 		String 	ballImg = "./src/PingPong/ball.png";
@@ -48,7 +46,7 @@ public class TestBall {
 		
 		pp.setBallYValue(y);
 		
-		assertEquals(y, pp.getY());
+		assertEquals(y, pp.getBrickY());
 	}
 	
 	@Test
@@ -68,7 +66,7 @@ public class TestBall {
 		pp.setBallYValue(y);
 		pp.incY();
 		
-		assertEquals(13, pp.getY());
+		assertEquals(13, pp.getBrickY());
 	}
 	
 	@Test
@@ -143,7 +141,7 @@ public class TestBall {
 		pp.setBallYValue(0);
 		pp.checkStart();
 		
-		assertEquals(y,pp.getY());
+		assertEquals(y,pp.getBrickY());
 	}
 	
 	@Test
@@ -216,13 +214,13 @@ public class TestBall {
 		pp.setDown();
 		pp.updateBallCoordinates();
 		assertEquals(601,pp.getX());
-		assertEquals(603,pp.getY());
+		assertEquals(603,pp.getBrickY());
 		
 		pp.setLeft();
 		pp.setBallUp();
 		pp.updateBallCoordinates();
 		assertEquals(600,pp.getX());
-		assertEquals(600,pp.getY());
+		assertEquals(600,pp.getBrickY());
 	}
 
 }

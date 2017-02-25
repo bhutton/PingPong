@@ -44,6 +44,35 @@ public class Bricks {
 		}
 	}
 	
+	/*
+	 * Setup array that holds the x,y coordinates of the wall
+	 */
+	public void createWall() {
+		
+		// Screen coordinates of the individual bricks
+		int x=5, y=5;
+		
+		setColLoc(0);
+	    
+	    for (int col = 0; col < 8; col++) {	    	
+	    	setRowLoc(0); 
+	    	y = 5;	
+	    	
+	    	for (int row = 0; row < 2; row++) {
+	    		setBrickYCoord(y).setBrickXCoord(x).incRowLoc(); 
+	    		y += 55;
+		    }
+		    
+		    incColLoc(); x += 105;
+	    }
+	    
+	    setNumRows().setNumCols();
+	}		
+	
+	public int returnSizeOfBrickArray() {
+		return this.takenBricks.length;
+	}
+	
 	// Import brick image
 	public void setBrickImage(String brickImg) {
 		try { imgBrick = ImageIO.read(new File(brickImg)); } 
@@ -63,6 +92,12 @@ public class Bricks {
 		return this;
 	}
 	
+	public int returnBrickColumnLocation() {
+		return this.brickColumnLocation;
+	}
+	
+	
+	
 	/*
 	 * Sets current row position in the bricks array
 	 */
@@ -70,6 +105,10 @@ public class Bricks {
 		this.brickRowLocation = row;
 		
 		return this;
+	}
+	
+	public int returnBrickRowLocation() {
+		return this.brickRowLocation;
 	}
 	
 	/*
@@ -141,7 +180,7 @@ public class Bricks {
 	/*
 	 *  Return screen Y position of specific brick
 	 */
-	public int getY() {
+	public int getBrickY() {
 		return this.takenBricks[brickColumnLocation][brickRowLocation][1];
 	}
 	
@@ -212,9 +251,21 @@ public class Bricks {
 		return this;
 	}
 	
+	public int getBallX() {
+		return this.x;
+	}
+	
+	public int getBallY() {
+		return this.y;
+	}
+	
 	public Bricks setBallDown(Boolean down) {
 		this.down = down;
 		return this;
+	}
+	
+	public Boolean getBallDown() {
+		return this.down;
 	}
 	
 	public Bricks setBallRight(Boolean right) {
@@ -222,30 +273,9 @@ public class Bricks {
 		return this;
 	}
 	
-	/*
-	 * Setup array that holds the x,y coordinates of the wall
-	 */
-	public void createWall() {
-		
-		// Screen coordinates of the individual bricks
-		int x=5, y=5;
-		
-		setColLoc(0);
-	    
-	    for (int col = 0; col < 8; col++) {	    	
-	    	setRowLoc(0); 
-	    	y = 5;	
-	    	
-	    	for (int row = 0; row < 2; row++) {
-	    		setBrickYCoord(y).setBrickXCoord(x).incRowLoc(); 
-	    		y += 55;
-		    }
-		    
-		    incColLoc(); x += 105;
-	    }
-	    
-	    setNumRows().setNumCols();
-	}		   
+	public Boolean getBallRight() {
+		return this.right;
+	}
 	
 	public Boolean checkActive(int x, Boolean leftRight) {
 		int left = x-brickWidth, right = x+brickWidth;
@@ -267,10 +297,11 @@ public class Bricks {
 	 */
 	public Boolean setBrickTaken() {
 		
+		
 		for (int row = this.numRows-1; row >= 0; row--) {
 			if (this.takenBricks[brickColumnLocation][row][2] == brickIsActive) {
 				this.takenBricks[brickColumnLocation][row][2] = brickHasBeenTaken;
-				
+						
 				return true;
 			}
 		}

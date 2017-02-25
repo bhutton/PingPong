@@ -2,11 +2,35 @@ package PingPong;
 
 import static org.junit.Assert.*;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.junit.Test;
 
 public class TestPaddle {
 	
 	private Ball pp = new Ball(true, true, 0, 0);
+	
+	@Test
+	public void testSetPaddleImg() {
+		String 	paddleImg = "./src/PingPong/paddle.png";
+		BufferedImage imgPaddle1 = null, imgPaddle2 = null;
+		
+		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); } 
+		catch (IOException e) { e.printStackTrace(); }
+		
+		pp.setBallImage(paddleImg);
+		imgPaddle2 = pp.getBall();
+		
+		byte[] byteArray1 = ((DataBufferByte) imgPaddle1.getData().getDataBuffer()).getData();
+		byte[] byteArray2 = ((DataBufferByte) imgPaddle2.getData().getDataBuffer()).getData();
+		
+		assertArrayEquals(byteArray1, byteArray2);
+	}
 	
 	@Test
 	public void testCheckPaddleReturnsTrue() {				
