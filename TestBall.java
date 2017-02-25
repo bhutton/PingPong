@@ -32,5 +32,52 @@ public class TestBall {
 		
 		assertArrayEquals(byteArray1, byteArray2);
 	}
+	
+	@Test
+	public void testSetBallXValueAndGetReturn() {
+		int x = 10;
+		
+		pp.setBallXValue(x);
+		
+		assertEquals(x, pp.getX());
+	}
+	
+	@Test
+	public void testSetBallYValueAndGetReturn() {
+		int y = 10;
+		
+		pp.setBallYValue(y);
+		
+		assertEquals(y, pp.getY());
+	}
+	
+	@Test
+	public void testIncrementingXValue() {
+		int x = 10;
+		
+		pp.setBallXValue(x);
+		pp.incX();
+		
+		assertEquals(11, pp.getX());
+	}
+	
+	@Test
+	public void testIncrementingYValue() {
+		int y = 10;
+		
+		pp.setBallYValue(y);
+		pp.incY();
+		
+		assertEquals(13, pp.getY());
+	}
+	
+	@Test
+	public void testShiftingBallLeft() {
+		int x = 10;
+		
+		pp.setBallXValue(x);
+		pp.shiftX();
+		assertEquals(11, pp.getX());
+	}
 
 }
