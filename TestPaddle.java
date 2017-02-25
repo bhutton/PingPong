@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class PaddleTests {
+public class TestPaddle {
 	
 	private Ball pp = new Ball(true, true, 0, 0);
 	

@@ -27,12 +27,16 @@ public class Ball extends Paddle {
 		return imgBall;
 	}
 	
-	public void setBallXValue(int x) {
+	public Ball setBallXValue(int x) {
 		this.x = x;
+		
+		return this;
 	}
 	
-	public void setBallYValue(int y) {
+	public Ball setBallYValue(int y) {
 		this.y = y;
+		
+		return this;
 	}
 	
 	public int getX() {
@@ -81,13 +85,27 @@ public class Ball extends Paddle {
 		return down;
 	}
 	
-	public void setDown() {
+	public Ball setDown() {
 		this.down = true;
+		
+		return this;
 	}
 	
-	public void setBallDirectionAfterReachingBricks() {
+	public Ball setBallUp() {
+		this.down = false;
+		
+		return this;
+	}
+	
+	public void setLeft() {
+		this.right = false;
+	}
+	
+	public Boolean setBallDirectionAfterReachingBricks() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkBricks();
+		
+		return down;
 	}
 	
 	public Boolean setBallDirectionAfterReachingPaddle() {

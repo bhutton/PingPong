@@ -72,12 +72,67 @@ public class TestBall {
 	}
 	
 	@Test
-	public void testShiftingBallLeft() {
+	public void testShiftingBallRight() {
 		int x = 10;
 		
 		pp.setBallXValue(x);
 		pp.shiftX();
 		assertEquals(11, pp.getX());
+	}
+	
+	@Test
+	public void testShiftingBallLeft() {
+		int x = 10;
+		
+		pp.setBallXValue(x);
+		pp.setLeft();
+		pp.shiftX();
+		assertEquals(9, pp.getX());
+	}
+	
+	@Test
+	public void testCheckBallDirectionAfterReachingBricks() {
+		int x = 10, y = 10;
+		
+		pp.createWall();
+		pp.setBallUp();
+		pp.setBallXValue(x);
+		pp.setBallYValue(y);		
+		
+		assertEquals(false, pp.getDown());
+		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+	}
+	
+	@Test
+	public void testCheckBallDirectionAfterReachingPaddle() {
+		int x = 450, y = 800;
+		
+		pp.createWall();
+		pp.setDown();
+		pp.setBallXValue(x);
+		pp.setBallYValue(y);	
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+		
+		assertEquals(true, pp.getDown());
+		assertEquals(false, pp.setBallDirectionAfterReachingPaddle());
+	}
+	
+	@Test
+	public void testCheckBallDirectionAfterMissingPaddle() {
+		int x = 0, y = 800;
+		
+		pp.createWall();
+		pp.setDown();
+		pp.setBallXValue(x);
+		pp.setBallYValue(y);	
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+		
+		assertEquals(true, pp.getDown());
+		assertEquals(true, pp.setBallDirectionAfterReachingPaddle());
 	}
 
 }
