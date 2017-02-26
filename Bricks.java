@@ -228,13 +228,12 @@ public class Bricks {
 	 * and if so remove it then reverse direction of ball
 	 */
 	public Boolean checkBricks() {
-		
 		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
     				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
-    				if (checkActive(x, right)) return true;
+    				if (checkActive(x, y, right)) return true;
     			}
 		}
 		
@@ -277,9 +276,13 @@ public class Bricks {
 		return this.right;
 	}
 	
-	public Boolean checkActive(int x, Boolean leftRight) {
+	public Boolean checkActive(int x, int y, Boolean leftRight) {
 		int left = x-brickWidth, right = x+brickWidth;
-
+		
+		System.out.println("Ball Y = " + this.getBallY());
+		System.out.println("Brick Ball Y = " + this.getBrickYCoord());
+		System.out.println("Brick Array Y = " + this.getBrickY());
+		
 		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
 		return false;
 	}
