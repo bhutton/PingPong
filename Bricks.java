@@ -233,6 +233,7 @@ public class Bricks {
     			for (int counter = 0; counter < this.numRows; counter++) {
     				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
+    				if (getActive() == false) return false;
     				if (checkActive(x, y, right)) return true;
     			}
 		}
@@ -278,10 +279,7 @@ public class Bricks {
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
 		int left = x-brickWidth, right = x+brickWidth;
-		
-		System.out.println("Ball Y = " + this.getBallY());
-		System.out.println("Brick Ball Y = " + this.getBrickYCoord());
-		System.out.println("Brick Array Y = " + this.getBrickY());
+		int top = y, bottom = y + brickHeight;
 		
 		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
 		return false;
