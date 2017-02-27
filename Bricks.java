@@ -280,8 +280,15 @@ public class Bricks {
 		int left = x-brickWidth, right = x+brickWidth;
 		int top = y, bottom = y + brickHeight;
 		
-		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
-		return false;
+		//if (this.takenBricks[brickColumnLocation][1][2] == brickHasBeenTaken)
+		//	return false;
+		
+		//if (getActive()) { 
+			if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
+			return false;
+		//}
+		
+		//return false;
 	}
 	
 	/*
