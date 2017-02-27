@@ -233,7 +233,6 @@ public class Bricks {
     			for (int counter = 0; counter < this.numRows; counter++) {
     				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
-    				if (getActive() == false) return false;
     				if (checkActive(x, y, right)) return true;
     			}
 		}
@@ -305,6 +304,9 @@ public class Bricks {
 						
 				return true;
 			}
+			//else return false;
+			
+			
 		}
 		
 		return false;
