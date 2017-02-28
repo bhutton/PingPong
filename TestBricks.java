@@ -215,5 +215,4 @@ public class TestBricks {
 		assertEquals(false, pp.getActive());
 	}
 	
-	
 }

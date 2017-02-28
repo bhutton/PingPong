@@ -54,7 +54,7 @@ public class Paddle extends Bricks {
 		if (y >= paddleY - (paddleHeight*1.7))
 			if (x >= paddleX-30 && x <= paddleX+paddleWidth)
 				return false;
-		
+
 		return direction;
 	}
 }
