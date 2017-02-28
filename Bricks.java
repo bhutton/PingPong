@@ -283,27 +283,19 @@ public class Bricks {
 		return this.down;
 	}
 	
+	public int getRow(int y) {
+		if (y < 50) return 0;
+		return 1;
+	}
+	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x-brickWidth, right = x+brickWidth;
-		int top = y, bottom = y + brickHeight, row;
+		int left = x-brickWidth, right = x+brickWidth, row = getRow(y);
 		
-		System.out.println(this.takenBricks[brickColumnLocation][brickRowLocation][2]);
-		
-		if (y < 50) row = 0;
-		else row = 1;
-		
-		if (this.takenBricks[brickColumnLocation][row][2] == brickHasBeenTaken) {
+		if (this.takenBricks[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
-		}
 		
-		//System.out.println(this.down);
-		
-		//if (getActive()) { 
-			if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
-			return false;
-		//}
-		
-		//return false;
+		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
+		return false;
 	}
 	
 	/*
