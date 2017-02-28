@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class Bricks {
 	
 	// Contains the x,y coordinates and whether the brick is active or not.
-	private int[][][] takenBricks = new int[225][830][3];
+	private int[][][] brickArray = new int[225][830][3];
 	
 	private int brickColumnLocation = 0, 
 				brickRowLocation = 0, 
@@ -39,7 +39,7 @@ public class Bricks {
 	public void initializeBrickArray() {
 		for (int count = 0; count < 8; count++) {
 			for (int counter = 0; counter < 3; counter++) {
-				this.takenBricks[count][counter][2] = brickIsActive;
+				this.brickArray[count][counter][2] = brickIsActive;
 			}
 		}
 	}
@@ -70,7 +70,7 @@ public class Bricks {
 	}		
 	
 	public int returnSizeOfBrickArray() {
-		return this.takenBricks.length;
+		return this.brickArray.length;
 	}
 	
 	// Import brick image
@@ -115,7 +115,7 @@ public class Bricks {
 	 * Sets the screen X coordinate for a brick
 	 */
 	public Bricks setBrickXCoord(int x) {
-		this.takenBricks[brickColumnLocation][brickRowLocation][0] = x;
+		this.brickArray[brickColumnLocation][brickRowLocation][0] = x;
 		
 		return this;
 	}
@@ -124,24 +124,24 @@ public class Bricks {
 	 * Sets the screen Y coordinate for a brick
 	 */
 	public Bricks setBrickYCoord(int y) {
-		this.takenBricks[brickColumnLocation][brickRowLocation][1] = y;
+		this.brickArray[brickColumnLocation][brickRowLocation][1] = y;
 		
 		return this;
 	}
 	
 	public int getBrickXCoord() {
-		return this.takenBricks[brickColumnLocation][brickRowLocation][0];
+		return this.brickArray[brickColumnLocation][brickRowLocation][0];
 	}
 	
 	public int getBrickYCoord() {
-		return this.takenBricks[brickColumnLocation][brickRowLocation][1];
+		return this.brickArray[brickColumnLocation][brickRowLocation][1];
 	}
 	
 	/*
 	 * Enables brick
 	 */
 	public void setBrickEnabled(int enabled) {
-		this.takenBricks[brickColumnLocation][brickRowLocation][2] = enabled;
+		this.brickArray[brickColumnLocation][brickRowLocation][2] = enabled;
 	}
 	
 	/*
@@ -174,14 +174,14 @@ public class Bricks {
 	 * Return screen X position of specific brick
 	 */
 	public int getBrickX() {
-		return this.takenBricks[brickColumnLocation][brickRowLocation][0];
+		return this.brickArray[brickColumnLocation][brickRowLocation][0];
 	}
 	
 	/*
 	 *  Return screen Y position of specific brick
 	 */
 	public int getBrickY() {
-		return this.takenBricks[brickColumnLocation][brickRowLocation][1];
+		return this.brickArray[brickColumnLocation][brickRowLocation][1];
 	}
 	
 	public Bricks setColLoc(int col) {
@@ -291,7 +291,7 @@ public class Bricks {
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
 		int left = x-brickWidth, right = x+brickWidth, row = getRow(y);
 		
-		if (this.takenBricks[brickColumnLocation][row][2] == brickHasBeenTaken)
+		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
 		
 		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
@@ -302,25 +302,20 @@ public class Bricks {
 	 * Determine whether brick is currently active
 	 */
 	public boolean getActive() {
-		if (this.takenBricks[brickColumnLocation][brickRowLocation][2] == brickIsActive) return true;
+		if (this.brickArray[brickColumnLocation][brickRowLocation][2] == brickIsActive) return true;
 		return false;
 	}
 	
 	/*
 	 * Sets brick to be removed from screen
 	 */
-	public Boolean setBrickTaken() {
-		
-		
+	public Boolean setBrickTaken() {		
 		for (int row = this.numRows-1; row >= 0; row--) {
-			if (this.takenBricks[brickColumnLocation][row][2] == brickIsActive) {
-				this.takenBricks[brickColumnLocation][row][2] = brickHasBeenTaken;
+			if (this.brickArray[brickColumnLocation][row][2] == brickIsActive) {
+				this.brickArray[brickColumnLocation][row][2] = brickHasBeenTaken;
 						
 				return true;
 			}
-			//else return false;
-			
-			
 		}
 		
 		return false;

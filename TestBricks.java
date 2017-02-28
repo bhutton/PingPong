@@ -166,7 +166,6 @@ public class TestBricks {
 		assertEquals(true, pp.checkBricks());
 		assertEquals(true, pp.checkBricks());
 		assertEquals(false, pp.checkBricks());
-		//assertEquals(false, pp.checkBricks());
 	}
 	
 	@Test
