@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class Ball extends Paddle {
 	private int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
-	private boolean forward = true, right = true, down = true, ballIsActive = true;
+	private boolean right = true, down = true, ballIsActive = true;
 	
 	private BufferedImage imgBall = null;
 	
@@ -156,6 +156,8 @@ public class Ball extends Paddle {
 		if ((this.getBrickY() + height + 2) > appletHeight) {
 			this.down = false;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
+			
+			this.ballIsActive = false;
 		}
 		
 		return this;

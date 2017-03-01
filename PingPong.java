@@ -92,7 +92,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 		Thread currentThread = Thread.currentThread();
 
-	    while (currentThread == animatorThread) {
+	    while (currentThread == animatorThread && pp.checkBallActive()) {
 	    	
 	    	pp.calculateCurrentLocation(appletWidth, appletHeight);
 	    	pp.setBallDirectionAfterReachingBricks();

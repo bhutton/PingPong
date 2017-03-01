@@ -187,22 +187,26 @@ public class TestBall {
 		
 		assertEquals(true,pp.getRight());
 		assertEquals(true,pp.getDown());
+		assertEquals(true,pp.checkBallActive());
 		
 		pp.checkEdges(600, 600);
 		
 		assertEquals(false,pp.getRight());
 		assertEquals(false,pp.getDown());
+		assertEquals(false,pp.checkBallActive());
 		
 		pp.setBallXValue(0);
 		pp.checkEdges(600, 600);
 		
 		assertEquals(true,pp.getRight());
 		assertEquals(false,pp.getDown());
+		assertEquals(false,pp.checkBallActive());
 		
 		pp.setBallYValue(0);
 		pp.checkEdges(600, 600);
 		assertEquals(true,pp.getRight());
 		assertEquals(false,pp.getDown());
+		assertEquals(false,pp.checkBallActive());
 	}
 	
 	@Test
@@ -225,7 +229,6 @@ public class TestBall {
 	@Test
 	public void testCheckBallActive() {
 		pp.checkBallActive();
-		
 	}
 
 }
