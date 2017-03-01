@@ -24,7 +24,7 @@ public class Bricks {
 	private int x,y;
 	private Boolean down,right;
 
-	BufferedImage imgBrick = null;
+	private BufferedImage imgBrick = null;
 	
 	public Bricks() {
 		initializeBrickArray();

@@ -12,7 +12,7 @@ public class Paddle extends Bricks {
 	private int paddleX, paddleY, paddleWidth, paddleHeight;
 	private int appletWidth;
 	
-	BufferedImage imgPaddle = null;
+	private BufferedImage imgPaddle = null;
 
 	public Paddle() {
 		super();

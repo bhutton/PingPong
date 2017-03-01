@@ -9,10 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.imageio.ImageIO;
 
 public class Ball extends Paddle {
-	int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
-	boolean forward = true, right = true, down = true;
+	private int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
+	private boolean forward = true, right = true, down = true, ballIsActive = true;
 	
-	BufferedImage imgBall = null;
+	private BufferedImage imgBall = null;
 	
 	public Ball(Boolean down, Boolean right, int x, int y) {
 		super();
@@ -164,6 +164,10 @@ public class Ball extends Paddle {
 	public void calculateCurrentLocation(int appletWidth, int appletHeight) {
 		checkEdges(appletWidth, appletHeight);
     	updateBallCoordinates();
+	}
+	
+	public Boolean checkBallActive() {
+		return this.ballIsActive;
 	}
 	
 	public void checkEdges(int appletWidth, int appletHeight) {

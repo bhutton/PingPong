@@ -221,5 +221,11 @@ public class TestBall {
 		assertEquals(600,pp.getX());
 		assertEquals(600,pp.getBrickY());
 	}
+	
+	@Test
+	public void testCheckBallActive() {
+		pp.checkBallActive();
+		
+	}
 
 }
