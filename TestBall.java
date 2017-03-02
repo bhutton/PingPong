@@ -231,14 +231,14 @@ public class TestBall {
 		pp.checkBallActive();
 	}
 	
-	/*@Test
+	@Test
 	public void testSetBallInActive() {
-		assertEquals(true,pp.setBallInActive());
+		assertEquals(false,pp.setBallInActive());
 	}
 	
 	@Test
 	public void testSetBallActive() {
-		System.out.println(pp.checkBallActive());
-	}*/
+		assertEquals(true,pp.setBallActive());
+	}
 
 }

@@ -172,6 +172,14 @@ public class Ball extends Paddle {
 		return this.ballIsActive;
 	}
 	
+	public Boolean setBallInActive() {
+		return this.ballIsActive = false;
+	}
+	
+	public Boolean setBallActive() {
+		return this.ballIsActive = true;
+	}
+	
 	public void checkEdges(int appletWidth, int appletHeight) {
 		checkStart().checkLeft().checkRight(appletWidth).checkTop().checkBottom(appletHeight);    	
 	}
