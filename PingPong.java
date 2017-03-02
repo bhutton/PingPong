@@ -1,7 +1,9 @@
 package PingPong;
 
 import java.applet.Applet;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.event.KeyEvent;
@@ -24,6 +26,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	
 	Ball pp = new Ball(true, true, 0, 0);	
+	Messages msg = new Messages();
 	
 	String s = "";
 	
@@ -89,11 +92,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	public void run() {
 		
+		msg.setGameActive();
+		
 		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 		Thread currentThread = Thread.currentThread();
 
-	    while (currentThread == animatorThread && pp.checkBallActive()) {
-	    	
+	    while (currentThread == animatorThread && pp.checkBallActive()) {	    	
 	    	pp.calculateCurrentLocation(appletWidth, appletHeight);
 	    	pp.setBallDirectionAfterReachingBricks();
 	    	pp.setBallDirectionAfterReachingPaddle();
@@ -107,11 +111,17 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    		break;
 	    	}
 	    }
+	    
+	    msg.setGameOver();
+	    repaint();
 	}
 	
 	public void paint(Graphics g) {
-		pp.drawWall(g);
-	    pp.drawBall(g);
-	    pp.drawPaddle(g);
+		if (msg.getGameActive()) {
+			pp.drawWall(g);
+		    pp.drawBall(g);
+		    pp.drawPaddle(g);
+		}
+		else msg.displayMessage(g, appletWidth, appletHeight);
 	}
 }
