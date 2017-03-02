@@ -19,11 +19,11 @@ public class Messages {
 	}
 	
 	public String returnMessage() {
-		return "Game Over";
+		return "Game Over, Press Enter to Start Again";
 	}
 	
 	public void displayMessage(Graphics g, int width, int height) {
-		int x = width / 2 - 20;
+		int x = width / 2 - 100;
 		int y = height / 2;
 		g.drawString(returnMessage(), x, y);
 	}

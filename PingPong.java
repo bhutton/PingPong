@@ -74,6 +74,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	public void keyPressed( KeyEvent e ) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) pp.movePaddleLeft();
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) pp.movePaddleRight();
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) msg.setGameActive();
 	}
 	public void keyReleased( KeyEvent e ) {	}
 	public void keyTyped( KeyEvent e ) { }
@@ -97,23 +98,27 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 		Thread currentThread = Thread.currentThread();
 
-	    while (currentThread == animatorThread && pp.checkBallActive()) {	    	
-	    	pp.calculateCurrentLocation(appletWidth, appletHeight);
-	    	pp.setBallDirectionAfterReachingBricks();
-	    	pp.setBallDirectionAfterReachingPaddle();
+	    while (currentThread == animatorThread) {
 	    	
-	    	repaint();
-	    	
-	    	try {
-	    		Thread.sleep(10);
-	    	} 
-	    	catch (InterruptedException e) {
-	    		break;
+	    	while (pp.checkBallActive()) {
+		    	pp.calculateCurrentLocation(appletWidth, appletHeight);
+		    	pp.setBallDirectionAfterReachingBricks();
+		    	pp.setBallDirectionAfterReachingPaddle();
+		    	
+		    	repaint();
+		    	
+		    	try {
+		    		Thread.sleep(10);
+		    	} 
+		    	catch (InterruptedException e) {
+		    		break;
+		    	}
 	    	}
+	    	
+	    	msg.setGameOver();
+		    repaint();
 	    }
 	    
-	    msg.setGameOver();
-	    repaint();
 	}
 	
 	public void paint(Graphics g) {
