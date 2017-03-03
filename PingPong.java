@@ -7,6 +7,12 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import java.awt.event.KeyAdapter;
 
 
@@ -22,6 +28,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	boolean frozen = false; 
 	
+	private BufferedImage 	imgBall = null,
+							imgGameOver = null,
+							imgBackground = null;
+	
 	
 	
 	
@@ -31,11 +41,20 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	String s = "";
 	
 	public void init() {
-		String 	ballImg = "../src/PingPong/ball.png",
+		String 	ballImg = "../src/PingPong/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
 				brickImg = "../src/PingPong/brick.png",
-				paddleImg = "../src/PingPong/paddle.png"; 
+				paddleImg = "../src/PingPong/paddle.png",
+				gameOverImg = "../src/PingPong/free-game-wallpaper-9.jpg", 
+				backGroundImg = "../src/PingPong/12-vector-game-backgrounds-8320_imgs_8320.png"; 
 		
 		setSize(853,600);
+		
+		try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
+		catch (IOException e) { e.printStackTrace(); }
+		
+		try { imgBackground = ImageIO.read(new File(backGroundImg)); } 
+		catch (IOException e) { e.printStackTrace(); }
+		
 		
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
@@ -130,11 +149,17 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 	
 	public void paint(Graphics g) {
+		
+		g.drawImage(imgBackground, 0, 0, appletWidth, appletHeight, null);
+
 		if (msg.getGameActive()) {
 			pp.drawWall(g);
 		    pp.drawBall(g);
 		    pp.drawPaddle(g);
 		}
-		else msg.displayMessage(g, appletWidth, appletHeight);
+		else {
+			g.drawImage(imgGameOver, 0, 0, appletWidth, appletHeight, null);
+			msg.displayMessage(g, appletWidth, appletHeight);
+		}
 	}
 }

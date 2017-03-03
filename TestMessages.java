@@ -29,6 +29,6 @@ public class TestMessages {
 
 	@Test
 	public void testReturnMessage() {
-		assertEquals("Game Over", msg.returnMessage());
+		assertEquals("Press Enter to Start Again", msg.returnMessage());
 	}
 }

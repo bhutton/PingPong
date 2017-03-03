@@ -1,5 +1,6 @@
 package PingPong;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Messages {
@@ -19,12 +20,13 @@ public class Messages {
 	}
 	
 	public String returnMessage() {
-		return "Game Over, Press Enter to Start Again";
+		return "Press Enter to Start Again";
 	}
 	
 	public void displayMessage(Graphics g, int width, int height) {
-		int x = width / 2 - 100;
+		int x = width / 2;
 		int y = height / 2;
+		g.setColor(Color.WHITE);
 		g.drawString(returnMessage(), x, y);
 	}
 }
