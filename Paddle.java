@@ -49,6 +49,14 @@ public class Paddle extends Bricks {
 		g.drawImage(this.imgPaddle, paddleX, paddleY, null);
 	}
 	
+	public int getPaddleX() {
+		return paddleX;
+	}
+	
+	public int getPaddleY() {
+		return paddleY;
+	}
+	
 	public boolean checkPaddle(Boolean direction, int x, int y) {
 		
 		if (y >= paddleY - (paddleHeight*1.7))

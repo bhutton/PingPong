@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class Ball extends Paddle {
 	private int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
-	private boolean right = true, down = true, ballIsActive = true;
+	private boolean right = true, down = true, ballIsActive = true, ballStart = false;
 	
 	private BufferedImage imgBall = null;
 	
@@ -185,10 +185,26 @@ public class Ball extends Paddle {
 	}
 	
 	public void updateBallCoordinates() {
-		shiftX().shiftY();
+		if (ballStart) {
+			shiftX().shiftY();
+		}
 	}
 	
 	public void drawBall(Graphics g) {
 		g.drawImage(this.imgBall, this.x, this.y, null);
+	}
+	
+	public void initializeBall() {
+		this.x = this.getPaddleX();
+		this.y = this.getPaddleY()-50;
+	}
+	
+	public Boolean ballSetStart() {
+		return ballStart = true;
+	}
+	
+	public Boolean ballSetStop() {
+		ballStart = false;
+		return true;
 	}
 }

@@ -321,6 +321,16 @@ public class Bricks {
 		return false;
 	}
 	
+	public Boolean getBricksLeft() {
+		for (int row = 0; row < this.numRows; row++)
+			for (int col = 0; col < this.numCols; col++) {
+				if (this.brickArray[col][row][2] == brickIsActive) 
+					return true;
+			}
+		
+		return false;
+	}
+	
 	public void drawWall(Graphics g) {
 		for (brickRowLocation = 0; brickRowLocation < numRows; brickRowLocation++)
 			for (brickColumnLocation = 0; brickColumnLocation < numCols; brickColumnLocation++)

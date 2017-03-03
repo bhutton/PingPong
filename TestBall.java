@@ -211,6 +211,7 @@ public class TestBall {
 	
 	@Test
 	public void testUpdateBallCoordinates() {
+		pp.ballSetStart();
 		pp.setBallXValue(600);
 		pp.setBallYValue(600);
 		pp.setRight();
@@ -239,6 +240,24 @@ public class TestBall {
 	@Test
 	public void testSetBallActive() {
 		assertEquals(true,pp.setBallActive());
+	}
+	
+	@Test
+	public void testItializeBall() {
+		pp.initializeBall();
+		
+		assertTrue(pp.getBallX() == pp.getPaddleX());
+		assertTrue(pp.getBallY() == pp.getPaddleY());
+	}
+	
+	@Test
+	public void testSetStart() {
+		assertEquals(true, pp.ballSetStart());
+	}
+	
+	@Test
+	public void testSetStop() {
+		assertEquals(true, pp.ballSetStop());
 	}
 
 }

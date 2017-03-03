@@ -215,4 +215,12 @@ public class TestBricks {
 		assertEquals(false, pp.getActive());
 	}
 	
+	@Test
+	public void testAnyBricksLeft() {
+		pp.initializeBrickArray();
+		assertEquals(false, pp.getBricksLeft());
+		pp.createWall();
+		assertEquals(true, pp.getBricksLeft());
+	}
+	
 }

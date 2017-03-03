@@ -25,7 +25,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	
 	
-	Ball pp = new Ball(true, true, 0, 0);	
+	Ball pp = new Ball(true, true, 0, 0);
 	Messages msg = new Messages();
 	
 	String s = "";
@@ -75,6 +75,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) pp.movePaddleLeft();
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) pp.movePaddleRight();
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) msg.setGameActive();
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) pp.ballSetStart();
 	}
 	public void keyReleased( KeyEvent e ) {	}
 	public void keyTyped( KeyEvent e ) { }
@@ -104,8 +105,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    pp.createWall();
 	    	
 	    	pp.setBallActive();
+	    	pp.ballSetStop();
+	    	pp.initializeBall();
 	    	
-	    	while (pp.checkBallActive()) {
+	    	while (pp.checkBallActive() && pp.getBricksLeft()) {
 		    	pp.calculateCurrentLocation(appletWidth, appletHeight);
 		    	pp.setBallDirectionAfterReachingBricks();
 		    	pp.setBallDirectionAfterReachingPaddle();
