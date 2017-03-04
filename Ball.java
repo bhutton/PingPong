@@ -188,6 +188,9 @@ public class Ball extends Paddle {
 		if (ballStart) {
 			shiftX().shiftY();
 		}
+		
+		if (!getBallStatus()) 
+			setBallX(getPaddleX());
 	}
 	
 	public void drawBall(Graphics g) {
@@ -206,5 +209,9 @@ public class Ball extends Paddle {
 	public Boolean ballSetStop() {
 		ballStart = false;
 		return true;
+	}
+	
+	public Boolean getBallStatus() {
+		return ballStart;
 	}
 }
