@@ -261,13 +261,19 @@ public class TestBall {
 	}
 	
 	@Test
-	public void testKeepWithPaddleWhenStopped() {
-		pp.setPaddleLocation(800, 600);
-		assertEquals(true, pp.ballSetStop());
-		System.out.println(pp.getPaddleX());
-		pp.movePaddleLeft();
-		System.out.println(pp.getPaddleX());
+	public void testBallMoveswithPaddle() {
+		pp.initializeBall();
+		pp.ballSetStop();
+		assertEquals(false, pp.getBallStatus());
+		//System.out.println(pp.getPaddleX());
+		//System.out.println(pp.getBallX());
 		
+		pp.movePaddleRight();
+		pp.calculateCurrentLocation(800, 600);
+		assertEquals(30, pp.getPaddleX());
+		System.out.println(pp.getPaddleX());
+		System.out.println(pp.getBallX());
+		assertEquals(30, pp.getBallX());
 	}
 
 }
