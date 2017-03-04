@@ -17,7 +17,7 @@ public class TestBricks {
 
 	@Test
 	public void testSetBrickImg() {
-		String 	paddleImg = "./src/PingPong/brick.png";
+		String 	paddleImg = "./src/PingPong/images/brick.png";
 		BufferedImage imgBrick1 = null, imgBrick2 = null;
 		
 		try { imgBrick1 = ImageIO.read(new File(paddleImg)); } 

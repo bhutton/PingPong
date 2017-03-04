@@ -18,7 +18,7 @@ public class TestBackGround {
 
 	@Test
 	public void backgroundImg() {
-		String 	backgroundImg = "./src/PingPong/12-vector-game-backgrounds-8320_imgs_8320.png";
+		String 	backgroundImg = "./src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
 		BufferedImage imgBackground1 = null, imgBackground2 = null;
 		
 		try { imgBackground1 = ImageIO.read(new File(backgroundImg)); } 
@@ -33,8 +33,28 @@ public class TestBackGround {
 		assertArrayEquals(byteArray1, byteArray2);
 	}
 	
-	/*public void drawBall(Graphics g, int appletWidth, int appletHeight) {
-		g.drawImage(0, 0, int appletWidth, int appletHeight, null);
+	@Test
+	public void gameOverImg() {
+		String 	gameOverImage = "./src/PingPong/images/free-game-wallpaper-9.jpg";
+		BufferedImage imgGameOver1 = null, imgGameOver2 = null;
+		
+		try { imgGameOver1 = ImageIO.read(new File(gameOverImage)); } 
+		catch (IOException e) { e.printStackTrace(); }
+		
+		bg.setGameOverImage(gameOverImage);
+		imgGameOver2 = bg.getGameOverImage(); 
+		
+		byte[] byteArray1 = ((DataBufferByte) imgGameOver1.getData().getDataBuffer()).getData();
+		byte[] byteArray2 = ((DataBufferByte) imgGameOver2.getData().getDataBuffer()).getData();
+		
+		assertArrayEquals(byteArray1, byteArray2);
+	}
+	
+	/*@Test
+	public void testDrawBall() {
+		bg.drawBall();
 	}*/
+	
+	
 
 }

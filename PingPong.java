@@ -37,29 +37,35 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	Ball pp = new Ball(true, true, 0, 0);
 	Messages msg = new Messages();
+	Background bg = new Background();
 	
 	String s = "";
 	
 	public void init() {
-		String 	ballImg = "../src/PingPong/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
-				brickImg = "../src/PingPong/brick.png",
-				paddleImg = "../src/PingPong/paddle.png",
-				gameOverImg = "../src/PingPong/free-game-wallpaper-9.jpg", 
-				backGroundImg = "../src/PingPong/12-vector-game-backgrounds-8320_imgs_8320.png"; 
+		String 	ballImg = "../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
+				brickImg = "../src/PingPong/images/brick.png",
+				paddleImg = "../src/PingPong/images/paddle.png",
+				gameOverImg = "../src/PingPong/images/free-game-wallpaper-9.jpg",
+				gameOverMessage = "../src/PingPong/images/game-over-png-22.png",
+				backGroundImg = "../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+	
 		
 		setSize(853,600);
 		
-		try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
-		catch (IOException e) { e.printStackTrace(); }
+		/*try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
+		catch (IOException e) { e.printStackTrace(); }*/
 		
-		try { imgBackground = ImageIO.read(new File(backGroundImg)); } 
-		catch (IOException e) { e.printStackTrace(); }
+		/*try { imgBackground = ImageIO.read(new File(backGroundImg)); } 
+		catch (IOException e) { e.printStackTrace(); }*/
 		
 		
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 	    
+	    bg.setBackgroundImage(backGroundImg);
+	    bg.setGameOverImage(gameOverImg);
+	    msg.setGameOverImage(gameOverMessage);
 	    pp.setBallImage(ballImg);
 	    pp.setBrickImage(brickImg);
 	    pp.setPaddleImage(paddleImg);
@@ -150,16 +156,16 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	public void paint(Graphics g) {
 		
-		g.drawImage(imgBackground, 0, 0, appletWidth, appletHeight, null);
-
+		bg.drawBackground(g, appletWidth, appletHeight);
+		
 		if (msg.getGameActive()) {
 			pp.drawWall(g);
 		    pp.drawBall(g);
 		    pp.drawPaddle(g);
 		}
 		else {
-			g.drawImage(imgGameOver, 0, 0, appletWidth, appletHeight, null);
-			msg.displayMessage(g, appletWidth, appletHeight);
+			//bg.drawGameOver(g, appletWidth, appletHeight);
+			msg.displayMessage(g, 300, 79, appletWidth, appletHeight);
 		}
 	}
 }

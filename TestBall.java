@@ -15,7 +15,7 @@ public class TestBall {
 	
 	@Test
 	public void testSetBallImg() {
-		String 	ballImg = "./src/PingPong/ball.png";
+		String 	ballImg = "./src/PingPong/images/ball.png";
 		BufferedImage imgBall1 = null, imgBall2 = null;
 		
 		try { imgBall1 = ImageIO.read(new File(ballImg)); } 
@@ -258,6 +258,16 @@ public class TestBall {
 	@Test
 	public void testSetStop() {
 		assertEquals(true, pp.ballSetStop());
+	}
+	
+	@Test
+	public void testKeepWithPaddleWhenStopped() {
+		pp.setPaddleLocation(800, 600);
+		assertEquals(true, pp.ballSetStop());
+		System.out.println(pp.getPaddleX());
+		pp.movePaddleLeft();
+		System.out.println(pp.getPaddleX());
+		
 	}
 
 }

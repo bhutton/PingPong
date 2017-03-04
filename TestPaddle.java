@@ -17,7 +17,7 @@ public class TestPaddle {
 	
 	@Test
 	public void testSetPaddleImg() {
-		String 	paddleImg = "./src/PingPong/paddle.png";
+		String 	paddleImg = "./src/PingPong/images/paddle.png";
 		BufferedImage imgPaddle1 = null, imgPaddle2 = null;
 		
 		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); } 
