@@ -38,7 +38,11 @@ public class Paddle extends Bricks {
 	}
 	
 	public void setPaddleWidth(int width) {
-		paddleWidth = width;
+		this.paddleWidth = width;
+	}
+	
+	public int getPaddleWidth() {
+		return this.paddleWidth;
 	}
 	
 	public void setPaddleHeight(int height) {

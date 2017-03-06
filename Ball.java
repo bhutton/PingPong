@@ -190,7 +190,7 @@ public class Ball extends Paddle {
 		}
 		
 		if (!getBallStatus()) 
-			setBallX(getPaddleX());
+			this.x = getPaddleX() + (getPaddleWidth() / 2) - 30;
 	}
 	
 	public void drawBall(Graphics g) {
