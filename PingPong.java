@@ -52,13 +52,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		
 		setSize(853,600);
 		
-		/*try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
-		catch (IOException e) { e.printStackTrace(); }*/
-		
-		/*try { imgBackground = ImageIO.read(new File(backGroundImg)); } 
-		catch (IOException e) { e.printStackTrace(); }*/
-		
-		
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
@@ -168,9 +161,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    pp.drawBall(g);
 		    pp.drawPaddle(g);
 		}
-		else {
-			//bg.drawGameOver(g, appletWidth, appletHeight);
+		else 
 			msg.displayMessage(g, 300, 79, appletWidth, appletHeight);
-		}
 	}
 }
