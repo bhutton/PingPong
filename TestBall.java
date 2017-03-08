@@ -264,6 +264,7 @@ public class TestBall {
 	public void testBallMoveswithPaddle() {
 		pp.initializeBall();
 		pp.ballSetStop();
+		pp.setPaddleMoveAmount(30);
 		assertEquals(false, pp.getBallStatus());
 		
 		pp.movePaddleRight();

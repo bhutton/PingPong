@@ -11,6 +11,7 @@ public class Paddle extends Bricks {
 	
 	private int paddleX, paddleY, paddleWidth, paddleHeight;
 	private int appletWidth;
+	private int paddleMoveAmount;
 	
 	private BufferedImage imgPaddle = null;
 
@@ -29,12 +30,16 @@ public class Paddle extends Bricks {
 		paddleY = appletHeight - paddleHeight;
 	}
 	
+	public void setPaddleMoveAmount(int amount) {
+		this.paddleMoveAmount = amount;
+	}
+	
 	public void movePaddleLeft() {
-		if (paddleX >= 0) paddleX-=30;
+		if (paddleX >= 0) paddleX-=this.paddleMoveAmount;
 	}
 	
 	public void movePaddleRight() {
-		if (paddleX+paddleWidth <= appletWidth) paddleX+=30;
+		if (paddleX+paddleWidth <= appletWidth) paddleX+=this.paddleMoveAmount;
 	}
 	
 	public void setPaddleWidth(int width) {
@@ -64,7 +69,7 @@ public class Paddle extends Bricks {
 	public boolean checkPaddle(Boolean direction, int x, int y) {
 		
 		if (y >= paddleY - (paddleHeight*1.7))
-			if (x >= paddleX-30 && x <= paddleX+paddleWidth)
+			if (x >= paddleX-this.paddleMoveAmount && x <= paddleX+paddleWidth)
 				return false;
 
 		return direction;

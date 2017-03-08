@@ -33,6 +33,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 							imgBackground = null;
 	
 	
+	private Thread currentThread = null;
 	
 	
 	Ball pp = new Ball(true, true, 0, 0);
@@ -66,6 +67,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.setPaddleHeight(30);
 	    pp.initializeBrickArray();
 	    pp.createWall();
+	    pp.setPaddleMoveAmount(30);
 	    pp.setPaddleLocation(appletHeight, appletWidth);
 	    //mouseListener();
 	    addKeyListener(this);
@@ -109,17 +111,28 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	public void stop() {
 	    animatorThread = null;
 	}
+	
+	public void startGameIfActive() {
+		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+		this.currentThread = Thread.currentThread();
+	}
+	
+	public Boolean testThread() {
+		if (this.currentThread == animatorThread) return true;
+		return false;
+	}
+	
+	public Thread getThread() {
+		return this.currentThread;
+	}
 
 	public void run() {
 		
 		msg.setGameActive();
-		
-		Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-		Thread currentThread = Thread.currentThread();
-		
+		startGameIfActive();
 		pp.initializeBall();
 
-	    while (currentThread == animatorThread) {
+	    while (testThread()) {
 	    	
 	    	pp.initializeBrickArray();
 		    pp.createWall();
