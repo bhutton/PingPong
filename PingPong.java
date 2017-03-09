@@ -26,12 +26,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	Thread animatorThread;
 	
-	boolean frozen = false; 
-	
-	private BufferedImage 	imgBall = null,
-							imgGameOver = null,
-							imgBackground = null;
-	
+	boolean frozen = false, called=false; 
 	
 	private Thread currentThread = null;
 	
@@ -57,13 +52,16 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    this.appletHeight = appletSize.height;
 	    this.appletWidth = appletSize.width;
 	    
+	    setFocusable(true);
+	    requestFocus();
+	    
 	    bg.setBackgroundImage(backGroundImg);
 	    bg.setGameOverImage(gameOverImg);
 	    msg.setGameOverImage(gameOverMessage);
 	    pp.setBallImage(ballImg);
 	    pp.setBrickImage(brickImg);
 	    pp.setPaddleImage(paddleImg);
-	    pp.setPaddleWidth(200);
+	    pp.setPaddleWidth(174);
 	    pp.setPaddleHeight(30);
 	    pp.initializeBrickArray();
 	    pp.createWall();
@@ -92,10 +90,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	
 	public void keyPressed( KeyEvent e ) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) pp.movePaddleLeft();
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) pp.movePaddleRight();
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) msg.setGameActive();
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) pp.ballSetStart();
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = pp.movePaddleLeft();
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = pp.movePaddleRight();			
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = msg.setGameActive();
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) this.called = pp.ballSetStart();
 	}
 	public void keyReleased( KeyEvent e ) {	}
 	public void keyTyped( KeyEvent e ) { }

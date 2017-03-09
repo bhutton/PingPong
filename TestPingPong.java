@@ -1,8 +1,12 @@
 package PingPong;
 
 import static org.junit.Assert.*;
+
+import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -61,6 +65,50 @@ public class TestPingPong {
 		assertEquals(200, pp.pp.getPaddleX());
 		pp.pp.movePaddleRight();
 		assertEquals(250, pp.pp.getPaddleX());
+	}
+	
+	@Test
+	public void testKeyPressedLeft() throws AWTException {
+		pp.setFocusable(true);
+	    pp.requestFocus();
+	    
+	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
+	    pp.keyPressed(key);
+	    
+	    assertTrue(pp.called);
+	}
+	
+	@Test
+	public void testKeyPressRight() {
+		pp.setFocusable(true);
+	    pp.requestFocus();
+	    
+	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
+	    pp.keyPressed(key);
+	    
+	    assertTrue(pp.called);
+	}
+	
+	@Test
+	public void testKeyPressEnter() {
+		pp.setFocusable(true);
+	    pp.requestFocus();
+	    
+	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
+	    pp.keyPressed(key);
+	    
+	    assertTrue(pp.called);
+	}
+	
+	@Test
+	public void testKeyPressSpace() {
+		pp.setFocusable(true);
+	    pp.requestFocus();
+	    
+	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_SPACE,'Z');
+	    pp.keyPressed(key);
+	    
+	    assertTrue(pp.called);
 	}
 
 }

@@ -34,12 +34,14 @@ public class Paddle extends Bricks {
 		this.paddleMoveAmount = amount;
 	}
 	
-	public void movePaddleLeft() {
+	public Boolean movePaddleLeft() {
 		if (paddleX >= 0) paddleX-=this.paddleMoveAmount;
+		return true;
 	}
 	
-	public void movePaddleRight() {
+	public Boolean movePaddleRight() {
 		if (paddleX+paddleWidth <= appletWidth) paddleX+=this.paddleMoveAmount;
+		return true;
 	}
 	
 	public void setPaddleWidth(int width) {
