@@ -263,14 +263,18 @@ public class TestBall {
 	@Test
 	public void testBallMoveswithPaddle() {
 		pp.initializeBall();
+		pp.setPaddleWidth(120);
+		pp.setPaddleLocation(800, 600);
 		pp.ballSetStop();
 		pp.setPaddleMoveAmount(30);
+		
 		assertEquals(false, pp.getBallStatus());
 		
 		pp.movePaddleRight();
 		pp.calculateCurrentLocation(800, 600);
-		assertEquals(30, pp.getPaddleX());
-		assertEquals(30 + pp.getPaddleWidth() / 2 - 30, pp.getX());
+		
+		assertEquals(270, pp.getPaddleX());
+		assertEquals(270 + pp.getPaddleWidth() / 2 - 30, pp.getX());
 	}
 
 }
