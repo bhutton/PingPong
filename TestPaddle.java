@@ -76,7 +76,54 @@ public class TestPaddle {
 	    assertEquals(true,pp.setBallDirectionAfterReachingPaddle());
 	}
 	
+	@Test
+	public void testPaddleAtLeftScreenEdge() {
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+	    pp.setPaddleMoveAmount(30);
+	    pp.setPaddleX(0);
+	    
+	    assertEquals(0, pp.getPaddleX());
+	    pp.movePaddleLeft();
+	    assertEquals(0, pp.getPaddleX());
+	}
 	
+	@Test
+	public void testPaddleAtRightScreenEdge() {
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+	    pp.setPaddleMoveAmount(30);
+	    pp.setPaddleX(400);
+	    
+	    assertEquals(400, pp.getPaddleX());
+	    pp.movePaddleRight();
+	    assertEquals(400, pp.getPaddleX());
+	}
 	
+	@Test
+	public void testPaddleMovesLeft() {
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+	    pp.setPaddleMoveAmount(30);
+	    
+	    assertEquals(300, pp.getPaddleX());
+	    pp.movePaddleLeft();
+	    assertEquals(270, pp.getPaddleX());
+	}
+	
+	@Test
+	public void testPaddleMovesRight() {
+		pp.setPaddleLocation(600, 600);
+		pp.setPaddleWidth(200);
+	    pp.setPaddleHeight(30);
+	    pp.setPaddleMoveAmount(30);
+	    
+	    assertEquals(300, pp.getPaddleX());
+	    pp.movePaddleRight();
+	    assertEquals(330, pp.getPaddleX());
+	}
 	
 }

@@ -74,6 +74,10 @@ public class Paddle extends Bricks {
 		return paddleX;
 	}
 	
+	public void setPaddleX(int x) {
+		this.paddleX = x;
+	}
+	
 	public int getPaddleY() {
 		return paddleY;
 	}
