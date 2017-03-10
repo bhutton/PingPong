@@ -33,6 +33,14 @@ public class TestBricks {
 	}
 	
 	@Test
+	public void setWallDimensions() {
+		pp.setWallDimensions(8,2);
+		
+		assertEquals(8, pp.getNumCols());
+		assertEquals(2, pp.getNumRows());
+	}
+	
+	@Test
 	public void testInitializeBrickArray() {
 		pp.initializeBrickArray();
 		assertTrue(pp.returnSizeOfBrickArray() > 0);

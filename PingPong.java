@@ -30,7 +30,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	
 	private Thread currentThread = null;
 	
-	
 	Ball pp = new Ball(true, true, 0, 0);
 	Messages msg = new Messages();
 	Background bg = new Background();

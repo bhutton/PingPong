@@ -14,7 +14,7 @@ public class Bricks {
 	
 	private int brickColumnLocation = 0, 
 				brickRowLocation = 0, 
-				numRows, 
+				numRows=2, 
 				numCols, 
 				brickHeight=50, 
 				brickWidth=110, 
@@ -34,11 +34,16 @@ public class Bricks {
 		initializeBrickArray();
 		setBrickImage(brickImg);
 	}
+	
+	public void setWallDimensions(int cols, int rows) {
+		this.numCols = cols;
+		this.numRows = rows;
+	}
 
 	// Initialize array and set all bricks as active
 	public void initializeBrickArray() {
-		for (int count = 0; count < 8; count++) {
-			for (int counter = 0; counter < 3; counter++) {
+		for (int count = 0; count < this.numCols; count++) {
+			for (int counter = 0; counter < this.numRows; counter++) {
 				this.brickArray[count][counter][2] = brickIsActive;
 			}
 		}
@@ -58,7 +63,7 @@ public class Bricks {
 	    	setRowLoc(0); 
 	    	y = 5;	
 	    	
-	    	for (int row = 0; row < 2; row++) {
+	    	for (int row = 0; row < this.numRows; row++) {
 	    		setBrickYCoord(y).setBrickXCoord(x).incRowLoc(); 
 	    		y += 55;
 		    }
