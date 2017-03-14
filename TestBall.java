@@ -91,7 +91,7 @@ public class TestBall {
 	public void testCheckBallDirectionAfterReachingBricks() {
 		int x = 10, y = 10;
 		
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBallUp();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);		
@@ -104,7 +104,7 @@ public class TestBall {
 	public void testCheckBallDirectionAfterReachingPaddle() {
 		int x = 450, y = 800;
 		
-		pp.createWall();
+		pp.createWall(2);
 		pp.setDown();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);	
@@ -120,7 +120,7 @@ public class TestBall {
 	public void testCheckBallDirectionAfterMissingPaddle() {
 		int x = 0, y = 800;
 		
-		pp.createWall();
+		pp.createWall(2);
 		pp.setDown();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);	

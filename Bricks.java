@@ -52,10 +52,11 @@ public class Bricks {
 	/*
 	 * Setup array that holds the x,y coordinates of the wall
 	 */
-	public void createWall() {
+	public void createWall(int numLevels) {
 		
 		// Screen coordinates of the individual bricks
 		int x=5, y=5;
+		this.numRows = numLevels;
 		
 		setColLoc(0);
 	    
@@ -289,8 +290,12 @@ public class Bricks {
 	}
 	
 	public int getRow(int y) {
-		if (y < 50) return 0;
-		return 1;
+		if (y < 100) { 
+			if (y < 50) return 0;
+			return 1;
+		}
+		
+		return 2;
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {

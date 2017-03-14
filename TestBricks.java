@@ -94,14 +94,14 @@ public class TestBricks {
 	
 	@Test
 	public void testCreateWall() {
-		pp.createWall();
+		pp.createWall(2);
 		assertTrue(pp.getNumCols() > 0);
 		assertTrue(pp.getNumRows() > 0);
 	}
 	
 	@Test
 	public void testReturnXLocationOfSpecificBrick() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBrickRowLocation(1);
 		pp.setBrickColumnLocation(2);
 		assertTrue(pp.getBrickX() > 0);
@@ -109,7 +109,7 @@ public class TestBricks {
 	
 	@Test
 	public void testReturnYLocationOfSpecificBrick() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBrickRowLocation(1);
 		pp.setBrickColumnLocation(1);
 		assertTrue(pp.getBrickYCoord() > 0);
@@ -117,19 +117,19 @@ public class TestBricks {
 	
 	@Test
 	public void testGetNumberOfRows() {
-		pp.createWall();
+		pp.createWall(2);
 		assertTrue(pp.getNumRows() > 0);
 	}
 	
 	@Test
 	public void testGetNumberOfCols() {
-		pp.createWall();
+		pp.createWall(2);
 		assertTrue(pp.getNumCols() > 0);
 	}
 	
 	@Test
 	public void testIncrementingRows() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setRowLoc(1);
 		pp.incRowLoc();
 		assertEquals(2, pp.getRowLoc());
@@ -137,7 +137,7 @@ public class TestBricks {
 	
 	@Test
 	public void testIncrementingCols() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setColLoc(1);
 		pp.incColLoc();
 		assertEquals(2, pp.getColLoc());
@@ -145,13 +145,13 @@ public class TestBricks {
 	
 	@Test
 	public void testGetWallHeight() {
-		pp.createWall();
+		pp.createWall(2);
 		assertTrue(pp.wallHeight() > 0);
 	}
 	
 	@Test
 	public void testCheckBricks() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBallY(60);
 		pp.setBrickYCoord(60);
 		pp.setBallX(200);
@@ -163,14 +163,18 @@ public class TestBricks {
 	
 	@Test
 	public void testBallGoesPastTakenBrickLocation() {
-		pp.createWall();
+		pp.createWall(3);
 		pp.setBallY(60);
 		pp.setBrickYCoord(60);
 		pp.setBallX(200);
 		pp.setBallUp();
 		pp.setBrickRowLocation(1);
 		pp.setBallDown(false);
+		assertEquals(3, pp.getNumRows());
+		
 		assertEquals(false, pp.getDown());
+		assertEquals(true, pp.checkBricks());
+		assertEquals(true, pp.checkBricks());
 		assertEquals(true, pp.checkBricks());
 		assertEquals(true, pp.checkBricks());
 		assertEquals(false, pp.checkBricks());
@@ -206,7 +210,7 @@ public class TestBricks {
 	
 	@Test
 	public void testCheckActive() {
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBallX(1);
 		pp.setBallY(1);
 		assertEquals(true, pp.checkActive(20, 90, false));
@@ -215,7 +219,7 @@ public class TestBricks {
 	@Test
 	public void testGetActive() {
 		pp.initializeBrickArray();
-		pp.createWall();
+		pp.createWall(2);
 		pp.setBrickColumnLocation(0);
 		pp.setBrickRowLocation(1);
 		assertEquals(true, pp.getActive());
@@ -227,7 +231,7 @@ public class TestBricks {
 	public void testAnyBricksLeft() {
 		pp.initializeBrickArray();
 		assertEquals(false, pp.getBricksLeft());
-		pp.createWall();
+		pp.createWall(2);
 		assertEquals(true, pp.getBricksLeft());
 	}
 	

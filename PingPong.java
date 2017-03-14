@@ -63,7 +63,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.setPaddleWidth(174);
 	    pp.setPaddleHeight(30);
 	    pp.initializeBrickArray();
-	    pp.createWall();
+	    pp.createWall(2);
 	    pp.setPaddleMoveAmount(30);
 	    pp.setPaddleLocation(appletHeight, appletWidth);
 	    //mouseListener();
@@ -132,7 +132,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    while (testThread()) {
 	    	
 	    	pp.initializeBrickArray();
-		    pp.createWall();
+		    pp.createWall(3);
 	    	
 	    	pp.setBallActive();
 	    	pp.ballSetStop();
