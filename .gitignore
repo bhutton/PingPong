@@ -1,1 +1,4 @@
 mockito/
+.idea/
+PingPong.iml
+out/
