@@ -289,7 +289,7 @@ public class Bricks {
 		return this.down;
 	}
 	
-	public int getRow(int y) {
+	public int getBrickRowThatBallIsOn(int y) {
 		
 		for(int count = 0; count < numRows; count++) {
 			if (y < (count+1)*50)
@@ -300,7 +300,7 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x-brickWidth, right = x+brickWidth, row = getRow(y);
+		int left = x-brickWidth, right = x+brickWidth, row = getBrickRowThatBallIsOn(y);
 		
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;

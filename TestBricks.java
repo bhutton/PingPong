@@ -174,8 +174,13 @@ public class TestBricks {
 		
 		assertEquals(false,pp.checkBricks());
 		
+		// Check that ball bounces
 		pp.setBallDirectionAfterReachingBricks();
 		assertEquals(true,pp.checkBricks());
+		
+		// Check that ball goes through
+		pp.setBallDown(false);
+		assertEquals(false,pp.checkBricks());
 	}
 	
 	@Test
