@@ -171,20 +171,11 @@ public class TestBricks {
 		pp.setBrickYCoord(120);
 		
 		pp.setBallDown(false);
-		//pp.setBallDirectionAfterReachingBricks();
 		
 		assertEquals(false,pp.checkBricks());
 		
-		
 		pp.setBallDirectionAfterReachingBricks();
 		assertEquals(true,pp.checkBricks());
-		
-		
-		/*assertEquals(true, pp.checkBricks());
-		assertEquals(true, pp.checkBricks());
-		assertEquals(true, pp.checkBricks());
-		assertEquals(true, pp.checkBricks());
-		assertEquals(false, pp.checkBricks());*/
 	}
 	
 	@Test

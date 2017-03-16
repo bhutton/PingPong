@@ -290,9 +290,10 @@ public class Bricks {
 	}
 	
 	public int getRow(int y) {
-		if (y < 100) { 
-			if (y < 50) return 0;
-			return 1;
+		
+		for(int count = 0; count < numRows; count++) {
+			if (y < (count+1)*50)
+				return count;
 		}
 		
 		return 2;
