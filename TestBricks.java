@@ -163,24 +163,22 @@ public class TestBricks {
 	
 	@Test
 	public void testBallGoesPastTakenBrickLocation() {
-		pp.createWall(3);
-		pp.setBallY(80);
-		pp.setBrickYCoord(80);
-		pp.setBallX(200);
-		pp.setBallUp();
-		//pp.setBrickRowLocation(2);
+		
+		pp.setBallX(50);
+		pp.setBallY(120);
+		pp.setBallXValue(50);
+		pp.setBallYValue(120);
+		pp.setBrickYCoord(120);
+		
 		pp.setBallDown(false);
-		assertEquals(3, pp.getNumRows());
+		//pp.setBallDirectionAfterReachingBricks();
 		
-		pp.calculateCurrentLocation(800, 600);
+		assertEquals(false,pp.checkBricks());
 		
-		assertEquals(false, pp.getDown());
-		pp.setBallY(220);
-		pp.setBallYValue(220);
-		pp.calculateCurrentLocation(800, 600);
+		
 		pp.setBallDirectionAfterReachingBricks();
-		assertEquals(true, pp.checkBricks());
-		assertEquals(true, pp.getBallDown());
+		assertEquals(true,pp.checkBricks());
+		
 		
 		/*assertEquals(true, pp.checkBricks());
 		assertEquals(true, pp.checkBricks());
