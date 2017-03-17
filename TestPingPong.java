@@ -114,10 +114,10 @@ public class TestPingPong {
 	@Test
 	public void testLevel() {
 		
-		pp.run();
+		pp.level.getLevel();
+		pp.level.incrementLevel();
 		
-		
-		System.out.println(pp.level.getLevel());
+		assertEquals(2, pp.level.getLevel());
 	}
 
 }
