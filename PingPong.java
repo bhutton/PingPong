@@ -33,6 +33,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	Ball pp = new Ball(true, true, 0, 0);
 	Messages msg = new Messages();
 	Background bg = new Background();
+	Level level = new Level();
 	
 	String s = "";
 	
@@ -127,11 +128,11 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		msg.setGameActive();
 		startGameIfActive();
 		pp.initializeBall();
-
+		
 	    while (testThread()) {
 	    	
 	    	pp.initializeBrickArray();
-		    pp.createWall(4);
+		    pp.createWall(level.getLevel());
 	    	
 	    	pp.setBallActive();
 	    	pp.ballSetStop();

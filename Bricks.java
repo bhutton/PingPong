@@ -290,13 +290,10 @@ public class Bricks {
 	}
 	
 	public int getBrickRowThatBallIsOn(int y) {
+		for(int row = 0; row < this.numRows; row++) 
+			if ( y < ((row+1) * this.brickHeight) ) return row;
 		
-		for(int count = 0; count < numRows; count++) {
-			if (y < (count+1)*50)
-				return count;
-		}
-		
-		return 2;
+		return numRows-1;
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
