@@ -129,43 +129,56 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		startGameIfActive();
 		pp.initializeBall();
 		
-	    while (testThread()) {
+	    executeThread();
+	    
+	}
+
+	private void executeThread() {
+		while (testThread()) {
 	    	
-	    	pp.initializeBrickArray();
-		    pp.createWall(level.getLevel());
-	    	
-	    	pp.setBallActive();
-	    	pp.ballSetStop();
-	    	
-	    	pp.calculateCurrentLocation(appletWidth, appletHeight);
-	    	
-	    	
-	    	while (pp.checkBallActive() && pp.getBricksLeft()) {
-	    		
-	    		pp.calculateCurrentLocation(appletWidth, appletHeight);
-		    	pp.setBallDirectionAfterReachingBricks();
-		    	pp.setBallDirectionAfterReachingPaddle();
-		    	
-		    	repaint();
-		    	
-		    	try {
-		    		Thread.sleep(10);
-		    	} 
-		    	catch (InterruptedException e) {
-		    		break;
-		    	}
-	    	}
-	    	
-	    	pp.initializeBall();
-	    	
-	    	if (pp.getBricksLeft())
-	    		msg.setGameOver();
-	    	else
-	    		level.incrementLevel();
+	    	initializeGame();
+	    	runGame();
+	    	endOfLevel();
 	    	
 		    repaint();
 	    }
-	    
+	}
+
+	private void endOfLevel() {
+		if (pp.getBricksLeft())
+			msg.setGameOver();
+		else
+			level.incrementLevel();
+	}
+
+	private void runGame() {
+		while (pp.checkBallActive() && pp.getBricksLeft()) {
+			
+			pp.calculateCurrentLocation(appletWidth, appletHeight);
+			pp.setBallDirectionAfterReachingBricks();
+			pp.setBallDirectionAfterReachingPaddle();
+			
+			repaint();
+			
+			try {
+				Thread.sleep(10);
+			} 
+			catch (InterruptedException e) {
+				break;
+			}
+		}
+		
+		pp.initializeBall();
+	}
+
+	private void initializeGame() {
+		pp.initializeBrickArray();
+		pp.createWall(level.getLevel());
+		
+		pp.setBallActive();
+		pp.ballSetStop();
+		
+		pp.calculateCurrentLocation(appletWidth, appletHeight);
 	}
 	
 	public void paint(Graphics g) {
