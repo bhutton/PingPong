@@ -110,5 +110,14 @@ public class TestPingPong {
 	    
 	    assertTrue(pp.called);
 	}
+	
+	@Test
+	public void testLevel() {
+		
+		pp.run();
+		
+		
+		System.out.println(pp.level.getLevel());
+	}
 
 }

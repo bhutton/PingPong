@@ -157,7 +157,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    	}
 	    	
 	    	pp.initializeBall();
-	    	msg.setGameOver();
+	    	
+	    	if (pp.getBricksLeft())
+	    		msg.setGameOver();
+	    	else
+	    		level.incrementLevel();
+	    	
 		    repaint();
 	    }
 	    
