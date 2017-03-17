@@ -66,27 +66,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.initializeBrickArray();
 	    pp.setPaddleMoveAmount(30);
 	    pp.setPaddleLocation(appletHeight, appletWidth);
-	    //mouseListener();
 	    addKeyListener(this);
 	}
-	
-	/*public void mouseListener() {
-		addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-	        
-				if (frozen) {
-					frozen = false;
-					start();
-				} 
-				else {
-					frozen = true;
-					stop();
-				}
-			}
-		});
-	}*/
-	
-	
 	
 	public void keyPressed( KeyEvent e ) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = pp.movePaddleLeft();
@@ -154,9 +135,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	private void runGame() {
 		while (pp.checkBallActive() && pp.getBricksLeft()) {
 			
-			pp.calculateCurrentLocation(appletWidth, appletHeight);
-			pp.setBallDirectionAfterReachingBricks();
-			pp.setBallDirectionAfterReachingPaddle();
+			ballCalculations();
 			
 			repaint();
 			
@@ -169,6 +148,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		}
 		
 		pp.initializeBall();
+	}
+
+	private void ballCalculations() {
+		pp.calculateCurrentLocation(appletWidth, appletHeight);
+		pp.setBallDirectionAfterReachingBricks();
+		pp.setBallDirectionAfterReachingPaddle();
 	}
 
 	private void initializeGame() {
