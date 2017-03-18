@@ -1,6 +1,7 @@
 package PingPong;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ import org.junit.Test;
 public class TestMessages {
 	
 	Messages msg = new Messages();
+	Graphics g = mock(Graphics.class);
 	
 	@Test
 	public void gameOverImg() {
@@ -57,6 +59,18 @@ public class TestMessages {
 	
 	@Test
 	public void testDisplayGameStatsAtBottomOfScreen() {
-		msg.displayGameStatsAtBottomOfScreen(null, 0, 0);
+		msg.displayGameStatsAtBottomOfScreen(g, 800, 600);
+	}
+	
+	@Test
+	public void testSetAndGetLevel() {
+		msg.setLevel(2);
+		assertEquals(2, msg.getLevel());
+	}
+	
+	@Test
+	public void testSetAndGetLives() {
+		msg.setLives(2);
+		assertEquals(2, msg.getLives());
 	}
 }

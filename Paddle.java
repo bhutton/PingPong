@@ -27,7 +27,7 @@ public class Paddle extends Bricks {
 	public void setPaddleLocation(int appletHeight, int appletWidth) {
 		this.appletWidth = appletWidth;
 		paddleX = appletWidth/2 - paddleWidth/2;
-		paddleY = appletHeight - paddleHeight;
+		paddleY = appletHeight - (paddleHeight + 30);
 	}
 	
 	public void setPaddleMoveAmount(int amount) {

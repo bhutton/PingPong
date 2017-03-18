@@ -109,6 +109,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		msg.setGameActive();
 		startGameIfActive();
 		pp.initializeBall();
+		msg.setLevel(level.getLevel());
+		msg.setLives(level.getLives());
 		
 	    executeThread();
 	    
@@ -128,8 +130,10 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	private void endOfLevel() {
 		if (pp.getBricksLeft())
 			msg.setGameOver();
-		else
+		else {
 			level.incrementLevel();
+			msg.setLevel(level.getLevel());
+		}
 	}
 
 	private void runGame() {
@@ -174,6 +178,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			pp.drawWall(g);
 		    pp.drawBall(g);
 		    pp.drawPaddle(g);
+		    msg.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
 		}
 		else 
 			msg.displayMessage(g, 300, 79, appletWidth, appletHeight);

@@ -14,6 +14,8 @@ public class Messages {
 	
 	private BufferedImage imgGameOver = null;
 	
+	int level, lives;
+	
 	public void setGameOverImage(String gameOverImg) {
 		try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
 		catch (IOException e) { e.printStackTrace(); }
@@ -50,7 +52,27 @@ public class Messages {
 		g.drawString(returnMessage(), xStartMessage, yStartMessage);
 	}
 	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public int getLevel() {
+		return this.level;
+	}
+	
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	
+	public int getLives() {
+		return this.lives;
+	}
+	
 	public void displayGameStatsAtBottomOfScreen(Graphics g, int appletWidth, int appletHeight) {
-		
+		g.setColor(Color.BLACK);
+		g.fill3DRect(0, appletHeight-30, appletWidth, appletHeight, true);
+		g.setColor(Color.WHITE);
+		g.drawString("Lives: " + Integer.toString(getLives()), appletWidth-150, appletHeight-10);
+		g.drawString("Level: " + Integer.toString(getLevel()), appletWidth-70, appletHeight-10);
 	}
 }
