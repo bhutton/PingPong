@@ -54,4 +54,9 @@ public class TestMessages {
 	public void testReturnMessage() {
 		assertEquals("Press Enter to Try Again", msg.returnMessage());
 	}
+	
+	@Test
+	public void testDisplayGameStatsAtBottomOfScreen() {
+		msg.displayGameStatsAtBottomOfScreen(null, 0, 0);
+	}
 }

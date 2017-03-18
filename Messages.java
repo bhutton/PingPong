@@ -49,4 +49,8 @@ public class Messages {
 		g.drawImage(this.imgGameOver, xGameOver, yGameOver, null);
 		g.drawString(returnMessage(), xStartMessage, yStartMessage);
 	}
+	
+	public void displayGameStatsAtBottomOfScreen(Graphics g, int appletWidth, int appletHeight) {
+		
+	}
 }
