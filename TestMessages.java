@@ -73,4 +73,5 @@ public class TestMessages {
 		msg.setLives(2);
 		assertEquals(2, msg.getLives());
 	}
+
 }
