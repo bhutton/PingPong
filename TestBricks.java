@@ -1,6 +1,7 @@
 package PingPong;
 
 import static org.junit.Assert.*;
+//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -158,7 +159,7 @@ public class TestBricks {
 		pp.setBallUp();
 		pp.setBrickRowLocation(1);
 		assertEquals(false, pp.getDown());
-		assertEquals(true, pp.checkBricks());
+		assertEquals(true, pp.checkBricks(55));
 	}
 	
 	@Test
@@ -172,15 +173,15 @@ public class TestBricks {
 		
 		pp.setBallDown(false);
 		
-		assertEquals(false,pp.checkBricks());
+		assertEquals(false,pp.checkBricks(55));
 		
 		// Check that ball bounces
 		pp.setBallDirectionAfterReachingBricks();
-		assertEquals(true,pp.checkBricks());
+		assertEquals(true,pp.checkBricks(55));
 		
 		// Check that ball goes through
 		pp.setBallDown(false);
-		assertEquals(false,pp.checkBricks());
+		assertEquals(false,pp.checkBricks(55));
 	}
 	
 	@Test

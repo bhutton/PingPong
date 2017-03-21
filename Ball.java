@@ -107,7 +107,7 @@ public class Ball extends Paddle {
 	
 	public Boolean setBallDirectionAfterReachingBricks() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
-		down = checkBricks();
+		down = checkBricks(width);
 		
 		return down;
 	}

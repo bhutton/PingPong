@@ -25,7 +25,8 @@ public class Bricks {
 	private Boolean down,right;
 
 	private BufferedImage imgBrick = null;
-	
+	private int ballWidth;
+
 	public Bricks() {
 		initializeBrickArray();
 	}
@@ -233,8 +234,9 @@ public class Bricks {
 	 * Check whether ball intersects with an active brick
 	 * and if so remove it then reverse direction of ball
 	 */
-	public Boolean checkBricks() {
-		
+	public Boolean checkBricks(int ballWidth) {
+
+		this.ballWidth = ballWidth;
 		
 		if (y < ((brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
@@ -297,7 +299,7 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x-brickWidth, right = x+brickWidth, row = getBrickRowThatBallIsOn(y);
+		int left = x-(brickWidth - (this.ballWidth/2)), right = x+(brickWidth - (this.ballWidth/2)), row = getBrickRowThatBallIsOn(y);
 		
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;

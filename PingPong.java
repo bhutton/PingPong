@@ -14,6 +14,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import java.awt.event.KeyAdapter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class PingPong extends Applet implements KeyListener,Runnable {
@@ -38,12 +40,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	String s = "";
 	
 	public void init() {
-		String 	ballImg = "../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
-				brickImg = "../src/PingPong/images/brick.png",
-				paddleImg = "../src/PingPong/images/paddle.png",
-				gameOverImg = "../src/PingPong/images/free-game-wallpaper-9.jpg",
-				gameOverMessage = "../src/PingPong/images/game-over-png-22.png",
-				backGroundImg = "../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+		String 	ballImg = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
+				brickImg = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/brick.png",
+				paddleImg = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/paddle.png",
+				gameOverImg = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/free-game-wallpaper-9.jpg",
+				gameOverMessage = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/game-over-png-22.png",
+				backGroundImg = "/Users/bhutton/Documents/workspace/PingPong/src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
 	
 		
 		setSize(853,600);
@@ -105,6 +107,13 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	public void run() {
+
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		System.out.println("Current relative path is: " + s);
+
+		System.out.println("Working Directory = " +
+				System.getProperty("user.dir"));
 		
 		msg.setGameActive();
 		startGameIfActive();
