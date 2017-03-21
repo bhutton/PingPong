@@ -299,7 +299,7 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x-(brickWidth - (this.ballWidth/2)), right = x+(brickWidth - (this.ballWidth/2)), row = getBrickRowThatBallIsOn(y);
+		int left = x - (brickWidth - (this.ballWidth/2)), right = x + (brickWidth - (this.ballWidth/2)), row = getBrickRowThatBallIsOn(y);
 		
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
