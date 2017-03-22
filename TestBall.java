@@ -105,11 +105,11 @@ public class TestBall {
 		int x = 10, y = 10;
 
 		pp.createWall(4);
-		pp.setBallUp();
+		//pp.setBallUp();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);
 
-		assertEquals(false, pp.getDown());
+		assertEquals(true, pp.getDown());
 		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
 
 		pp.setBallUp();
