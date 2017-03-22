@@ -244,7 +244,8 @@ public class Bricks {
     				
     				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
-    				if (checkActive(x, y, right)) return true;
+    				if (checkActive(x, y, right))
+    					return true;
     			}
 		}
 		
@@ -304,7 +305,9 @@ public class Bricks {
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
 		
-		if (getBrickX() >= left && getBrickX() <= right) return setBrickTaken();			
+		if (getBrickX() >= left && getBrickX() <= right)
+			return setBrickTaken();
+
 		return false;
 	}
 	

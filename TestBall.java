@@ -91,13 +91,37 @@ public class TestBall {
 	public void testCheckBallDirectionAfterReachingBricks() {
 		int x = 10, y = 10;
 		
-		pp.createWall(2);
+		pp.createWall(4);
 		pp.setBallUp();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);		
 		
 		assertEquals(false, pp.getDown());
 		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+	}
+
+	@Test
+	public void testCheckBallHitsSideOfBrick() {
+		int x = 10, y = 10;
+
+		pp.createWall(4);
+		pp.setBallUp();
+		pp.setBallXValue(x);
+		pp.setBallYValue(y);
+
+		assertEquals(false, pp.getDown());
+		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+
+		pp.setBallUp();
+		pp.setBallXValue(x);
+		pp.setBallYValue(y);
+
+		System.out.println("Ball X = " + pp.getBallX());
+		System.out.println("Ball Down First = " + pp.getBallDown());
+		System.out.println("Set Ball Direction = " + pp.setBallDirectionAfterReachingBricks());
+		System.out.println("Ball Down Second = " + pp.getBallDown());
+
+		//assertEquals(true, pp.getBallDown());
 	}
 	
 	@Test
