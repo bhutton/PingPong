@@ -158,6 +158,8 @@ public class TestBricks {
 		pp.setBallX(200);
 		pp.setBallUp();
 		pp.setBrickRowLocation(1);
+		pp.setBallRight(true);
+		pp.setBallDown(false);
 		assertEquals(false, pp.getDown());
 		assertEquals(true, pp.checkBricks(55));
 	}

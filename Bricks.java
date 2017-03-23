@@ -310,6 +310,8 @@ public class Bricks {
 
 			System.out.println(getBallDown());
 
+
+
 			if (getBallDown()) {
 				if (leftRight)
 					setBallRight(false);
