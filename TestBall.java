@@ -104,7 +104,7 @@ public class TestBall {
 	public void testCheckBallHitsSideOfBrick() {
 		int x = 10, y = 10;
 
-		pp.createWall(4);
+		pp.createWall(2);
 		//pp.setBallUp();
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);
@@ -116,10 +116,14 @@ public class TestBall {
 		pp.setBallXValue(x);
 		pp.setBallYValue(y);
 
-		System.out.println("Ball X = " + pp.getBallX());
-		System.out.println("Ball Down First = " + pp.getBallDown());
-		System.out.println("Set Ball Direction = " + pp.setBallDirectionAfterReachingBricks());
-		System.out.println("Ball Down Second = " + pp.getBallDown());
+		//System.out.println("Ball X = " + pp.getBallX());
+		//System.out.println("Ball Down First = " + pp.getBallDown());
+		//System.out.println("Set Ball Direction = " + pp.setBallDirectionAfterReachingBricks());
+		//System.out.println("Ball Down Second = " + pp.getBallDown());
+
+		System.out.println(pp.checkActive(x, y, pp.getRight()));
+		System.out.println(pp.checkActive(x, y, pp.getRight()));
+
 
 		//assertEquals(true, pp.getBallDown());
 	}

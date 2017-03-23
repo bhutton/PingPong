@@ -217,7 +217,23 @@ public class TestBricks {
 		pp.createWall(2);
 		pp.setBallX(1);
 		pp.setBallY(1);
+
+		pp.setBallDown(false);
 		assertEquals(true, pp.checkActive(20, 90, false));
+		assertEquals(false, pp.checkActive(20, 90, false));
+	}
+
+	@Test
+	public void TestBallBouncesRightWhenGoingDown() {
+		pp.createWall(2);
+		pp.setBallX(1);
+		pp.setBallY(1);
+
+		pp.setBallDown(true);
+		pp.setBallRight(true);
+		assertEquals(true, pp.getBallRight());
+		assertEquals(true, pp.checkActive(20, 90, pp.getBallRight()));
+		assertEquals(false, pp.getBallRight());
 	}
 	
 	@Test

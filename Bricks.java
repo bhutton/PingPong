@@ -248,7 +248,7 @@ public class Bricks {
     					return true;
     			}
 		}
-		
+
 		return this.down;
 	}
 	
@@ -305,8 +305,21 @@ public class Bricks {
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
 		
-		if (getBrickX() >= left && getBrickX() <= right)
-			return setBrickTaken();
+		if (getBrickX() >= left && getBrickX() <= right) {
+			Boolean brickTaken = setBrickTaken();
+
+			System.out.println(getBallDown());
+
+			if (getBallDown()) {
+				if (leftRight)
+					setBallRight(false);
+				else
+					setBallRight(true);
+			}
+
+			return brickTaken;
+
+		}
 
 		return false;
 	}
