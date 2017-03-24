@@ -308,10 +308,6 @@ public class Bricks {
 		if (getBrickX() >= left && getBrickX() <= right) {
 			Boolean brickTaken = setBrickTaken();
 
-			System.out.println(getBallDown());
-
-
-
 			if (getBallDown()) {
 				if (leftRight)
 					setBallRight(false);

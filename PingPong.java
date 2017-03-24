@@ -19,7 +19,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	Background bg = new Background();
 	final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	Level level = new Level();
-	
+
 	public void init() {
 
         String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
@@ -144,7 +144,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	private void ballCalculations() {
-		pp.calculateCurrentLocation(appletWidth, appletHeight);
+	    pp.calculateCurrentLocation(appletWidth, appletHeight);
 		pp.setBallDirectionAfterReachingBricks();
 		pp.setBallDirectionAfterReachingPaddle();
 	}
