@@ -127,6 +127,19 @@ public class TestBall {
 
 		//assertEquals(true, pp.getBallDown());
 	}
+
+	@Test
+	public void TestBallBouncesRightWhenGoingDown() {
+		pp.createWall(2);
+		pp.setBallX(1);
+		pp.setBallY(1);
+
+		pp.setBallDown(true);
+		pp.setBallRight(true);
+		assertEquals(true, pp.getRight());
+		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+		assertEquals(false, pp.getRight());
+	}
 	
 	@Test
 	public void testCheckBallDirectionAfterReachingPaddle() {
