@@ -109,8 +109,10 @@ public class Ball extends Paddle {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkBricks(width);
 
-		if (getBallRight()) setRight();
-		else setLeft();
+		if (getBallRight())
+			setRight();
+		else
+			setLeft();
 
 		return down;
 	}
@@ -188,11 +190,10 @@ public class Ball extends Paddle {
 	}
 	
 	public void updateBallCoordinates() {
-		if (ballStart) {
+		if (ballStart)
 			shiftX().shiftY();
-		}
-		
-		if (!getBallStatus()) 
+
+		if (!getBallStatus())
 			this.x = getPaddleX() + (getPaddleWidth() / 2) - 30;
 	}
 	

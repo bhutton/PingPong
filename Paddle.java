@@ -15,10 +15,6 @@ public class Paddle extends Bricks {
 	
 	private BufferedImage imgPaddle = null;
 
-	public Paddle() {
-		super();
-	}
-	
 	public void setPaddleImage(String paddleImg) {
 		try { imgPaddle = ImageIO.read(new File(paddleImg)); } 
 		catch (IOException e) { e.printStackTrace(); }

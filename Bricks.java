@@ -238,13 +238,13 @@ public class Bricks {
 
 		this.ballWidth = ballWidth;
 		
-		if (y < ((brickHeight) * (getNumRows()))) {
+		if (this.y < ((this.brickHeight) * (getNumRows()))) {
 			for (int count = 0; count < this.numCols; count++) 
     			for (int counter = 0; counter < this.numRows; counter++) {
-    				
+
     				this.setBrickColumnLocation(count).setBrickRowLocation(counter);
     				
-    				if (checkActive(x, y, right))
+    				if (checkActive(this.x, this.y, this.right))
     					return true;
     			}
 		}
@@ -300,7 +300,9 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x - (brickWidth - (this.ballWidth/2)), right = x + (brickWidth - (this.ballWidth/2)), row = getBrickRowThatBallIsOn(y);
+		int left = x - (this.brickWidth - (this.ballWidth/2)),
+			right = x + (this.brickWidth - (this.ballWidth/2)),
+			row = getBrickRowThatBallIsOn(y);
 		
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
@@ -308,7 +310,7 @@ public class Bricks {
 		if (getBrickX() >= left && getBrickX() <= right) {
 			Boolean brickTaken = setBrickTaken();
 
-			if (getBallDown()) {
+			if (this.getBallDown()) {
 				if (leftRight)
 					setBallRight(false);
 				else
@@ -326,7 +328,9 @@ public class Bricks {
 	 * Determine whether brick is currently active
 	 */
 	public boolean getActive() {
-		if (this.brickArray[brickColumnLocation][brickRowLocation][2] == brickIsActive) return true;
+		if (this.brickArray[this.brickColumnLocation][this.brickRowLocation][2] == this.brickIsActive)
+			return true;
+
 		return false;
 	}
 	

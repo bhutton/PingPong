@@ -9,7 +9,8 @@ import java.io.File;
 
 public class PingPong extends Applet implements KeyListener,Runnable {
 	private static final long serialVersionUID = 1L;
-	int appletHeight, appletWidth, incX=1, incY=1, delay = 100;
+	int appletHeight, appletWidth, incX=1, incY=1;
+	private static int delay = 100, numLives = 3;
 	private Thread animatorThread;
 	boolean frozen = false, called=false;
 	private Thread currentThread = null;
@@ -88,7 +89,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	public void run() {
-
 		msg.setGameActive();
 		startGameIfActive();
 		pp.initializeBall();
@@ -96,7 +96,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		msg.setLives(level.getLives());
 		
 	    executeThread();
-	    
 	}
 
 	private void executeThread() {
@@ -104,7 +103,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    	initializeGame();
 	    	runGame();
 	    	endOfLevel();
-	    	
 		    repaint();
 	    }
 	}
@@ -119,7 +117,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				msg.setGameOver();
 		else {
 			level.incrementLevel();
-			level.setLives(3);
+			level.setLives(this.numLives);
 			msg.setLives(level.getLives());
 			msg.setLevel(level.getLevel());
 		}
@@ -127,9 +125,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	private void runGame() {
 		while (pp.checkBallActive() && pp.getBricksLeft()) {
-			
 			ballCalculations();
-			
 			repaint();
 			
 			try {
@@ -152,15 +148,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	private void initializeGame() {
 		pp.initializeBrickArray();
 		pp.createWall(level.getLevel());
-		
 		pp.setBallActive();
 		pp.ballSetStop();
-		
 		pp.calculateCurrentLocation(appletWidth, appletHeight);
 	}
 	
 	public void paint(Graphics g) {
-		
 		bg.drawBackground(g, appletWidth, appletHeight);
 		
 		if (msg.getGameActive()) {
