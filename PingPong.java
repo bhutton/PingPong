@@ -23,12 +23,13 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
 	public void init() {
 
-        String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
-                brickImg = this.basePath + "/../src/PingPong/images/brick.png",
-                paddleImg = this.basePath + "/../src/PingPong/images/paddle.png",
-                gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
-                gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png",
-                backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+        String 	ballImg = this.basePath + "/../PingPong/Images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
+                brickImg = this.basePath + "/../PingPong/images/brick.png",
+                paddleImg = this.basePath + "/../PingPong/images/paddle.png",
+                gameOverImg = this.basePath + "/../PingPong/images/free-game-wallpaper-9.jpg",
+                gameOverMessage = this.basePath + "/../PingPong/images/game-over-png-22.png",
+                //backGroundImg = this.basePath + "/../PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+				backGroundImg = this.basePath + "/../PingPong/images/dark-metal-texture_4.jpg";
 
 		setSize(853,600);
 		
@@ -113,8 +114,11 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				level.decreaseLives();
 				msg.setLives(level.getLives());
 			}
-			else
+			else {
 				msg.setGameOver();
+				level.setLevel(1);
+				msg.setLevel(1);
+			}
 		else {
 			level.incrementLevel();
 			level.setLives(this.numLives);
