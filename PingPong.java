@@ -21,7 +21,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	Level level = new Level();
 
-	String[] backGroundArray = new String[5];
+	String[] backGroundArray = new String[10];
 	String backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
 	int currentBackGroundImage;
 
@@ -35,11 +35,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
                 paddleImg = this.basePath + "/../src/PingPong/images/paddle.png",
                 gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
 				gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
-				//backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
-				//backGroundImg = this.basePath + "/../src/PingPong/images/dark-metal-texture_4.jpg";
-				//backGroundImg = this.basePath + "/../src/PingPong/images/textura-3.jpg";
-				//backGroundImg = this.basePath + "/../src/PingPong/images/textura-3.jpg";
-
 
         this.backGroundImg = this.getNextBackGround();
 
@@ -67,11 +62,17 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	public void loadBackGrounds() {
-        this.backGroundArray[0] = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
-        this.backGroundArray[1] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
-		this.backGroundArray[2] = this.basePath + "/../src/PingPong/images/dark-metal-texture_4.jpg";
-		this.backGroundArray[3] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
-		this.backGroundArray[4] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+    	String path = this.basePath + "/../src/PingPong/images";
+        this.backGroundArray[0] = path + "/background-1.png";
+        this.backGroundArray[1] = path + "/background-2.png";
+		this.backGroundArray[2] = path + "/background-3.jpg";
+		this.backGroundArray[3] = path + "/background-4.png";
+		this.backGroundArray[4] = path + "/background-5.jpg";
+		this.backGroundArray[5] = path + "/background-6.jpg";
+		this.backGroundArray[6] = path + "/background-7.jpg";
+		this.backGroundArray[7] = path + "/background-8.jpg";
+		this.backGroundArray[8] = path + "/background-9.jpg";
+		this.backGroundArray[9] = path + "/background-10.png";
     }
 
     public String getNextBackGround() {

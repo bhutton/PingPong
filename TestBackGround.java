@@ -18,7 +18,7 @@ public class TestBackGround {
 
 	@Test
 	public void backgroundImg() {
-		String 	backgroundImg = "./src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+		String 	backgroundImg = "./src/PingPong/images/background-1.png";
 		BufferedImage imgBackground1 = null, imgBackground2 = null;
 		
 		try { imgBackground1 = ImageIO.read(new File(backgroundImg)); } 
