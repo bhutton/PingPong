@@ -21,14 +21,27 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	Level level = new Level();
 
-	public void init() {
+	String[] backGroundArray = new String[5];
+	String backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+	int currentBackGroundImage;
+
+    public void init() {
+
+		this.loadBackGrounds();
+        this.currentBackGroundImage = 0;
 
         String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
                 brickImg = this.basePath + "/../src/PingPong/images/brick.png",
                 paddleImg = this.basePath + "/../src/PingPong/images/paddle.png",
                 gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
-                gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png",
-                backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+				gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
+				//backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+				//backGroundImg = this.basePath + "/../src/PingPong/images/dark-metal-texture_4.jpg";
+				//backGroundImg = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+				//backGroundImg = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+
+
+        this.backGroundImg = this.getNextBackGround();
 
 		setSize(853,600);
 		
@@ -52,7 +65,19 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.setPaddleLocation(appletHeight, appletWidth);
 	    addKeyListener(this);
 	}
-	
+
+	public void loadBackGrounds() {
+        this.backGroundArray[0] = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+        this.backGroundArray[1] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+		this.backGroundArray[2] = this.basePath + "/../src/PingPong/images/dark-metal-texture_4.jpg";
+		this.backGroundArray[3] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+		this.backGroundArray[4] = this.basePath + "/../src/PingPong/images/textura-3.jpg";
+    }
+
+    public String getNextBackGround() {
+	    return this.backGroundArray[this.currentBackGroundImage];
+    }
+
 	public void keyPressed( KeyEvent e ) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = pp.movePaddleLeft();
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = pp.movePaddleRight();			
@@ -113,11 +138,17 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				level.decreaseLives();
 				msg.setLives(level.getLives());
 			}
-			else
+			else {
 				msg.setGameOver();
+				level.setLevel(1);
+				msg.setLevel(1);
+			}
 		else {
 			level.incrementLevel();
 			level.setLives(this.numLives);
+			this.currentBackGroundImage++;
+			this.backGroundImg = this.getNextBackGround();
+            bg.setBackgroundImage(this.backGroundImg);
 			msg.setLives(level.getLives());
 			msg.setLevel(level.getLevel());
 		}
