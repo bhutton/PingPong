@@ -32,7 +32,7 @@ public class TestBackGround {
 		
 		assertArrayEquals(byteArray1, byteArray2);
 	}
-	
+
 	@Test
 	public void gameOverImg() {
 		String 	gameOverImage = "./src/PingPong/images/free-game-wallpaper-9.jpg";
@@ -48,6 +48,14 @@ public class TestBackGround {
 		byte[] byteArray2 = ((DataBufferByte) imgGameOver2.getData().getDataBuffer()).getData();
 		
 		assertArrayEquals(byteArray1, byteArray2);
+	}
+
+	@Test
+	public void testLoadingBackgrounds() {
+		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		String[] backGroundArray = new String[10];
+		backGroundArray = bg.loadBackGrounds(basePath);
+		assert(backGroundArray.length == 10);
 	}
 	
 	/*@Test
