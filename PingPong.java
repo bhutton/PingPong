@@ -145,14 +145,17 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				msg.setLevel(1);
 			}
 		else {
-			level.incrementLevel();
-			level.setLives(this.numLives);
-			this.currentBackGroundImage++;
+		    level.setLives(this.numLives);
+            pp.initializeBrickArray();
+            pp.createWall(level.getLevel());
 			this.backGroundImg = this.getNextBackGround();
             bg.setBackgroundImage(this.backGroundImg);
 			msg.setLives(level.getLives());
 			msg.setLevel(level.getLevel());
-		}
+            level.incrementLevel();
+            this.currentBackGroundImage++;
+
+        }
 	}
 
 	private void runGame() {
@@ -178,8 +181,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	private void initializeGame() {
-		pp.initializeBrickArray();
-		pp.createWall(level.getLevel());
+		//pp.initializeBrickArray();
+		//pp.createWall(level.getLevel());
 		pp.setBallActive();
 		pp.ballSetStop();
 		pp.calculateCurrentLocation(appletWidth, appletHeight);
