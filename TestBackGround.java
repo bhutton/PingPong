@@ -57,12 +57,4 @@ public class TestBackGround {
 		backGroundArray = bg.loadBackGrounds(basePath);
 		assert(backGroundArray.length == 10);
 	}
-	
-	/*@Test
-	public void testDrawBall() {
-		bg.drawBall();
-	}*/
-	
-	
-
 }

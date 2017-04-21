@@ -293,7 +293,7 @@ public class Bricks {
 	}
 	
 	public int getBrickRowThatBallIsOn(int y) {
-		for(int row = 0; row < this.numRows; row++) 
+		for(int row = 0; row < this.numRows; row++)
 			if ( y < ((row+1) * this.brickHeight) ) return row;
 		
 		return numRows-1;
@@ -309,21 +309,22 @@ public class Bricks {
 		
 		if (getBrickX() >= left && getBrickX() <= right) {
 			Boolean brickTaken = setBrickTaken();
-
-			if (this.getBallDown()) {
-				if (leftRight)
-					setBallRight(false);
-				else
-					setBallRight(true);
-			}
-
+			checkIfBallDownThenBounce(leftRight);
 			return brickTaken;
-
 		}
 
 		return false;
 	}
-	
+
+	private void checkIfBallDownThenBounce(Boolean leftRight) {
+		if (this.getBallDown()) {
+            if (leftRight)
+                setBallRight(false);
+            else
+                setBallRight(true);
+        }
+	}
+
 	/*
 	 * Determine whether brick is currently active
 	 */

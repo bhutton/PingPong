@@ -27,7 +27,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 
     public void init() {
 
-		this.loadBackGrounds();
+		backGroundArray = this.bg.loadBackGrounds(this.basePath);
         this.currentBackGroundImage = 0;
 
         String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
@@ -60,20 +60,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    pp.setPaddleLocation(appletHeight, appletWidth);
 	    addKeyListener(this);
 	}
-
-	public void loadBackGrounds() {
-    	String path = this.basePath + "/../src/PingPong/images";
-        this.backGroundArray[0] = path + "/background-1.png";
-        this.backGroundArray[1] = path + "/background-2.png";
-		this.backGroundArray[2] = path + "/background-3.jpg";
-		this.backGroundArray[3] = path + "/background-4.png";
-		this.backGroundArray[4] = path + "/background-5.jpg";
-		this.backGroundArray[5] = path + "/background-6.jpg";
-		this.backGroundArray[6] = path + "/background-7.jpg";
-		this.backGroundArray[7] = path + "/background-8.jpg";
-		this.backGroundArray[8] = path + "/background-9.jpg";
-		this.backGroundArray[9] = path + "/background-10.png";
-    }
 
     public String getNextBackGround() {
 	    return this.backGroundArray[this.currentBackGroundImage];
@@ -142,7 +128,11 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 			else {
 				msg.setGameOver();
 				level.setLevel(1);
-				msg.setLevel(1);
+				level.setLives(3);
+				msg.setLevel(level.getLevel());
+				msg.setLives(level.getLives());
+				pp.initializeBrickArray();
+				pp.createWall(level.getLevel());
 			}
 		else {
 		    level.setLives(this.numLives);
