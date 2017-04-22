@@ -11,6 +11,8 @@ public class Background {
 	
 	private BufferedImage imgBackground = null;
 	private BufferedImage imgGameOver = null;
+	private String[] backGroundArray = new String[10];
+	private int backGroundArrayIndex;
 	
 	public void setBackgroundImage(String backgroundImg) {
 		try { imgBackground = ImageIO.read(new File(backgroundImg)); } 
@@ -39,20 +41,29 @@ public class Background {
 	}
 
 	public String[] loadBackGrounds(File basePath) {
-		String[] backGroundArray = new String[10];
     	String path = basePath + "/../src/PingPong/images";
-    	System.out.println(path);
-        backGroundArray[0] = path + "/background-1.png";
-        backGroundArray[1] = path + "/background-2.png";
-		backGroundArray[2] = path + "/background-3.jpg";
-		backGroundArray[3] = path + "/background-4.png";
-		backGroundArray[4] = path + "/background-5.jpg";
-		backGroundArray[5] = path + "/background-6.png";
-		backGroundArray[6] = path + "/background-7.png";
-		backGroundArray[7] = path + "/background-8.png";
-		backGroundArray[8] = path + "/background-9.png";
-		backGroundArray[9] = path + "/background-10.png";
+    	this.backGroundArrayIndex = 0;
 
-		return backGroundArray;
+        this.backGroundArray[0] = path + "/background-1.png";
+        this.backGroundArray[1] = path + "/background-2.png";
+		this.backGroundArray[2] = path + "/background-3.jpg";
+		this.backGroundArray[3] = path + "/background-4.png";
+		this.backGroundArray[4] = path + "/background-5.jpg";
+		this.backGroundArray[5] = path + "/background-6.png";
+		this.backGroundArray[6] = path + "/background-7.png";
+		this.backGroundArray[7] = path + "/background-8.png";
+		this.backGroundArray[8] = path + "/background-9.png";
+		this.backGroundArray[9] = path + "/background-10.png";
+
+		return this.backGroundArray;
     }
+    
+    public String getBackGroundImageFileName() {
+		return this.backGroundArray[this.backGroundArrayIndex];
+	}
+
+	public String getNextBackGroundImageFileName() {
+		this.backGroundArrayIndex++;
+		return this.backGroundArray[this.backGroundArrayIndex];
+	}
 }

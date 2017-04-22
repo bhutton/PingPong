@@ -2,7 +2,6 @@ package PingPong;
 
 import static org.junit.Assert.*;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
@@ -57,4 +56,26 @@ public class TestBackGround {
 		backGroundArray = bg.loadBackGrounds(basePath);
 		assert(backGroundArray.length == 10);
 	}
+
+	@Test
+	public void testGetBackgroundImageFileName() {
+		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		String[] backGroundArray = new String[10];
+		backGroundArray = bg.loadBackGrounds(basePath);
+
+		assert(bg.getBackGroundImageFileName() != null);
+	}
+
+	@Test
+	public void testGetNextBackGroundImageFileName() {
+		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		String[] backGroundArray = new String[10];
+		bg.loadBackGrounds(basePath);
+
+		String backGroundImageFileName1 = bg.getBackGroundImageFileName();
+		String backGRoundImageFileName2 = bg.getNextBackGroundImageFileName();
+
+		assert(backGroundImageFileName1 != backGRoundImageFileName2);
+	}
 }
+
