@@ -36,9 +36,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
                 gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
 				gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
 
-        this.backGroundImg = this.getNextBackGround();
-
-		setSize(853,600);
+        setSize(853,600);
 		
 		Dimension appletSize = this.getSize();
 	    this.appletHeight = appletSize.height;
@@ -61,11 +59,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	    addKeyListener(this);
 	}
 
-    public String getNextBackGround() {
-	    return this.backGroundArray[this.currentBackGroundImage];
-    }
-
-	public void keyPressed( KeyEvent e ) {
+    public void keyPressed( KeyEvent e ) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = pp.movePaddleLeft();
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = pp.movePaddleRight();			
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = msg.setGameActive();
@@ -138,12 +132,12 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    level.setLives(this.numLives);
             pp.initializeBrickArray();
             pp.createWall(level.getLevel());
-			this.backGroundImg = this.getNextBackGround();
+			this.backGroundImg = bg.getBackGroundImageFileName();
             bg.setBackgroundImage(this.backGroundImg);
 			msg.setLives(level.getLives());
 			msg.setLevel(level.getLevel());
             level.incrementLevel();
-            this.currentBackGroundImage++;
+            this.backGroundImg = bg.getNextBackGroundImageFileName();
 
         }
 	}
@@ -171,8 +165,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	private void initializeGame() {
-		//pp.initializeBrickArray();
-		//pp.createWall(level.getLevel());
 		pp.setBallActive();
 		pp.ballSetStop();
 		pp.calculateCurrentLocation(appletWidth, appletHeight);
