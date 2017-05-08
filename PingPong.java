@@ -22,7 +22,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	Level level = new Level();
 
 	String[] backGroundArray = new String[10];
-	String backGroundImg = this.basePath + "/../src/PingPong/images/12-vector-game-backgrounds-8320_imgs_8320.png";
+	String backGroundImg = this.basePath + "/../src/PingPong/images/background-1.png";
 	int currentBackGroundImage;
 
     public void init() {
@@ -132,6 +132,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    level.setLives(this.numLives);
             pp.initializeBrickArray();
             pp.createWall(level.getLevel());
+            bg.loadBackGrounds(this.basePath);
 			this.backGroundImg = bg.getBackGroundImageFileName();
             bg.setBackgroundImage(this.backGroundImg);
 			msg.setLives(level.getLives());
