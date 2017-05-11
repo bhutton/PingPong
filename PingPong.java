@@ -132,7 +132,6 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 		    level.setLives(this.numLives);
             pp.initializeBrickArray();
             pp.createWall(level.getLevel());
-            bg.loadBackGrounds(this.basePath);
 			this.backGroundImg = bg.getBackGroundImageFileName();
             bg.setBackgroundImage(this.backGroundImg);
 			msg.setLives(level.getLives());
