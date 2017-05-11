@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.imageio.ImageIO;
 
 public class Ball extends Paddle {
-	private int x,y,incX=1, incY=3, width=50, height=50, brickHeight = 50;
+	private int x,y,incX=1, incY=3, width=50;
 	private boolean right = true, down = true, ballIsActive = true, ballStart = false;
 	
 	private BufferedImage imgBall = null;
@@ -124,6 +124,7 @@ public class Ball extends Paddle {
 	}
 
 	public Ball checkStart() {
+        int brickHeight = 50;
 		if (this.getBrickY() == 0)
 			this.y = ((brickHeight + 5) * 4);
 		
@@ -158,6 +159,8 @@ public class Ball extends Paddle {
 	}
 	
 	public Ball checkBottom(int appletHeight) {
+		int height=50;
+
 		if ((this.getBrickY() + height + 2) > appletHeight) {
 			this.down = false;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
