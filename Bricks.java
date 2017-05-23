@@ -16,8 +16,8 @@ public class Bricks {
 				brickRowLocation = 0, 
 				numRows=2, 
 				numCols, 
-				brickHeight=50, 
-				brickWidth=110, 
+				brickHeight=50,
+
 				brickIsActive=0, 	
 				brickHasBeenTaken=1;
 	
@@ -300,8 +300,9 @@ public class Bricks {
 	}
 	
 	public Boolean checkActive(int x, int y, Boolean leftRight) {
-		int left = x - (this.brickWidth - (this.ballWidth/2)),
-			right = x + (this.brickWidth - (this.ballWidth/2)),
+		int brickWidth=110;
+		int left = x - (brickWidth - (this.ballWidth/2)),
+			right = x + (brickWidth - (this.ballWidth/2)),
 			row = getBrickRowThatBallIsOn(y);
 		
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
@@ -329,10 +330,7 @@ public class Bricks {
 	 * Determine whether brick is currently active
 	 */
 	public boolean getActive() {
-		if (this.brickArray[this.brickColumnLocation][this.brickRowLocation][2] == this.brickIsActive)
-			return true;
-
-		return false;
+		return this.brickArray[this.brickColumnLocation][this.brickRowLocation][2] == this.brickIsActive;
 	}
 	
 	/*

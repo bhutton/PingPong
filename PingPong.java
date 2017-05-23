@@ -10,7 +10,7 @@ import java.io.File;
 public class PingPong extends Applet implements KeyListener,Runnable {
 	private static final long serialVersionUID = 1L;
 	int appletHeight, appletWidth, incX=1, incY=1;
-	private static int delay = 100, numLives = 3;
+	private static int delay = 100;
 	private Thread animatorThread;
 	boolean frozen = false, called=false;
 	private Thread currentThread = null;
@@ -86,9 +86,8 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 	
 	public Boolean testThread() {
-		if (this.currentThread == animatorThread) return true;
-		return false;
-	}
+        return this.currentThread == animatorThread;
+    }
 	
 	public Thread getThread() {
 		return this.currentThread;
@@ -114,6 +113,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 	}
 
 	private void endOfLevel() {
+        int numLives = 3;
 		if (pp.getBricksLeft())
 			if (level.getLives() > 1) {
 				level.decreaseLives();
@@ -129,7 +129,7 @@ public class PingPong extends Applet implements KeyListener,Runnable {
 				pp.createWall(level.getLevel());
 			}
 		else {
-		    level.setLives(this.numLives);
+		    level.setLives(numLives);
             pp.initializeBrickArray();
             pp.createWall(level.getLevel());
 			this.backGroundImg = bg.getBackGroundImageFileName();
