@@ -10,9 +10,9 @@ import java.awt.event.KeyEvent;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-public class TestPingPong {
+public class TestPingPongOld {
 	
-	private PingPong pp = new PingPong();
+	private PingPongOld pp = new PingPongOld();
 	Graphics g = mock(Graphics.class);
 	
 	@Test	

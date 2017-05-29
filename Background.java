@@ -1,9 +1,12 @@
 package PingPong;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import javax.imageio.ImageIO;
 
