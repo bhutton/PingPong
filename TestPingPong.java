@@ -6,19 +6,20 @@ import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
-public class TestPingPongOld {
+public class TestPingPong {
 	
-	private PingPongOld pp = new PingPongOld();
+	private PingPong pp = new PingPong();
 	Graphics g = mock(Graphics.class);
 	
-	@Test	
+	/*@Test
 	public void testRun() {
 		pp.run();
-	}
+	}*/
 	
 	@Test
 	public void testPaint() {
@@ -119,6 +120,43 @@ public class TestPingPongOld {
 		
 		assertEquals(2, pp.level.getLevel());
 	}
+
+	@Test
+    public void testGameStillGoing() {
+        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+
+        pp.bg.setBackgroundImage(backGroundImg);
+	    pp.pp.initializeBrickArray();
+	    pp.pp.createWall(3);
+
+	    pp.level.setLives(2);
+
+	    assertEquals("Game On", pp.endOfLevel());
+    }
+
+    @Test
+    public void testGameOver() {
+        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+
+        pp.bg.setBackgroundImage(backGroundImg);
+        pp.pp.initializeBrickArray();
+        pp.pp.createWall(3);
+
+        pp.level.setLives(1);
+
+        assertEquals("Game Over", pp.endOfLevel());
+    }
+
+    @Test
+    public void testLevelComplete() {
+        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        pp.bg.loadBackGrounds(basePath);
+        pp.level.setLives(1);
+
+        assertEquals("Level Finished", pp.endOfLevel());
+    }
 
 
 }
