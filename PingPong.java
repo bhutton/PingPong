@@ -31,13 +31,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 	String backGroundImg = this.basePath + "/../src/PingPong/images/background-1.png";
 	int currentBackGroundImage;
 
-    String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
-            brickImg = this.basePath + "/../src/PingPong/images/brick.png",
-            paddleImg = this.basePath + "/../src/PingPong/images/paddle.png",
-            gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
-            gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
-
-
 
     public static void main(String[] args) {
         new PingPong().go();
@@ -60,6 +53,12 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
 
+        String 	ballImg = this.basePath + "/../src/PingPong/images/soccer-ball-clipart-no-background-clipart-panda-free-clipart-Ek7jBT-clipart.png",
+                brickImg = this.basePath + "/../src/PingPong/images/brick.png",
+                paddleImg = this.basePath + "/../src/PingPong/images/paddle.png",
+                gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
+                gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
+
         backGroundArray = this.bg.loadBackGrounds(this.basePath);
         this.currentBackGroundImage = 0;
         bg.setBackgroundImage(backGroundImg);
@@ -73,54 +72,10 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.initializeBrickArray();
         pp.setPaddleMoveAmount(30);
         pp.setPaddleLocation(appletHeight, appletWidth);
-        frame.repaint();
-
-
-        //initializeGame();
-        //pp.ballSetStart();
-        //run();
-
-        addKeyListener(this);
-
-    }
-
-
-    /*public PingPong() {
-        f.setTitle("PingPong");
-        f.setSize(853, 600);
-        f.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        jp = new DrawPanel();
-        f.add(jp);
-        f.setVisible(true);
-
-        backGroundArray = this.bg.loadBackGrounds(this.basePath);
-        this.currentBackGroundImage = 0;
-
-
-        //setSize(853,600);
-
-        //Dimension appletSize = this.getSize();
-        //this.appletHeight = appletSize.height;
-        //this.appletWidth = appletSize.width;
-        //setFocusable(true);
-        //requestFocus();
-
-        bg.setBackgroundImage(backGroundImg);
-        bg.setGameOverImage(gameOverImg);
-        msg.setGameOverImage(gameOverMessage);
-        pp.setBallImage(ballImg);
-        pp.setBrickImage(brickImg);
-        pp.setPaddleImage(paddleImg);
-        pp.setPaddleWidth(174);
-        pp.setPaddleHeight(30);
-        pp.initializeBrickArray();
-        pp.setPaddleMoveAmount(30);
-        pp.setPaddleLocation(appletHeight, appletWidth);
-        addKeyListener(this);
-        initializeGame();
+        msg.setGameActive();
+        frame.addKeyListener(this);
         run();
-    }*/
+    }
 
     public void keyPressed( KeyEvent e ) {
 
@@ -236,7 +191,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         public void paintComponent(Graphics g) {
             bg.drawBackground(g, appletWidth, appletHeight);
 
-            if (!msg.getGameActive()) {
+            if (msg.getGameActive()) {
                 pp.drawWall(g);
                 pp.drawBall(g);
                 pp.drawPaddle(g);
