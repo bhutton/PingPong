@@ -8,10 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PingPong extends JFrame implements KeyListener,Runnable {
-    JFrame f = new JFrame();
-    JPanel jp;
+    //JFrame f = new JFrame();
+    //JPanel jp;
 
-	int appletHeight = 600, appletWidth = 853, incX=1, incY=1;
+    JFrame frame;
+    DrawPanel drawPanel;
+
+
+    int appletHeight = 600, appletWidth = 853, incX=1, incY=1;
 	private static int delay = 100;
 	private Thread animatorThread;
 	boolean frozen = false, called=false;
@@ -34,18 +38,59 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
             gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
 
 
+
     public static void main(String[] args) {
-        PingPong g1 = new PingPong();
-        g1.setVisible(true);
+        new PingPong().go();
+        //PingPong g1 = new PingPong();
+        //g1.setVisible(true);
+    }
+
+    private void go()
+    {
+
+        frame = new JFrame("PingPong");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        drawPanel = new PingPong.DrawPanel();
+
+        frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
+
+        frame.setResizable(false);
+        frame.setSize(853, 625);
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+
+        backGroundArray = this.bg.loadBackGrounds(this.basePath);
+        this.currentBackGroundImage = 0;
+        bg.setBackgroundImage(backGroundImg);
+        bg.setGameOverImage(gameOverImg);
+        msg.setGameOverImage(gameOverMessage);
+        pp.setBallImage(ballImg);
+        pp.setBrickImage(brickImg);
+        pp.setPaddleImage(paddleImg);
+        pp.setPaddleWidth(174);
+        pp.setPaddleHeight(30);
+        pp.initializeBrickArray();
+        pp.setPaddleMoveAmount(30);
+        pp.setPaddleLocation(appletHeight, appletWidth);
+        frame.repaint();
+
+
+        //initializeGame();
+        //pp.ballSetStart();
+        //run();
+
+        addKeyListener(this);
+
     }
 
 
-    public PingPong() {
+    /*public PingPong() {
         f.setTitle("PingPong");
         f.setSize(853, 600);
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        jp = new GPanel();
+        jp = new DrawPanel();
         f.add(jp);
         f.setVisible(true);
 
@@ -75,7 +120,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         addKeyListener(this);
         initializeGame();
         run();
-    }
+    }*/
 
     public void keyPressed( KeyEvent e ) {
 
@@ -122,10 +167,11 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
             catch (InterruptedException e) {
                 break;
             }
+
             initializeGame();
             runGame();
             endOfLevel();
-            jp.repaint();
+            frame.repaint();
         }
     }
 
@@ -138,7 +184,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     private void runGame() {
         while (pp.checkBallActive() && pp.getBricksLeft()) {
             ballCalculations();
-            repaint();
+            frame.repaint();
 
             try {
                 Thread.sleep(10);
@@ -186,25 +232,11 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         }
     }
 
-    class GPanel extends JPanel {
-
-        /*public GPanel() {
-            bg.setBackgroundImage(backGroundImg);
-            pp.setBallImage(ballImg);
-            pp.setBrickImage(brickImg);
-            pp.setPaddleImage(paddleImg);
-            pp.setPaddleWidth(174);
-            pp.setPaddleHeight(30);
-            msg.setGameActive();
-
-            f.setPreferredSize(new Dimension(800, 600));
-        }*/
-
-        //@Override
+    class DrawPanel extends JPanel {
         public void paintComponent(Graphics g) {
             bg.drawBackground(g, appletWidth, appletHeight);
 
-            if (msg.getGameActive()) {
+            if (!msg.getGameActive()) {
                 pp.drawWall(g);
                 pp.drawBall(g);
                 pp.drawPaddle(g);
