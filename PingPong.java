@@ -8,12 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PingPong extends JFrame implements KeyListener,Runnable {
-    //JFrame f = new JFrame();
-    //JPanel jp;
-
     JFrame frame;
     DrawPanel drawPanel;
-
 
     int appletHeight = 600, appletWidth = 853, incX=1, incY=1;
 	private static int delay = 100;
@@ -34,13 +30,9 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 
     public static void main(String[] args) {
         new PingPong().go();
-        //PingPong g1 = new PingPong();
-        //g1.setVisible(true);
     }
 
-    private void go()
-    {
-
+    private void go() {
         frame = new JFrame("PingPong");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -73,8 +65,13 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.setPaddleMoveAmount(30);
         pp.setPaddleLocation(appletHeight, appletWidth);
         msg.setGameActive();
+
+        //addKeyListener(this);
         frame.addKeyListener(this);
         run();
+
+
+
     }
 
     public void keyPressed( KeyEvent e ) {
