@@ -32,7 +32,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         new PingPong().go();
     }
 
-    private void go() {
+    public void go() {
         frame = new JFrame("PingPong");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -53,6 +53,13 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 
         backGroundArray = this.bg.loadBackGrounds(this.basePath);
         this.currentBackGroundImage = 0;
+        initialiseGame(ballImg, brickImg, paddleImg, gameOverImg, gameOverMessage);
+
+        frame.addKeyListener(this);
+        run();
+    }
+
+    private void initialiseGame(String ballImg, String brickImg, String paddleImg, String gameOverImg, String gameOverMessage) {
         bg.setBackgroundImage(backGroundImg);
         bg.setGameOverImage(gameOverImg);
         msg.setGameOverImage(gameOverMessage);
@@ -65,13 +72,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.setPaddleMoveAmount(30);
         pp.setPaddleLocation(appletHeight, appletWidth);
         msg.setGameActive();
-
-        //addKeyListener(this);
-        frame.addKeyListener(this);
-        run();
-
-
-
     }
 
     public void keyPressed( KeyEvent e ) {
@@ -155,21 +155,17 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.setBallDirectionAfterReachingPaddle();
     }
 
-    private void endOfLevel() {
+    public String endOfLevel() {
         int numLives = 3;
         if (pp.getBricksLeft())
             if (level.getLives() > 1) {
                 level.decreaseLives();
                 msg.setLives(level.getLives());
+                return "Game On";
             }
             else {
-                msg.setGameOver();
-                level.setLevel(1);
-                level.setLives(3);
-                msg.setLevel(level.getLevel());
-                msg.setLives(level.getLives());
-                pp.initializeBrickArray();
-                pp.createWall(level.getLevel());
+                setGameOver();
+                return "Game Over";
             }
         else {
             level.setLives(numLives);
@@ -181,7 +177,18 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
             msg.setLevel(level.getLevel());
             level.incrementLevel();
             this.backGroundImg = bg.getNextBackGroundImageFileName();
+            return "Level Finished";
         }
+    }
+
+    private void setGameOver() {
+        msg.setGameOver();
+        level.setLevel(1);
+        level.setLives(3);
+        msg.setLevel(level.getLevel());
+        msg.setLives(level.getLives());
+        pp.initializeBrickArray();
+        pp.createWall(level.getLevel());
     }
 
     class DrawPanel extends JPanel {
