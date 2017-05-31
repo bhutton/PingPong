@@ -49,6 +49,14 @@ public class Bricks {
 			}
 		}
 	}
+
+	public void zeroBrickArray() {
+        for (int count = 0; count < this.numCols; count++) {
+            for (int counter = 0; counter < this.numRows; counter++) {
+                this.brickArray[count][counter][2] = brickHasBeenTaken;
+            }
+        }
+    }
 	
 	/*
 	 * Setup array that holds the x,y coordinates of the wall
@@ -368,6 +376,19 @@ public class Bricks {
 		if (getActive()) 
 			g.drawImage(getBrickImage(), getBrickXCoord(), getBrickYCoord(), null);
 	}
+
+	public Boolean brickArrayPopulated() {
+		for (int count = 0; count < this.numCols; count++) {
+			for (int counter = 0; counter < this.numRows; counter++) {
+				if(this.brickArray[count][counter][2] == brickHasBeenTaken)
+					return false;
+			}
+		}
+
+		return true;
+	}
+
+
 	
 
 }

@@ -141,12 +141,15 @@ public class TestPingPong {
         String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
 
         pp.bg.setBackgroundImage(backGroundImg);
+
         pp.pp.initializeBrickArray();
+        pp.pp.zeroBrickArray();
         pp.pp.createWall(3);
 
         pp.level.setLives(1);
 
         assertEquals("Game Over", pp.endOfLevel());
+        assertEquals(true, pp.pp.brickArrayPopulated());
     }
 
     @Test
@@ -156,6 +159,7 @@ public class TestPingPong {
         pp.level.setLives(1);
 
         assertEquals("Level Finished", pp.endOfLevel());
+
     }
 
 

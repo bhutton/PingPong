@@ -4,7 +4,7 @@ public class Level {
 	int level, lives;
 	
 	public Level() {
-		this.level = 1;
+		this.level = 0;
 		this.lives = 3;
 	}
 	
@@ -27,8 +27,14 @@ public class Level {
 	public int getLives() {
 		return this.lives;
 	}
+
+	public Boolean stillAlive() {
+		return getLives() > 0;
+	}
 	
-	public void decreaseLives() {
-		this.lives--;
+	public int decreaseLives() {
+		return --this.lives;
+
+		//return stillAlive();
 	}
 }

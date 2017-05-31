@@ -217,6 +217,12 @@ public class Ball extends Paddle {
 		ballStart = false;
 		return true;
 	}
+
+	public void drawWindow(Graphics g) {
+		this.drawWall(g);
+		this.drawBall(g);
+		this.drawPaddle(g);
+	}
 	
 	public Boolean getBallStatus() {
 		return ballStart;
