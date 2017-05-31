@@ -4,7 +4,7 @@ public class Level {
 	int level, lives;
 	
 	public Level() {
-		this.level = 0;
+		this.level = 1;
 		this.lives = 3;
 	}
 	

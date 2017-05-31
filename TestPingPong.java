@@ -114,17 +114,18 @@ public class TestPingPong {
 	
 	@Test
 	public void testLevel() {
-		
 		pp.level.getLevel();
 		pp.level.incrementLevel();
-		
 		assertEquals(2, pp.level.getLevel());
 	}
 
 	@Test
     public void testGameStillGoing() {
-        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-        String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        final File basePath =
+                new File(PingPong.class.getProtectionDomain().
+                        getCodeSource().getLocation().getPath());
+        String backGroundImg = basePath
+                + "/../src/PingPong/images/background-1.png";
 
         pp.bg.setBackgroundImage(backGroundImg);
 	    pp.pp.initializeBrickArray();
@@ -132,7 +133,7 @@ public class TestPingPong {
 
 	    pp.level.setLives(2);
 
-	    assertEquals("Game On", pp.endOfLevel());
+	    assertEquals("Game On", pp.checkForEndOfLevel());
     }
 
     @Test
@@ -148,7 +149,7 @@ public class TestPingPong {
 
         pp.level.setLives(1);
 
-        assertEquals("Game Over", pp.endOfLevel());
+        assertEquals("Game Over", pp.checkForEndOfLevel());
         assertEquals(true, pp.pp.brickArrayPopulated());
     }
 
@@ -158,7 +159,7 @@ public class TestPingPong {
         pp.bg.loadBackGrounds(basePath);
         pp.level.setLives(1);
 
-        assertEquals("Level Finished", pp.endOfLevel());
+        assertEquals("Level Finished", pp.checkForEndOfLevel());
 
     }
 

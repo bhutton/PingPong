@@ -72,6 +72,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.setPaddleMoveAmount(30);
         pp.setPaddleLocation(appletHeight, appletWidth);
         msg.setGameActive();
+        pp.initializeBall();
     }
 
     public void keyPressed( KeyEvent e ) {
@@ -118,18 +119,11 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
             catch (InterruptedException e) {
                 break;
             }
-
             initializeGame();
             runGame();
-            endOfLevel();
+            checkForEndOfLevel();
             frame.repaint();
         }
-    }
-
-    private void initializeGame() {
-        pp.setBallActive();
-        pp.ballSetStop();
-        pp.calculateCurrentLocation(appletWidth, appletHeight);
     }
 
     private void runGame() {
@@ -144,37 +138,36 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
                 break;
             }
         }
+    }
 
-        pp.initializeBall();
+    public String checkForEndOfLevel() {
+        int numLives = 3;
+        if (pp.getBricksLeft())
+            return decreaseLives();
+        return setEndOfLevel(numLives);
+    }
+
+    private String setEndOfLevel(int numLives) {
+        level.setLives(numLives);
+        pp.initializeBrickArray();
+        pp.createWall(level.getLevel());
+        bg.setBackgroundImage(bg.getNextBackGroundImageFileName());
+        msg.setLives(level.getLives());
+        msg.setLevel(level.getLevel());
+        level.incrementLevel();
+        return "Level Finished";
+    }
+
+    private void initializeGame() {
+        pp.setBallActive();
+        pp.ballSetStop();
+        pp.calculateCurrentLocation(appletWidth, appletHeight);
     }
 
     private void ballCalculations() {
         pp.calculateCurrentLocation(appletWidth, appletHeight);
         pp.setBallDirectionAfterReachingBricks();
         pp.setBallDirectionAfterReachingPaddle();
-    }
-
-    public String endOfLevel() {
-        int numLives = 3;
-        if (pp.getBricksLeft())
-            return decreaseLives();
-        else {
-            return setEndOfLevel(numLives);
-        }
-    }
-
-    private String setEndOfLevel(int numLives) {
-        level.setLives(numLives);
-        pp.initializeBrickArray();
-        level.incrementLevel();
-        pp.createWall(level.getLevel());
-        this.backGroundImg = bg.getBackGroundImageFileName();
-        bg.setBackgroundImage(this.backGroundImg);
-        msg.setLives(level.getLives());
-        msg.setLevel(level.getLevel());
-
-        this.backGroundImg = bg.getNextBackGroundImageFileName();
-        return "Level Finished";
     }
 
     private String decreaseLives() {

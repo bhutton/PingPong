@@ -212,7 +212,7 @@ public class Ball extends Paddle {
 	public Boolean ballSetStart() {
 		return ballStart = true;
 	}
-	
+
 	public Boolean ballSetStop() {
 		ballStart = false;
 		return true;
