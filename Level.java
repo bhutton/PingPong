@@ -40,4 +40,9 @@ public class Level {
         setLevel(1);
         setLives(3);
     }
+
+    public void newLevel(int numLives) {
+	    setLives(numLives);
+	    incrementLevel();
+    }
 }

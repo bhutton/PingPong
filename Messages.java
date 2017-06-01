@@ -38,6 +38,11 @@ public class Messages {
 		this.lives = lives;
 		return gameActive = false;
 	}
+
+	public void setGameStart(int level, int lives) {
+		this.level = level;
+		this.lives = lives;
+	}
 	
 	public String returnMessage() {
 		return "Press Enter to Try Again";
