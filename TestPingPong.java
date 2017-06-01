@@ -138,19 +138,23 @@ public class TestPingPong {
 
     @Test
     public void testGameOver() {
-        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-        String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        final File basePath = new File(PingPong.class.
+                getProtectionDomain().getCodeSource().
+                getLocation().getPath());
 
-        pp.bg.setBackgroundImage(backGroundImg);
+        pp.bg.loadBackGrounds(basePath);
+        String backGroundImage = pp.bg.getBackGroundImageFileName();
+        pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
+        pp.bg.getNextBackGroundImageFileName();
 
         pp.pp.initializeBrickArray();
         pp.pp.zeroBrickArray();
         pp.pp.createWall(3);
-
         pp.level.setLives(1);
 
         assertEquals("Game Over", pp.checkForEndOfLevel());
         assertEquals(true, pp.pp.brickArrayPopulated());
+        assertEquals(backGroundImage, pp.bg.getBackGroundImageFileName());
     }
 
     @Test
