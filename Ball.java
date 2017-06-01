@@ -227,4 +227,10 @@ public class Ball extends Paddle {
 	public Boolean getBallStatus() {
 		return ballStart;
 	}
+
+    public void ballCalculations(int appletWidth, int appletHeight) {
+        calculateCurrentLocation(appletWidth, appletHeight);
+        setBallDirectionAfterReachingBricks();
+        setBallDirectionAfterReachingPaddle();
+    }
 }

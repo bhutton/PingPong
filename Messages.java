@@ -33,7 +33,9 @@ public class Messages {
 		return gameActive;
 	}
 	
-	public Boolean setGameOver() {
+	public Boolean setGameOver(int level, int lives) {
+		this.level = level;
+		this.lives = lives;
 		return gameActive = false;
 	}
 	
@@ -67,6 +69,12 @@ public class Messages {
 	public int getLives() {
 		return this.lives;
 	}
+
+	/*public void setNewGame(int level, int lives) {
+		setGameOver(level, lives);
+		setLevel(level);
+		setLives(lives);
+	}*/
 	
 	public void displayGameStatsAtBottomOfScreen(Graphics g, int appletWidth, int appletHeight) {
 		g.setColor(Color.BLACK);

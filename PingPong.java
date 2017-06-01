@@ -134,7 +134,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 
     private void runGame() {
         while (pp.checkBallActive() && pp.getBricksLeft()) {
-            ballCalculations();
+            pp.ballCalculations(this.appletWidth, this.appletHeight);
             frame.repaint();
 
             try {
@@ -146,12 +146,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         }
 
         pp.initializeBall();
-    }
-
-    private void ballCalculations() {
-        pp.calculateCurrentLocation(appletWidth, appletHeight);
-        pp.setBallDirectionAfterReachingBricks();
-        pp.setBallDirectionAfterReachingPaddle();
     }
 
     public String checkForEndOfLevel() {
@@ -184,11 +178,8 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     }
 
     private String setGameOver() {
-        msg.setGameOver();
-        level.setLevel(1);
-        level.setLives(3);
-        msg.setLevel(level.getLevel());
-        msg.setLives(level.getLives());
+        msg.setGameOver(level.getLevel(), level.getLives());
+        level.setGameStart();
         pp.initializeBrickArray();
         pp.createWall(level.getLevel());
         return "Game Over";

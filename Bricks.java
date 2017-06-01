@@ -62,8 +62,7 @@ public class Bricks {
 	 * Setup array that holds the x,y coordinates of the wall
 	 */
 	public void createWall(int numLevels) {
-		
-		// Screen coordinates of the individual bricks
+	    // Screen coordinates of the individual bricks
 		int x=5, y=5;
 		this.numRows = numLevels;
 		
@@ -82,7 +81,12 @@ public class Bricks {
 	    }
 	    
 	    setNumRows().setNumCols();
-	}		
+	}
+
+	public void startGame(int level) {
+        initializeBrickArray();
+        createWall(level);
+    }
 	
 	public int returnSizeOfBrickArray() {
 		return this.brickArray.length;

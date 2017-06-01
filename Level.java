@@ -34,7 +34,10 @@ public class Level {
 	
 	public int decreaseLives() {
 		return --this.lives;
+    }
 
-		//return stillAlive();
-	}
+    public void setGameStart() {
+        setLevel(1);
+        setLives(3);
+    }
 }
