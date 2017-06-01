@@ -72,7 +72,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.setPaddleMoveAmount(30);
         pp.setPaddleLocation(appletHeight, appletWidth);
         msg.setGameActive();
-        pp.initializeBall();
     }
 
     public void keyPressed( KeyEvent e ) {
@@ -119,11 +118,18 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
             catch (InterruptedException e) {
                 break;
             }
+
             initializeGame();
             runGame();
             checkForEndOfLevel();
             frame.repaint();
         }
+    }
+
+    private void initializeGame() {
+        pp.setBallActive();
+        pp.ballSetStop();
+        pp.calculateCurrentLocation(appletWidth, appletHeight);
     }
 
     private void runGame() {
@@ -138,6 +144,14 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
                 break;
             }
         }
+
+        pp.initializeBall();
+    }
+
+    private void ballCalculations() {
+        pp.calculateCurrentLocation(appletWidth, appletHeight);
+        pp.setBallDirectionAfterReachingBricks();
+        pp.setBallDirectionAfterReachingPaddle();
     }
 
     public String checkForEndOfLevel() {
@@ -151,23 +165,13 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         level.setLives(numLives);
         pp.initializeBrickArray();
         pp.createWall(level.getLevel());
-        bg.setBackgroundImage(bg.getNextBackGroundImageFileName());
+        bg.setBackgroundImage(bg.getBackGroundImageFileName());
         msg.setLives(level.getLives());
         msg.setLevel(level.getLevel());
+        bg.getNextBackGroundImageFileName();
         level.incrementLevel();
+
         return "Level Finished";
-    }
-
-    private void initializeGame() {
-        pp.setBallActive();
-        pp.ballSetStop();
-        pp.calculateCurrentLocation(appletWidth, appletHeight);
-    }
-
-    private void ballCalculations() {
-        pp.calculateCurrentLocation(appletWidth, appletHeight);
-        pp.setBallDirectionAfterReachingBricks();
-        pp.setBallDirectionAfterReachingPaddle();
     }
 
     private String decreaseLives() {

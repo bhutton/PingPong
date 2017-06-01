@@ -158,10 +158,18 @@ public class TestPingPong {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
         pp.bg.loadBackGrounds(basePath);
         pp.level.setLives(1);
-
+        String background = pp.bg.getBackGroundImageFileName();
         assertEquals("Level Finished", pp.checkForEndOfLevel());
-
     }
 
-
+    @Test
+    public void testBackgroundChangesOnLevelComplete() {
+        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        pp.bg.loadBackGrounds(basePath);
+        pp.level.setLives(1);
+        String background = pp.bg.getBackGroundImageFileName();
+        pp.checkForEndOfLevel();
+        assertNotEquals(null, pp.bg.getBackGroundImageFileName());
+        assertNotEquals(background, pp.bg.getBackGroundImageFileName());
+    }
 }
