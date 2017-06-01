@@ -21,6 +21,10 @@ public class Background {
 		try { imgBackground = ImageIO.read(new File(backgroundImg)); } 
 		catch (IOException e) { e.printStackTrace(); }
 	}
+
+	public void setStart() {
+		this.backGroundArrayIndex = 0;
+	}
 	
 	public BufferedImage getBackground() {
 		return imgBackground;

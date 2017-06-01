@@ -159,8 +159,8 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.startGame(level.getLevel());
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
         bg.getNextBackGroundImageFileName();
-        level.newLevel(numLives);
         msg.setGameStart(level.getLevel(), level.getLives());
+        level.newLevel(numLives);
         return "Level Finished";
     }
 
@@ -176,8 +176,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     private String setGameOver() {
         level.setGameStart();
         msg.setGameOver(level.getLevel(), level.getLives());
-        //pp.initializeBrickArray();
-        //pp.createWall(level.getLevel());
         pp.startGame(level.getLevel());
         return "Game Over";
     }
