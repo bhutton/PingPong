@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 public class TestPingPong {
 	
 	private PingPong pp = new PingPong();
-	Graphics g = mock(Graphics.class);
+	private Graphics g = mock(Graphics.class);
 	
 	/*@Test
 	public void testRun() {
@@ -161,9 +161,22 @@ public class TestPingPong {
     public void testLevelComplete() {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
         pp.bg.loadBackGrounds(basePath);
-        pp.level.setLives(1);
         String background = pp.bg.getBackGroundImageFileName();
         assertEquals("Level Finished", pp.checkForEndOfLevel());
+        assertNotEquals(background, pp.bg.getBackGroundImageFileName());
+    }
+
+    @Test
+    public void testLevelCompleteGameOver() {
+        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        pp.bg.loadBackGrounds(basePath);
+
+        pp.pp.zeroBrickArray();
+        pp.level.setLives(0);
+
+        String background = pp.bg.getBackGroundImageFileName();
+        assertEquals("Level Finished", pp.checkForEndOfLevel());
+        assertEquals(background, pp.bg.getBackGroundImageFileName());
     }
 
     @Test
