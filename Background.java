@@ -38,11 +38,13 @@ public class Background {
 	public BufferedImage getGameOverImage() {
 		return imgGameOver;
 	}
+
+
 	
 	public void drawBackground(Graphics g, int appletWidth, int appletHeight) {
-		g.drawImage(this.imgBackground, 0, 0, appletWidth, appletHeight, null);
+		g.drawImage(this.getBackground(), 0, 0, appletWidth, appletHeight, null);
 	}
-	
+
 	public void drawGameOver(Graphics g, int appletWidth, int appletHeight) {
 		g.drawImage(this.imgGameOver, 0, 0, appletWidth, appletHeight, null);
 	}
