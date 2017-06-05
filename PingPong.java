@@ -27,8 +27,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 	String backGroundImg = this.basePath + "/../src/PingPong/images/background-1.png";
 	int currentBackGroundImage;
 	Boolean gameOver = false;
-	int count = 0;
-
 
     public static void main(String[] args) {
         new PingPong().go();
@@ -136,8 +134,9 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     }
 
     private void runGame() {
+
         while (pp.checkBallActive() && pp.getBricksLeft()) {
-            ++this.count;
+
             pp.ballCalculations(this.appletWidth, this.appletHeight);
             frame.repaint();
 
@@ -162,8 +161,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     private String setEndOfLevel(int numLives) {
         pp.startGame(level.getLevel());
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
-        if(this.count > 0)
-            bg.getNextBackGroundImageFileName();
+        bg.getNextBackGroundImageFileName();
         msg.setGameStart(level.getLevel(), level.getLives());
         level.newLevel(numLives);
         return "Level Finished";
@@ -179,7 +177,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     }
 
     public String setGameOver() {
-        this.count = 0;
         level.setGameStart();
         msg.setGameOver(level.getLevel(), level.getLives());
         pp.startGame(level.getLevel());
