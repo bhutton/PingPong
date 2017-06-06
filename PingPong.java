@@ -2,19 +2,16 @@ package PingPong;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PingPong extends JFrame implements KeyListener,Runnable {
-    JFrame frame;
+    private JFrame frame;
     DrawPanel drawPanel;
 
-    int appletHeight = 600, appletWidth = 853, incX=1, incY=1;
-	private static int delay = 100;
+    int appletHeight = 600, appletWidth = 853;
 	private Thread animatorThread;
-	boolean frozen = false, called=false;
+    boolean called=false;
 	private Thread currentThread = null;
 
 	Ball pp = new Ball(true, true, 0, 0);
@@ -23,10 +20,10 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 	final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	Level level = new Level();
 
-	String[] backGroundArray = new String[10];
+	//String[] backGroundArray = new String[10];
 	String backGroundImg = this.basePath + "/../src/PingPong/images/background-1.png";
-	int currentBackGroundImage;
-	Boolean gameOver = false;
+	//int currentBackGroundImage;
+	//Boolean gameOver = false;
 
     public static void main(String[] args) {
         new PingPong().go();
@@ -34,7 +31,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
 
     public void go() {
         frame = new JFrame("PingPong");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         drawPanel = new PingPong.DrawPanel();
 
@@ -51,8 +48,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
                 gameOverImg = this.basePath + "/../src/PingPong/images/free-game-wallpaper-9.jpg",
                 gameOverMessage = this.basePath + "/../src/PingPong/images/game-over-png-22.png";
 
-        backGroundArray = this.bg.loadBackGrounds(this.basePath);
-        this.currentBackGroundImage = 0;
+        this.bg.loadBackGrounds(this.basePath);
         initialiseGame(ballImg, brickImg, paddleImg, gameOverImg, gameOverMessage);
 
         frame.addKeyListener(this);
@@ -127,7 +123,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     }
 
     private void initializeGame() {
-        this.gameOver = false;
+        //this.gameOver = false;
         pp.setBallActive();
         pp.ballSetStop();
         pp.calculateCurrentLocation(appletWidth, appletHeight);
@@ -162,7 +158,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.startGame(level.getLevel());
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
         bg.getNextBackGroundImageFileName();
-        msg.setGameStart(level.getLevel(), level.getLives());
+        //msg.setGameStart(level.getLevel(), level.getLives());
         level.newLevel(numLives);
         return "Level Finished";
     }
@@ -182,7 +178,6 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.startGame(level.getLevel());
         bg.setStart();
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
-        this.gameOver = true;
         return "Game Over";
     }
 
@@ -194,9 +189,8 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
                 pp.drawWindow(g);
                 msg.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
             }
-            else {
+            else
                 msg.displayMessage(g, 300, 79, appletWidth, appletHeight);
-            }
         }
     }
 }
