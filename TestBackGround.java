@@ -77,5 +77,11 @@ public class TestBackGround {
 
 		assert(backGroundImageFileName1 != backGRoundImageFileName2);
 	}
+
+	/*@Test
+	public void testSetBackGroundIndex() {
+		bg.setBackgroundIndex(1);
+		assertEquals(1,bg.getBackgroundIndex());
+	}*/
 }
 

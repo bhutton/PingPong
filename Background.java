@@ -72,7 +72,16 @@ public class Background {
 	}
 
 	public String getNextBackGroundImageFileName() {
-		this.backGroundArrayIndex++;
-		return this.backGroundArray[this.backGroundArrayIndex];
+        if (this.backGroundArrayIndex == this.backGroundArray.length)
+			this.backGroundArrayIndex = -1;
+		return this.backGroundArray[++this.backGroundArrayIndex];
+	}
+
+	public void setBackgroundIndex(int index) {
+		this.backGroundArrayIndex = index;
+	}
+
+	public int getBackgroundIndex() {
+		return this.backGroundArrayIndex;
 	}
 }
