@@ -158,7 +158,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         pp.startGame(level.getLevel());
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
         bg.getNextBackGroundImageFileName();
-        //msg.setGameStart(level.getLevel(), level.getLives());
+        msg.setGameStart(level.getLevel(), level.getLives());
         level.newLevel(numLives);
         return "Level Finished";
     }
