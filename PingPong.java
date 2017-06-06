@@ -161,7 +161,8 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
     private String setEndOfLevel(int numLives) {
         pp.startGame(level.getLevel());
         bg.setBackgroundImage(bg.getBackGroundImageFileName());
-        bg.getNextBackGroundImageFileName();
+        if(level.stillAlive())
+            bg.getNextBackGroundImageFileName();
         msg.setGameStart(level.getLevel(), level.getLives());
         level.newLevel(numLives);
         return "Level Finished";
@@ -173,6 +174,8 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         if (level.stillAlive())
             return "Game On";
 
+        bg.setStart();
+
         return setGameOver();
     }
 
@@ -181,6 +184,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
         msg.setGameOver(level.getLevel(), level.getLives());
         pp.startGame(level.getLevel());
         bg.setStart();
+        bg.setBackgroundImage(bg.getBackGroundImageFileName());
         this.gameOver = true;
         return "Game Over";
     }
@@ -193,8 +197,9 @@ public class PingPong extends JFrame implements KeyListener,Runnable {
                 pp.drawWindow(g);
                 msg.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
             }
-            else
+            else {
                 msg.displayMessage(g, 300, 79, appletWidth, appletHeight);
+            }
         }
     }
 }
