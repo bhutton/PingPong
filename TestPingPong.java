@@ -6,9 +6,15 @@ import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
+
+import javax.imageio.ImageIO;
+
 import static org.mockito.Mockito.*;
 
 public class TestPingPong {
@@ -169,14 +175,24 @@ public class TestPingPong {
     @Test
     public void testLevelCompleteGameOver() {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        BufferedImage imgBackground1 = null, imgBackground2 = null;
+
         pp.bg.loadBackGrounds(basePath);
+        pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
+        imgBackground1 = pp.bg.getBackground();
 
         pp.pp.zeroBrickArray();
         pp.level.setLives(0);
+        pp.bg.setBackgroundIndex(3);
 
-        String background = pp.bg.getBackGroundImageFileName();
         assertEquals("Level Finished", pp.checkForEndOfLevel());
-        assertEquals(background, pp.bg.getBackGroundImageFileName());
+        assertEquals("Game Over", pp.setGameOver());
+
+        imgBackground2 = pp.bg.getBackground();
+        byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
+        byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
+
+        assertArrayEquals(byteArray1, byteArray2);
     }
 
     @Test
