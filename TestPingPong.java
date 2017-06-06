@@ -173,7 +173,7 @@ public class TestPingPong {
     }
 
     @Test
-    public void testLevelCompleteGameOver() {
+    public void testLevelsLivesAndBackgroundsResetOnGameOver() {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
         BufferedImage imgBackground1 = null, imgBackground2 = null;
 
