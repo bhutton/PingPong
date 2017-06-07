@@ -81,7 +81,7 @@ public class Background {
 		this.backGroundArrayIndex = index;
 	}
 
-	public int getBackgroundIndex() {
-		return this.backGroundArrayIndex;
-	}
+	//public int getBackgroundIndex() {
+	//	return this.backGroundArrayIndex;
+	//}
 }

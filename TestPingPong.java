@@ -166,10 +166,23 @@ public class TestPingPong {
     @Test
     public void testLevelComplete() {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        BufferedImage imgBackground1 = null, imgBackground2 = null;
+
         pp.bg.loadBackGrounds(basePath);
         String background = pp.bg.getBackGroundImageFileName();
+        pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
+        imgBackground1 = pp.bg.getBackground();
+
         assertEquals("Level Finished", pp.checkForEndOfLevel());
-        assertNotEquals(background, pp.bg.getBackGroundImageFileName());
+        //assertNotEquals(background, pp.bg.getBackGroundImageFileName());
+
+        //pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
+        imgBackground2 = pp.bg.getBackground();
+
+        byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
+        byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
+
+        assertArrayEquals(byteArray1, byteArray2);
     }
 
     @Test

@@ -45,7 +45,7 @@ public class TestBackGround {
 		
 		byte[] byteArray1 = ((DataBufferByte) imgGameOver1.getData().getDataBuffer()).getData();
 		byte[] byteArray2 = ((DataBufferByte) imgGameOver2.getData().getDataBuffer()).getData();
-		
+
 		assertArrayEquals(byteArray1, byteArray2);
 	}
 
@@ -60,16 +60,13 @@ public class TestBackGround {
 	@Test
 	public void testGetBackgroundImageFileName() {
 		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		String[] backGroundArray = new String[10];
-		backGroundArray = bg.loadBackGrounds(basePath);
-
+		bg.loadBackGrounds(basePath);
 		assert(bg.getBackGroundImageFileName() != null);
 	}
 
 	@Test
 	public void testGetNextBackGroundImageFileName() {
 		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		String[] backGroundArray = new String[10];
 		bg.loadBackGrounds(basePath);
 
 		String backGroundImageFileName1 = bg.getBackGroundImageFileName();
