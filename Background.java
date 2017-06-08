@@ -24,6 +24,7 @@ public class Background {
 
 	public void setStart() {
 		this.backGroundArrayIndex = 0;
+		this.setBackgroundImage(this.getBackGroundImageFileName());
 	}
 	
 	public BufferedImage getBackground() {
@@ -64,6 +65,8 @@ public class Background {
 		this.backGroundArray[8] = path + "/background-9.png";
 		this.backGroundArray[9] = path + "/background-10.png";
 
+		this.setBackgroundImage(this.backGroundArray[this.backGroundArrayIndex]);
+
 		return this.backGroundArray;
     }
     
@@ -72,9 +75,11 @@ public class Background {
 	}
 
 	public String getNextBackGroundImageFileName() {
+        this.backGroundArrayIndex++;
         if (this.backGroundArrayIndex == this.backGroundArray.length)
-			this.backGroundArrayIndex = -1;
-		return this.backGroundArray[++this.backGroundArrayIndex];
+			this.backGroundArrayIndex = 0;
+        this.setBackgroundImage(this.getBackGroundImageFileName());
+		return this.getBackGroundImageFileName();
 	}
 
 	public void setBackgroundIndex(int index) {

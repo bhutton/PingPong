@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -169,20 +170,17 @@ public class TestPingPong {
         BufferedImage imgBackground1 = null, imgBackground2 = null;
 
         pp.bg.loadBackGrounds(basePath);
-        String background = pp.bg.getBackGroundImageFileName();
-        pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
         imgBackground1 = pp.bg.getBackground();
+        pp.gameStart = true;
 
         assertEquals("Level Finished", pp.checkForEndOfLevel());
-        //assertNotEquals(background, pp.bg.getBackGroundImageFileName());
 
-        //pp.bg.setBackgroundImage(pp.bg.getBackGroundImageFileName());
         imgBackground2 = pp.bg.getBackground();
 
         byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
         byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
 
-        assertArrayEquals(byteArray1, byteArray2);
+        assertFalse(Arrays.equals(byteArray1, byteArray2));
     }
 
     @Test
@@ -213,6 +211,7 @@ public class TestPingPong {
         final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
         pp.bg.loadBackGrounds(basePath);
         pp.level.setLives(1);
+        pp.gameStart = true;
         String background = pp.bg.getBackGroundImageFileName();
         pp.checkForEndOfLevel();
         assertNotEquals(null, pp.bg.getBackGroundImageFileName());
