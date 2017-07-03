@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -7,15 +7,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static org.junit.Assert.*;
 
+import com.pingpong.Ball;
 import org.junit.Test;
 
 public class TestBall {
 	
-	private Ball pp = new Ball(true, true, 0, 0);
+	private final Ball pp = new Ball();
 	
 	@Test
 	public void testSetBallImg() {
-		String 	ballImg = "./src/PingPong/images/ball.png";
+		String 	ballImg = "./src/com/pingpong/images/ball.png";
 		BufferedImage imgBall1 = null, imgBall2 = null;
 		
 		try { imgBall1 = ImageIO.read(new File(ballImg)); } 
@@ -36,7 +37,7 @@ public class TestBall {
 		
 		pp.setBallXValue(x);
 		
-		assertEquals(x, pp.getX());
+		assertEquals(x, pp.getBallXPosition());
 	}
 	
 	@Test
@@ -45,7 +46,7 @@ public class TestBall {
 		
 		pp.setBallYValue(y);
 		
-		assertEquals(y, pp.getBrickY());
+		assertEquals(y, pp.getBrickYPosition());
 	}
 	
 	@Test
@@ -53,9 +54,9 @@ public class TestBall {
 		int x = 10;
 		
 		pp.setBallXValue(x);
-		pp.incX();
+		pp.moveBallRight();
 		
-		assertEquals(11, pp.getX());
+		assertEquals(11, pp.getBallXPosition());
 	}
 	
 	@Test
@@ -65,7 +66,7 @@ public class TestBall {
 		pp.setBallYValue(y);
 		pp.incY();
 		
-		assertEquals(13, pp.getBrickY());
+		assertEquals(13, pp.getBrickYPosition());
 	}
 	
 	@Test
@@ -73,8 +74,8 @@ public class TestBall {
 		int x = 10;
 		
 		pp.setBallXValue(x);
-		pp.shiftX();
-		assertEquals(11, pp.getX());
+		pp.moveBallLeftOrRight();
+		assertEquals(11, pp.getBallXPosition());
 	}
 	
 	@Test
@@ -83,8 +84,8 @@ public class TestBall {
 		
 		pp.setBallXValue(x);
 		pp.setLeft();
-		pp.shiftX();
-		assertEquals(9, pp.getX());
+		pp.moveBallLeftOrRight();
+		assertEquals(9, pp.getBallXPosition());
 	}
 	
 	@Test
@@ -97,7 +98,7 @@ public class TestBall {
 		pp.setBallYValue(y);		
 		
 		assertEquals(false, pp.getDown());
-		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+		assertEquals(true, pp.setBallDirectionOnReachingBricks());
 	}
 
 	@Test
@@ -109,7 +110,7 @@ public class TestBall {
 		pp.setBallDown(true);
 		pp.setBallRight(true);
 		assertEquals(true, pp.getRight());
-		assertEquals(true, pp.setBallDirectionAfterReachingBricks());
+		assertEquals(true, pp.setBallDirectionOnReachingBricks());
 		assertEquals(false, pp.getRight());
 	}
 	
@@ -153,7 +154,7 @@ public class TestBall {
 		pp.setBallYValue(0);
 		pp.checkStart();
 		
-		assertEquals(y,pp.getBrickY());
+		assertEquals(y,pp.getBrickYPosition());
 	}
 	
 	@Test
@@ -230,14 +231,14 @@ public class TestBall {
 		pp.setRight();
 		pp.setDown();
 		pp.updateBallCoordinates();
-		assertEquals(601,pp.getX());
-		assertEquals(603,pp.getBrickY());
+		assertEquals(601,pp.getBallXPosition());
+		assertEquals(603,pp.getBrickYPosition());
 		
 		pp.setLeft();
 		pp.setBallUp();
 		pp.updateBallCoordinates();
-		assertEquals(600,pp.getX());
-		assertEquals(600,pp.getBrickY());
+		assertEquals(600,pp.getBallXPosition());
+		assertEquals(600,pp.getBrickYPosition());
 	}
 	
 	@Test
@@ -256,7 +257,7 @@ public class TestBall {
 	}
 	
 	@Test
-	public void testItializeBall() {
+	public void testInitializeBall() {
 		pp.initializeBall();
 		
 		assertTrue(pp.getBallX() == pp.getPaddleX());
@@ -269,12 +270,7 @@ public class TestBall {
 	}
 	
 	@Test
-	public void testSetStop() {
-		assertEquals(true, pp.ballSetStop());
-	}
-	
-	@Test
-	public void testBallMoveswithPaddle() {
+	public void testBallMovesWithPaddle() {
 		pp.initializeBall();
 		pp.setPaddleWidth(120);
 		pp.setPaddleLocation(800, 600);
@@ -287,7 +283,7 @@ public class TestBall {
 		pp.calculateCurrentLocation(800, 600);
 		
 		assertEquals(270, pp.getPaddleX());
-		assertEquals(270 + pp.getPaddleWidth() / 2 - 30, pp.getX());
+		assertEquals(270 + pp.getPaddleWidth() / 2 - 30, pp.getBallXPosition());
 	}
 
 }

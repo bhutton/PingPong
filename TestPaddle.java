@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import static org.junit.Assert.*;
 
@@ -9,15 +9,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.pingpong.Ball;
 import org.junit.Test;
 
 public class TestPaddle {
 	
-	private Ball pp = new Ball(true, true, 0, 0);
+	private final Ball pp = new Ball();
 	
 	@Test
 	public void testSetPaddleImg() {
-		String 	paddleImg = "./src/PingPong/images/paddle.png";
+		String 	paddleImg = "./src/com/pingpong/images/paddle.png";
 		BufferedImage imgPaddle1 = null, imgPaddle2 = null;
 		
 		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); } 

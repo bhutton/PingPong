@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import static org.junit.Assert.*;
 
@@ -10,20 +10,15 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 
+import com.pingpong.PingPong;
 import org.junit.Test;
 import java.util.Arrays;
-
 import static org.mockito.Mockito.*;
 
 public class TestPingPong {
 	
-	private PingPong pp = new PingPong();
-	private Graphics g = mock(Graphics.class);
-	
-	/*@Test
-	public void testRun() {
-		pp.run();
-	}*/
+	private final com.pingpong.PingPong pp = new PingPong();
+	private final Graphics g = mock(Graphics.class);
 	
 	@Test
 	public void testPaint() {
@@ -118,7 +113,6 @@ public class TestPingPong {
 	
 	@Test
 	public void testLevel() {
-		pp.level.getLevel();
 		pp.level.incrementLevel();
 		assertEquals(2, pp.level.getLevel());
 	}
@@ -129,7 +123,7 @@ public class TestPingPong {
                 new File(PingPong.class.getProtectionDomain().
                         getCodeSource().getLocation().getPath());
         String backGroundImg = basePath
-                + "/../src/PingPong/images/background-1.png";
+                + "/com/pingpong/images/background-1.png";
 
         pp.bg.setBackgroundImage(backGroundImg);
 	    pp.pp.initializeBrickArray();
@@ -191,10 +185,9 @@ public class TestPingPong {
 
         pp.pp.zeroBrickArray();
         pp.level.setLives(0);
-        pp.bg.setBackgroundIndex(3);
+        //pp.bg.setBackgroundIndex(3);
 
         assertEquals("Level Finished", pp.checkForEndOfLevel());
-        assertEquals("Game Over", pp.setGameOver());
 
         imgBackground2 = pp.bg.getBackground();
         byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();

@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import static org.junit.Assert.*;
 //import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -10,15 +10,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.pingpong.Ball;
 import org.junit.Test;
 
 public class TestBricks {
 	
-	private Ball pp = new Ball(true, true, 0, 0);
+	private final Ball pp = new Ball();
 
 	@Test
 	public void testSetBrickImg() {
-		String 	paddleImg = "./src/PingPong/images/brick.png";
+		String 	paddleImg = "./src/com/pingpong/images/brick.png";
 		BufferedImage imgBrick1 = null, imgBrick2 = null;
 		
 		try { imgBrick1 = ImageIO.read(new File(paddleImg)); } 
@@ -63,16 +64,16 @@ public class TestBricks {
 	public void testSetXCoordinateOfCurrentLocation() {
 		pp.setBrickColumnLocation(2);
 		pp.setBrickRowLocation(2);
-		pp.setBrickXCoord(2);
-		assertEquals(2, pp.getBrickXCoord());
+		pp.setBrickXCoordinates(2);
+		assertEquals(2, pp.getBrickXCoordinates());
 	}
 	
 	@Test
 	public void testSetYCoordinateOfCurrentLocation() {
 		pp.setBrickColumnLocation(2);
 		pp.setBrickRowLocation(2);
-		pp.setBrickYCoord(2);
-		assertEquals(2, pp.getBrickYCoord());
+		pp.setBrickYCoordinates(2);
+		assertEquals(2, pp.getBrickYCoordinates());
 	}
 	
 	@Test
@@ -105,7 +106,7 @@ public class TestBricks {
 		pp.createWall(2);
 		pp.setBrickRowLocation(1);
 		pp.setBrickColumnLocation(2);
-		assertTrue(pp.getBrickX() > 0);
+		assertTrue(pp.getBrickXPosition() > 0);
 	}
 	
 	@Test
@@ -113,7 +114,7 @@ public class TestBricks {
 		pp.createWall(2);
 		pp.setBrickRowLocation(1);
 		pp.setBrickColumnLocation(1);
-		assertTrue(pp.getBrickYCoord() > 0);
+		assertTrue(pp.getBrickYCoordinates() > 0);
 	}
 	
 	@Test
@@ -154,7 +155,7 @@ public class TestBricks {
 	public void testCheckBricks() {
 		pp.createWall(2);
 		pp.setBallY(60);
-		pp.setBrickYCoord(60);
+		pp.setBrickYCoordinates(60);
 		pp.setBallX(200);
 		pp.setBallUp();
 		pp.setBrickRowLocation(1);
@@ -171,14 +172,14 @@ public class TestBricks {
 		pp.setBallY(120);
 		pp.setBallXValue(50);
 		pp.setBallYValue(120);
-		pp.setBrickYCoord(120);
+		pp.setBrickYCoordinates(120);
 		
 		pp.setBallDown(false);
 		
 		assertEquals(false,pp.checkBricks(55));
 		
 		// Check that ball bounces
-		pp.setBallDirectionAfterReachingBricks();
+		pp.setBallDirectionOnReachingBricks();
 		assertEquals(true,pp.checkBricks(55));
 		
 		// Check that ball goes through

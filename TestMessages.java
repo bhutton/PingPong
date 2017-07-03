@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -11,16 +11,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.pingpong.Messages;
 import org.junit.Test;
 
 public class TestMessages {
 	
-	Messages msg = new Messages();
-	Graphics g = mock(Graphics.class);
+	private final Messages msg = new Messages();
+	private final Graphics g = mock(Graphics.class);
 	
 	@Test
 	public void gameOverImg() {
-		String 	gameOverImage = "./src/PingPong/images/game-over-png-22.png";
+		String 	gameOverImage = "./src/com/pingpong/images/game-over-message.png";
 		BufferedImage imgGameOver1 = null, imgGameOver2 = null;
 		
 		try { imgGameOver1 = ImageIO.read(new File(gameOverImage)); } 

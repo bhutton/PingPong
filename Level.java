@@ -1,7 +1,8 @@
-package PingPong;
+package com.pingpong;
 
-public class Level {
-	int level, lives;
+class Level {
+	private int level;
+    private int lives;
 	
 	public Level() {
 		this.level = 1;

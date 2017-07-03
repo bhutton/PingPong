@@ -1,4 +1,4 @@
-package com.pingpong.oldtests;
+package com.pingpong;
 
 import static org.junit.Assert.*;
 
@@ -6,18 +6,21 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
+import com.pingpong.Background;
+import com.pingpong.PingPong;
 import org.junit.Test;
 
 public class TestBackGround {
 	
-	Background bg = new Background();
+	private final Background bg = new Background();
 
 	@Test
 	public void backgroundImg() {
-		String 	backgroundImg = "./src/PingPong/images/background-1.png";
+		String 	backgroundImg = "./src/com/pingpong/images/background-1.png";
 		BufferedImage imgBackground1 = null, imgBackground2 = null;
 		
 		try { imgBackground1 = ImageIO.read(new File(backgroundImg)); } 
@@ -25,16 +28,15 @@ public class TestBackGround {
 		
 		bg.setBackgroundImage(backgroundImg);
 		imgBackground2 = bg.getBackground(); 
-		
+
 		byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
-		byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
-		
-		assertArrayEquals(byteArray1, byteArray2);
+        byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
+        assertArrayEquals(byteArray1, byteArray2);
 	}
 
 	@Test
 	public void gameOverImg() {
-		String 	gameOverImage = "./src/PingPong/images/free-game-wallpaper-9.jpg";
+		String 	gameOverImage = "./src/com/pingpong/images/game-over.jpg";
 		BufferedImage imgGameOver1 = null, imgGameOver2 = null;
 		
 		try { imgGameOver1 = ImageIO.read(new File(gameOverImage)); } 
@@ -52,9 +54,8 @@ public class TestBackGround {
 	@Test
 	public void testLoadingBackgrounds() {
 		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		String[] backGroundArray = new String[10];
-		backGroundArray = bg.loadBackGrounds(basePath);
-		assert(backGroundArray.length == 10);
+		bg.loadBackGrounds(basePath);
+		assert(bg.getBackGroundListSize() == 10);
 	}
 
 	@Test
@@ -72,13 +73,18 @@ public class TestBackGround {
 		String backGroundImageFileName1 = bg.getBackGroundImageFileName();
 		String backGRoundImageFileName2 = bg.getNextBackGroundImageFileName();
 
-		assert(backGroundImageFileName1 != backGRoundImageFileName2);
+		assert(!Objects.equals(backGroundImageFileName1, backGRoundImageFileName2));
 	}
 
-	/*@Test
-	public void testSetBackGroundIndex() {
-		bg.setBackgroundIndex(1);
-		assertEquals(1,bg.getBackgroundIndex());
-	}*/
+	@Test
+	public void testBackgroundRolloverAtLastImage() {
+		final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		bg.loadBackGrounds(basePath);
+
+		String filename = bg.getBackGroundImageFileName();
+
+		bg.setLastBackground();
+		assertEquals(filename,bg.getNextBackGroundImageFileName());
+	}
 }
 

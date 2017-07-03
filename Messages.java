@@ -1,4 +1,4 @@
-package PingPong;
+package com.pingpong;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,13 +8,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Messages {
+class Messages {
 	
-	Boolean gameActive = false;
+	private Boolean gameActive = false;
 	
 	private BufferedImage imgGameOver = null;
 	
-	int level, lives;
+	private int level;
+    private int lives;
 	
 	public void setGameOverImage(String gameOverImg) {
 		try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
@@ -75,12 +76,6 @@ public class Messages {
 		return this.lives;
 	}
 
-	/*public void setNewGame(int level, int lives) {
-		setGameOver(level, lives);
-		setLevel(level);
-		setLives(lives);
-	}*/
-	
 	public void displayGameStatsAtBottomOfScreen(Graphics g, int appletWidth, int appletHeight) {
 		g.setColor(Color.BLACK);
 		g.fill3DRect(0, appletHeight-30, appletWidth, appletHeight, true);

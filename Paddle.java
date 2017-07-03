@@ -1,4 +1,4 @@
-package PingPong;
+package com.pingpong;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Paddle extends Bricks {
+class Paddle extends Bricks {
 	
 	private int paddleX, paddleY, paddleWidth, paddleHeight;
 	private int appletWidth;
@@ -62,7 +62,7 @@ public class Paddle extends Bricks {
 		paddleHeight = height;
 	}
 	
-	public void drawPaddle(Graphics g) {
+	void drawPaddle(Graphics g) {
 		g.drawImage(this.imgPaddle, paddleX, paddleY, null);
 	}
 	
@@ -79,7 +79,6 @@ public class Paddle extends Bricks {
 	}
 	
 	public boolean checkPaddle(Boolean direction, int x, int y) {
-		
 		if (y >= paddleY - (paddleHeight*1.7))
 			if (x >= paddleX-this.paddleMoveAmount && x <= paddleX+paddleWidth)
 				return false;

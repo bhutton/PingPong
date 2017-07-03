@@ -1,25 +1,24 @@
-package PingPong;
+package com.pingpong;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class Bricks {
 	
 	// Contains the x,y coordinates and whether the brick is active or not.
-	private int[][][] brickArray = new int[225][830][3];
+	final private int[][][] brickArray = new int[225][830][3];
 	
 	private int brickColumnLocation = 0, 
 				brickRowLocation = 0, 
 				numRows=2, 
-				numCols, 
-				brickHeight=50,
+				numCols;
 
-				brickIsActive=0, 	
-				brickHasBeenTaken=1;
+	private final int brickHeight=50,
+                      brickIsActive=0,
+                      brickHasBeenTaken=1;
 	
 	private int x,y;
 	private Boolean down,right;
@@ -27,13 +26,8 @@ public class Bricks {
 	private BufferedImage imgBrick = null;
 	private int ballWidth;
 
-	public Bricks() {
+	Bricks() {
 		initializeBrickArray();
-	}
-	
-	public Bricks(String brickImg) {
-		initializeBrickArray();
-		setBrickImage(brickImg);
 	}
 	
 	public void setWallDimensions(int cols, int rows) {
@@ -63,7 +57,7 @@ public class Bricks {
 	 */
 	public void createWall(int numLevels) {
 	    // Screen coordinates of the individual bricks
-		int x=5, y=5;
+		int x=5, y;
 		this.numRows = numLevels;
 		
 		setColLoc(0);
@@ -73,7 +67,7 @@ public class Bricks {
 	    	y = 5;	
 	    	
 	    	for (int row = 0; row < this.numRows; row++) {
-	    		setBrickYCoord(y).setBrickXCoord(x).incRowLoc(); 
+	    		this.setBrickYCoordinates(y).setBrickXCoordinates(x).incRowLoc();
 	    		y += 55;
 		    }
 		    
@@ -98,7 +92,7 @@ public class Bricks {
 		catch (IOException e) { e.printStackTrace(); }
 	}
 	
-	public BufferedImage getBrickImage() {
+	private BufferedImage getBrickImage() {
 		return imgBrick;
 	}
 	
@@ -120,11 +114,10 @@ public class Bricks {
 	/*
 	 * Sets current row position in the bricks array
 	 */
-	public Bricks setBrickRowLocation(int row) {
+	public void setBrickRowLocation(int row) {
 		this.brickRowLocation = row;
-		
-		return this;
-	}
+
+    }
 	
 	public int returnBrickRowLocation() {
 		return this.brickRowLocation;
@@ -133,7 +126,7 @@ public class Bricks {
 	/*
 	 * Sets the screen X coordinate for a brick
 	 */
-	public Bricks setBrickXCoord(int x) {
+	public Bricks setBrickXCoordinates(int x) {
 		this.brickArray[brickColumnLocation][brickRowLocation][0] = x;
 		
 		return this;
@@ -142,17 +135,17 @@ public class Bricks {
 	/*
 	 * Sets the screen Y coordinate for a brick
 	 */
-	public Bricks setBrickYCoord(int y) {
+	public Bricks setBrickYCoordinates(int y) {
 		this.brickArray[brickColumnLocation][brickRowLocation][1] = y;
 		
 		return this;
 	}
 	
-	public int getBrickXCoord() {
+	public int getBrickXCoordinates() {
 		return this.brickArray[brickColumnLocation][brickRowLocation][0];
 	}
 	
-	public int getBrickYCoord() {
+	public int getBrickYCoordinates() {
 		return this.brickArray[brickColumnLocation][brickRowLocation][1];
 	}
 	
@@ -166,7 +159,7 @@ public class Bricks {
 	/*
 	 * Sets number of rows displayed 
 	 */
-	public Bricks setNumRows() {
+    private Bricks setNumRows() {
 		this.numRows = brickRowLocation;
 		
 		return this;
@@ -175,10 +168,8 @@ public class Bricks {
 	/*
 	 * Sets number of columns displayed
 	 */
-	public Bricks setNumCols() {
+    private void setNumCols() {
 		this.numCols = brickColumnLocation;
-		
-		return this;
 	}
 	
 	public int getNumRows() {
@@ -189,25 +180,14 @@ public class Bricks {
 		return this.numCols;
 	}
 	
-	/*
-	 * Return screen X position of specific brick
-	 */
-	public int getBrickX() {
+	public int getBrickXPosition() {
 		return this.brickArray[brickColumnLocation][brickRowLocation][0];
 	}
 	
-	/*
-	 *  Return screen Y position of specific brick
-	 */
-	public int getBrickY() {
-		return this.brickArray[brickColumnLocation][brickRowLocation][1];
-	}
-	
-	public Bricks setColLoc(int col) {
+	public void setColLoc(int col) {
 		brickColumnLocation = col;
-		
-		return this;
-	}
+
+    }
 	
 	public void incColLoc() {
 		brickColumnLocation++;
@@ -217,19 +197,18 @@ public class Bricks {
 		return brickColumnLocation;
 	}
 	
-	public Bricks setRowLoc(int row) {
+	public void setRowLoc(int row) {
 		brickRowLocation = row;
-		
-		return this;
-	}
+
+    }
 	
 	public void incRowLoc() {
 		brickRowLocation++;
 	}
 	
-	public void decRowLoc() {
-		brickRowLocation--;
-	}
+	//public void decRowLoc() {
+	//	brickRowLocation--;
+	//}
 	
 	
 	public int getRowLoc() {
@@ -291,20 +270,19 @@ public class Bricks {
 		return this.down;
 	}
 	
-	public Bricks setBallRight(Boolean right) {
+	public void setBallRight(Boolean right) {
 		this.right = right;
-		return this;
-	}
+    }
 	
 	public Boolean getBallRight() {
 		return this.right;
 	}
 	
-	public Boolean getBricksDown() {
-		return this.down;
-	}
+	//public Boolean getBricksDown() {
+	//	return this.down;
+	//}
 	
-	public int getBrickRowThatBallIsOn(int y) {
+	private int getBrickRowThatBallIsOn(int y) {
 		for(int row = 0; row < this.numRows; row++)
 			if ( y < ((row+1) * this.brickHeight) ) return row;
 		
@@ -320,7 +298,7 @@ public class Bricks {
 		if (this.brickArray[brickColumnLocation][row][2] == brickHasBeenTaken)
 			return false;
 		
-		if (getBrickX() >= left && getBrickX() <= right) {
+		if (getBrickXPosition() >= left && getBrickXPosition() <= right) {
 			Boolean brickTaken = setBrickTaken();
 			checkIfBallDownThenBounce(leftRight);
 			return brickTaken;
@@ -370,15 +348,15 @@ public class Bricks {
 		return false;
 	}
 	
-	public void drawWall(Graphics g) {
+	void drawWall(Graphics g) {
 		for (brickRowLocation = 0; brickRowLocation < numRows; brickRowLocation++)
 			for (brickColumnLocation = 0; brickColumnLocation < numCols; brickColumnLocation++)
 				drawBrick(g);
 	}
 	
-	public void drawBrick(Graphics g) {
+	private void drawBrick(Graphics g) {
 		if (getActive()) 
-			g.drawImage(getBrickImage(), getBrickXCoord(), getBrickYCoord(), null);
+			g.drawImage(getBrickImage(), getBrickXCoordinates(), getBrickYCoordinates(), null);
 	}
 
 	public Boolean brickArrayPopulated() {

@@ -1,29 +1,26 @@
-package PingPong;
+package com.pingpong;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
-public class Background {
-	
+
+class Background {
 	private BufferedImage imgBackground = null;
 	private BufferedImage imgGameOver = null;
-	private String[] backGroundArray = new String[10];
-	private int backGroundArrayIndex;
-	
+	private ArrayList<String> backGroundList = new ArrayList<>(10);
+	private int backGroundListIndex;
+
 	public void setBackgroundImage(String backgroundImg) {
 		try { imgBackground = ImageIO.read(new File(backgroundImg)); } 
 		catch (IOException e) { e.printStackTrace(); }
 	}
 
 	public void setStart() {
-		this.backGroundArrayIndex = 0;
+		this.backGroundListIndex = 0;
 		this.setBackgroundImage(this.getBackGroundImageFileName());
 	}
 	
@@ -40,53 +37,48 @@ public class Background {
 		return imgGameOver;
 	}
 
-
-	
 	public void drawBackground(Graphics g, int appletWidth, int appletHeight) {
 		g.drawImage(this.getBackground(), 0, 0, appletWidth, appletHeight, null);
 	}
 
-	public void drawGameOver(Graphics g, int appletWidth, int appletHeight) {
-		g.drawImage(this.imgGameOver, 0, 0, appletWidth, appletHeight, null);
-	}
+	public void loadBackGrounds(File basePath) {
+    	String path = basePath + "/com/pingpong/images";
+    	this.backGroundListIndex = 0;
 
-	public String[] loadBackGrounds(File basePath) {
-    	String path = basePath + "/../src/PingPong/images";
-    	this.backGroundArrayIndex = 0;
+		backGroundList.add(path + "/background-1.png");
+		backGroundList.add(path + "/background-2.png");
+		backGroundList.add(path + "/background-3.png");
+		backGroundList.add(path + "/background-4.png");
+		backGroundList.add(path + "/background-5.png");
+		backGroundList.add(path + "/background-6.png");
+		backGroundList.add(path + "/background-7.png");
+		backGroundList.add(path + "/background-8.png");
+		backGroundList.add(path + "/background-9.png");
+		backGroundList.add(path + "/background-10.png");
 
-        this.backGroundArray[0] = path + "/background-1.png";
-        this.backGroundArray[1] = path + "/background-2.png";
-		this.backGroundArray[2] = path + "/background-3.jpg";
-		this.backGroundArray[3] = path + "/background-4.png";
-		this.backGroundArray[4] = path + "/background-5.jpg";
-		this.backGroundArray[5] = path + "/background-6.png";
-		this.backGroundArray[6] = path + "/background-7.png";
-		this.backGroundArray[7] = path + "/background-8.png";
-		this.backGroundArray[8] = path + "/background-9.png";
-		this.backGroundArray[9] = path + "/background-10.png";
-
-		this.setBackgroundImage(this.backGroundArray[this.backGroundArrayIndex]);
-
-		return this.backGroundArray;
+        this.setBackgroundImage(this.backGroundList.get(this.backGroundListIndex));
     }
+
+    public void setLastBackground() {
+		this.backGroundListIndex = 9;
+		this.setBackgroundImage(this.backGroundList.get(9));
+	}
     
     public String getBackGroundImageFileName() {
-		return this.backGroundArray[this.backGroundArrayIndex];
+		return this.backGroundList.get(backGroundListIndex);
 	}
 
 	public String getNextBackGroundImageFileName() {
-        this.backGroundArrayIndex++;
-        if (this.backGroundArrayIndex == this.backGroundArray.length)
-			this.backGroundArrayIndex = 0;
+        this.backGroundListIndex++;
+
+        if (this.backGroundListIndex == this.backGroundList.size())
+			this.backGroundListIndex = 0;
+
         this.setBackgroundImage(this.getBackGroundImageFileName());
 		return this.getBackGroundImageFileName();
 	}
 
-	public void setBackgroundIndex(int index) {
-		this.backGroundArrayIndex = index;
+	public int getBackGroundListSize() {
+		return this.backGroundList.size();
 	}
-
-	//public int getBackgroundIndex() {
-	//	return this.backGroundArrayIndex;
-	//}
 }

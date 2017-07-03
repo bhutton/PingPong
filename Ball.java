@@ -1,20 +1,23 @@
-package PingPong;
+package com.pingpong;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
-
 import javax.imageio.ImageIO;
 
 public class Ball extends Paddle {
-	private int x,y,incX=1, incY=3, width=50;
+	private int x;
+    private int y;
+    private int incX=1;
+    private final int incY=3;
+    private final int width=50;
 	private boolean right = true, down = true, ballIsActive = true, ballStart = false;
 	
 	private BufferedImage imgBall = null;
-	
-	public Ball(Boolean down, Boolean right, int x, int y) {
+
+	public Ball() {
 		super();
 	}
 	
@@ -27,27 +30,23 @@ public class Ball extends Paddle {
 		return imgBall;
 	}
 	
-	public Ball setBallXValue(int x) {
+	public void setBallXValue(int x) {
 		this.x = x;
-		
-		return this;
 	}
 	
-	public Ball setBallYValue(int y) {
+	public void setBallYValue(int y) {
 		this.y = y;
-		
-		return this;
-	}
+    }
 	
-	public int getX() {
+	public int getBallXPosition() {
 		return this.x;
 	}
 	
-	public int getBrickY() {
+	public int getBrickYPosition() {
 		return this.y;
 	}
 	
-	public void incX() {
+	public void moveBallRight() {
 		this.x += incX;
 	}
 	
@@ -55,26 +54,24 @@ public class Ball extends Paddle {
 		this.y += incY;
 	}
 	
-	public void decX() {
+	private void moveBallLeft() {
 		this.x -= incX;
 	}
 	
-	public void decY() {
+	private void decY() {
 		this.y -= incY;
 	}
 	
-	public Ball shiftX() {
-		if (right) incX();
-		else decX();
+	public Ball moveBallLeftOrRight() {
+		if (right) moveBallRight();
+		else moveBallLeft();
 		
 		return this;
 	}
 	
-	public Ball shiftY() {
+	private void shiftY() {
 		if (down) incY();
 		else decY();
-		
-		return this;
 	}
 	
 	public boolean getRight() {
@@ -85,17 +82,13 @@ public class Ball extends Paddle {
 		return down;
 	}
 	
-	public Ball setDown() {
+	public void setDown() {
 		this.down = true;
-		
-		return this;
-	}
+    }
 	
-	public Ball setBallUp() {
+	public void setBallUp() {
 		this.down = false;
-		
-		return this;
-	}
+    }
 	
 	public void setLeft() {
 		this.right = false;
@@ -105,14 +98,14 @@ public class Ball extends Paddle {
 		this.right = true;
 	}
 	
-	public Boolean setBallDirectionAfterReachingBricks() {
-		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
-		down = checkBricks(width);
+	public Boolean setBallDirectionOnReachingBricks() {
+		this.setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
+		this.down = checkBricks(this.width);
 
-		if (getBallRight())
-			setRight();
+		if (this.getBallRight())
+			this.setRight();
 		else
-			setLeft();
+			this.setLeft();
 
 		return down;
 	}
@@ -125,14 +118,14 @@ public class Ball extends Paddle {
 
 	public Ball checkStart() {
         int brickHeight = 50;
-		if (this.getBrickY() == 0)
+		if (this.getBrickYPosition() == 0)
 			this.y = ((brickHeight + 5) * 4);
 		
 		return this;
 	}
 	
 	public Ball checkRight(int appletWidth) {
-		if ((this.getX() + width + 2) > appletWidth) {
+		if ((this.getBallXPosition() + width + 2) > appletWidth) {
 			this.right = false;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 		}
@@ -141,7 +134,7 @@ public class Ball extends Paddle {
 	}
 	
 	public Ball checkLeft() {
-		if (this.getX() <= 0) {
+		if (this.getBallXPosition() <= 0) {
 			this.right = true;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 		}
@@ -150,7 +143,7 @@ public class Ball extends Paddle {
 	}
 	
 	public Ball checkTop() {
-		if (this.getBrickY() <= 0) {
+		if (this.getBrickYPosition() <= 0) {
 			this.down = true;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 		}
@@ -158,18 +151,17 @@ public class Ball extends Paddle {
 		return this;
 	}
 	
-	public Ball checkBottom(int appletHeight) {
+	public void checkBottom(int appletHeight) {
 		int height=50;
 
-		if ((this.getBrickY() + height + 2) > appletHeight) {
+		if ((this.getBrickYPosition() + height + 2) > appletHeight) {
 			this.down = false;
 			incX = ThreadLocalRandom.current().nextInt(1, 5);
 			
 			this.ballIsActive = false;
 		}
-		
-		return this;
-	}
+
+    }
 	
 	public void calculateCurrentLocation(int appletWidth, int appletHeight) {
 		checkEdges(appletWidth, appletHeight);
@@ -194,13 +186,13 @@ public class Ball extends Paddle {
 	
 	public void updateBallCoordinates() {
 		if (ballStart)
-			shiftX().shiftY();
+			this.moveBallLeftOrRight().shiftY();
 
-		if (!getBallStatus())
-			this.x = getPaddleX() + (getPaddleWidth() / 2) - 30;
+		if (!this.getBallStatus())
+			this.x = this.getPaddleX() + (this.getPaddleWidth() / 2) - 30;
 	}
 	
-	public void drawBall(Graphics g) {
+	private void drawBall(Graphics g) {
 		g.drawImage(this.imgBall, this.x, this.y, null);
 	}
 	
@@ -213,9 +205,8 @@ public class Ball extends Paddle {
 		return ballStart = true;
 	}
 
-	public Boolean ballSetStop() {
+	public void ballSetStop() {
 		ballStart = false;
-		return true;
 	}
 
 	public void drawWindow(Graphics g) {
@@ -230,7 +221,7 @@ public class Ball extends Paddle {
 
     public void ballCalculations(int appletWidth, int appletHeight) {
         calculateCurrentLocation(appletWidth, appletHeight);
-        setBallDirectionAfterReachingBricks();
+        setBallDirectionOnReachingBricks();
         setBallDirectionAfterReachingPaddle();
     }
 }
