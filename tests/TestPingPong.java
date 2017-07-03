@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.tests;
 
 import static org.junit.Assert.*;
 

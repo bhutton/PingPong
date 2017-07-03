@@ -1,6 +1,9 @@
 package com.pingpong;
 
+import com.pingpong.elements.Background;
 import com.pingpong.elements.Ball;
+import com.pingpong.game.Level;
+import com.pingpong.game.Messages;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -9,25 +12,27 @@ import java.util.HashMap;
 import javax.swing.*;
 
 @SuppressWarnings("FieldCanBeLocal")
-class PingPong extends JFrame implements KeyListener,Runnable
+public class PingPong extends JFrame implements KeyListener,Runnable
 {
     private JFrame frame;
     private DrawPanel drawPanel;
 
 	private Thread animatorThread;
 	private Thread currentThread = null;
-    int appletHeight = 600, appletWidth = 853;
-    boolean gameStart=false, called=false;
+    public int appletHeight = 600;
+    public int appletWidth = 853;
+    public boolean gameStart=false;
+    public boolean called=false;
 
     private HashMap<String,String> artifacts = new HashMap<>();
 
-    final Ball pp = new Ball();
+    public final Ball pp = new Ball();
 	private final Messages msg = new Messages();
-	final Background bg = new Background();
+	public final Background bg = new Background();
 	private final File basePath = new File(
 	        PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
     );
-	final Level level = new Level();
+	public final Level level = new Level();
 
 	public static void main(String[] args)
     {

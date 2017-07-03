@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.game;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-class Messages {
+public class Messages {
 	
 	private Boolean gameActive = false;
 	

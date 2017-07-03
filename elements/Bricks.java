@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.elements;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,7 @@ public class Bricks {
 	private BufferedImage imgBrick = null;
 	private int ballWidth;
 
-	Bricks() {
+	public Bricks() {
 		initializeBrickArray();
 	}
 	

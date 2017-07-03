@@ -1,4 +1,6 @@
-package com.pingpong;
+package com.pingpong.elements;
+
+import com.pingpong.elements.Bricks;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -14,6 +16,10 @@ public class Paddle extends Bricks {
 	private int paddleMoveAmount;
 	
 	private BufferedImage imgPaddle = null;
+
+	public Paddle() {
+		super();
+	}
 
 	public void setPaddleImage(String paddleImg) {
 		try { imgPaddle = ImageIO.read(new File(paddleImg)); } 

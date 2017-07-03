@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.tests;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,8 @@ import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
-import com.pingpong.Background;
 import com.pingpong.PingPong;
+import com.pingpong.elements.Background;
 import org.junit.Test;
 
 public class TestBackGround {

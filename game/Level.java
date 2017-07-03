@@ -1,6 +1,6 @@
-package com.pingpong;
+package com.pingpong.game;
 
-class Level {
+public class Level {
 	private int level;
     private int lives;
 	

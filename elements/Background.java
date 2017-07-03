@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.elements;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 
-class Background {
+public class Background {
 	private BufferedImage imgBackground = null;
 	private BufferedImage imgGameOver = null;
 	private ArrayList<String> backGroundList = new ArrayList<>(10);

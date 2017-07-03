@@ -1,4 +1,4 @@
-package com.pingpong;
+package com.pingpong.tests;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.pingpong.Messages;
+import com.pingpong.game.Messages;
 import org.junit.Test;
 
 public class TestMessages {

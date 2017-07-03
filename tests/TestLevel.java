@@ -1,8 +1,8 @@
-package com.pingpong;
+package com.pingpong.tests;
 
 import static org.junit.Assert.*;
 
-import com.pingpong.Level;
+import com.pingpong.game.Level;
 import org.junit.Test;
 
 public class TestLevel {
