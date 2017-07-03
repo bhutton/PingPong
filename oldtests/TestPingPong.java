@@ -1,4 +1,4 @@
-package com.pingpong.tests;
+package com.pingpong.oldtests;
 
 import static org.junit.Assert.*;
 
@@ -9,12 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
-import java.io.IOException;
 
 import org.junit.Test;
 import java.util.Arrays;
-
-import javax.imageio.ImageIO;
 
 import static org.mockito.Mockito.*;
 

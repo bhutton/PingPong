@@ -1,11 +1,11 @@
-package com.pingpong;
+package com.pingpong.oldtests;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
+//import org.junit.jupiter.api.Test;
 
 public class TestLevel {
 	
-	private final Level level = new Level();
+	private Level level = new Level();
 	
 	@Test
 	public void testInitialLevel() {

@@ -1,4 +1,4 @@
-package com.pingpong.tests;
+package com.pingpong.oldtests;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
