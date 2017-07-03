@@ -157,7 +157,9 @@ public class TestPingPong {
 
     @Test
     public void testLevelComplete() {
-        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        final File basePath = new File(
+        		PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+		);
         BufferedImage imgBackground1 = null, imgBackground2 = null;
 
         pp.bg.loadBackGrounds(basePath);
