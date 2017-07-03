@@ -1,4 +1,6 @@
-package com.pingpong;
+package com.pingpong.elements;
+
+import com.pingpong.Paddle;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

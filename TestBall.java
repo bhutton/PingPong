@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static org.junit.Assert.*;
 
-import com.pingpong.Ball;
+import com.pingpong.elements.Ball;
 import org.junit.Test;
 
 public class TestBall {

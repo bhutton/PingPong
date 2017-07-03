@@ -1,5 +1,7 @@
 package com.pingpong;
 
+import com.pingpong.elements.Ball;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;

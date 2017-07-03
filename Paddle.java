@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-class Paddle extends Bricks {
+public class Paddle extends Bricks {
 	
 	private int paddleX, paddleY, paddleWidth, paddleHeight;
 	private int appletWidth;
@@ -62,7 +62,7 @@ class Paddle extends Bricks {
 		paddleHeight = height;
 	}
 	
-	void drawPaddle(Graphics g) {
+	public void drawPaddle(Graphics g) {
 		g.drawImage(this.imgPaddle, paddleX, paddleY, null);
 	}
 	

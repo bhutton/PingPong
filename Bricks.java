@@ -348,7 +348,7 @@ public class Bricks {
 		return false;
 	}
 	
-	void drawWall(Graphics g) {
+	public void drawWall(Graphics g) {
 		for (brickRowLocation = 0; brickRowLocation < numRows; brickRowLocation++)
 			for (brickColumnLocation = 0; brickColumnLocation < numCols; brickColumnLocation++)
 				drawBrick(g);

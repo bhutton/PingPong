@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.pingpong.Ball;
+import com.pingpong.elements.Ball;
 import org.junit.Test;
 
 public class TestPaddle {
