@@ -72,7 +72,9 @@ public class TestPingPong {
 		pp.setFocusable(true);
 	    pp.requestFocus();
 	    
-	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
+	    KeyEvent key = new KeyEvent(
+	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z'
+        );
 	    pp.keyPressed(key);
 	    
 	    assertTrue(pp.called);
@@ -83,7 +85,9 @@ public class TestPingPong {
 		pp.setFocusable(true);
 	    pp.requestFocus();
 	    
-	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
+	    KeyEvent key = new KeyEvent(
+	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z'
+        );
 	    pp.keyPressed(key);
 	    
 	    assertTrue(pp.called);
@@ -94,7 +98,9 @@ public class TestPingPong {
 		pp.setFocusable(true);
 	    pp.requestFocus();
 	    
-	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
+	    KeyEvent key = new KeyEvent(
+	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z'
+        );
 	    pp.keyPressed(key);
 	    
 	    assertTrue(pp.called);
@@ -105,7 +111,9 @@ public class TestPingPong {
 		pp.setFocusable(true);
 	    pp.requestFocus();
 	    
-	    KeyEvent key = new KeyEvent(pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_SPACE,'Z');
+	    KeyEvent key = new KeyEvent(
+	    		pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_SPACE,'Z'
+        );
 	    pp.keyPressed(key);
 	    
 	    assertTrue(pp.called);
@@ -178,7 +186,9 @@ public class TestPingPong {
 
     @Test
     public void testLevelsLivesAndBackgroundsResetOnGameOver() {
-        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        final File basePath = new File(
+        		PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+		);
         BufferedImage imgBackground1 = null, imgBackground2 = null;
 
         pp.bg.loadBackGrounds(basePath);
@@ -200,7 +210,9 @@ public class TestPingPong {
 
     @Test
     public void testBackgroundChangesOnLevelComplete() {
-        final File basePath = new File(PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath());//String backGroundImg = basePath + "/../src/PingPong/images/background-1.png";
+        final File basePath = new File(
+        		PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+		);
         pp.bg.loadBackGrounds(basePath);
         pp.level.setLives(1);
         pp.gameStart = true;
