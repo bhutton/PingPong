@@ -13,7 +13,7 @@ public class Bricks {
 	
 	private int brickColumnLocation = 0, 
 				brickRowLocation = 0, 
-				numRows=2, 
+				numRows=0,
 				numCols;
 
 	private final int brickHeight=50,
@@ -51,33 +51,39 @@ public class Bricks {
             }
         }
     }
+
+    private void initialiseColLoc() {
+        brickColumnLocation = 0;
+    }
+
+    private void initialiseRowLoc() {
+        brickRowLocation = 0;
+    }
 	
 	/*
 	 * Setup array that holds the x,y coordinates of the wall
 	 */
 	public void createWall(int numLevels) {
-	    // Screen coordinates of the individual bricks
-		int x=5, y;
-		this.numRows = numLevels;
-		
-		setColLoc(0);
-	    
-	    for (int col = 0; col < 8; col++) {	    	
-	    	setRowLoc(0); 
-	    	y = 5;	
-	    	
-	    	for (int row = 0; row < this.numRows; row++) {
-	    		this.setBrickYCoordinates(y).setBrickXCoordinates(x).incRowLoc();
-	    		y += 55;
-		    }
-		    
-		    incColLoc(); x += 105;
-	    }
-	    
-	    setNumRows().setNumCols();
+	    this.numRows = numLevels;
+		this.initialiseColLoc();
+
+        initialiseBrickArray();
+
+        setNumRows().setNumCols();
 	}
 
-	public void startGame(int level) {
+    private void initialiseBrickArray() {
+        for (int col = 0, x=5; col < 8; col++, x += 105) {
+            this.initialiseRowLoc();
+
+            for (int row = 0, y = 5; row < this.numRows; row++, y += 55)
+                this.setBrickYCoordinates(y).setBrickXCoordinates(x).incRowLoc();
+
+            incColLoc();
+        }
+    }
+
+    public void startGame(int level) {
         initializeBrickArray();
         createWall(level);
     }
@@ -199,7 +205,6 @@ public class Bricks {
 	
 	public void setRowLoc(int row) {
 		brickRowLocation = row;
-
     }
 	
 	public void incRowLoc() {
