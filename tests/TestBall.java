@@ -15,8 +15,9 @@ public class TestBall {
 	private final Ball pp = new Ball();
 	
 	@Test
-	public void testSetBallImg() {
-		String 	ballImg = "./src/com/pingpong/images/ball.png";
+	public void testSetBallImg() throws IOException {
+		String current = new java.io.File( "." ).getCanonicalPath();
+		String 	ballImg = current + "/src/PingPong/images/ball.png";
 		BufferedImage imgBall1 = null, imgBall2 = null;
 		
 		try { imgBall1 = ImageIO.read(new File(ballImg)); } 

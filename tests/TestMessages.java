@@ -20,8 +20,9 @@ public class TestMessages {
 	private final Graphics g = mock(Graphics.class);
 	
 	@Test
-	public void gameOverImg() {
-		String 	gameOverImage = "./src/com/pingpong/images/game-over-message.png";
+	public void gameOverImg() throws IOException {
+		String current = new java.io.File( "." ).getCanonicalPath();
+		String gameOverImage = current + "/src/PingPong/images/game-over-message.png";
 		BufferedImage imgGameOver1 = null, imgGameOver2 = null;
 		
 		try { imgGameOver1 = ImageIO.read(new File(gameOverImage)); } 

@@ -131,7 +131,7 @@ public class TestPingPong {
                 new File(PingPong.class.getProtectionDomain().
                         getCodeSource().getLocation().getPath());
         String backGroundImg = basePath
-                + "/com/pingpong/images/background-1.png";
+                + "/PingPong/images/background-1.png";
 
         pp.bg.setBackgroundImage(backGroundImg);
 	    pp.pp.initializeBrickArray();

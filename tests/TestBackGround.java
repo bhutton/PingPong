@@ -19,8 +19,9 @@ public class TestBackGround {
 	private final Background bg = new Background();
 
 	@Test
-	public void backgroundImg() {
-		String 	backgroundImg = "./src/com/pingpong/images/background-1.png";
+	public void backgroundImg() throws IOException {
+		String current = new java.io.File( "." ).getCanonicalPath();
+		String backgroundImg = current + "/src/PingPong/images/background-1.png";
 		BufferedImage imgBackground1 = null, imgBackground2 = null;
 		
 		try { imgBackground1 = ImageIO.read(new File(backgroundImg)); } 
@@ -35,8 +36,9 @@ public class TestBackGround {
 	}
 
 	@Test
-	public void gameOverImg() {
-		String 	gameOverImage = "./src/com/pingpong/images/game-over.jpg";
+	public void gameOverImg() throws IOException {
+		String current = new java.io.File( "." ).getCanonicalPath();
+		String 	gameOverImage = current + "/src/PingPong/images/game-over.jpg";
 		BufferedImage imgGameOver1 = null, imgGameOver2 = null;
 		
 		try { imgGameOver1 = ImageIO.read(new File(gameOverImage)); } 

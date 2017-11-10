@@ -42,7 +42,7 @@ public class Background {
 	}
 
 	public void loadBackGrounds(File basePath) {
-    	String path = basePath + "/com/pingpong/images";
+    	String path = basePath + "/PingPong/images";
     	this.backGroundListIndex = 0;
 
 		backGroundList.add(path + "/background-1.png");
