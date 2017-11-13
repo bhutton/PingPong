@@ -14,13 +14,21 @@ import javax.swing.*;
 @SuppressWarnings("FieldCanBeLocal")
 public class PingPong extends JFrame implements KeyListener,Runnable
 {
+    private static final int NUM_LIVES = 3;
+    private static final int paddleWidth = 174;
+    private static final int paddleHeight = 30;
+    private static final int paddleMovementAmount = 30;
+    private static final int frameWidth = 853;
+    private static final int frameHeight = 625;
+
+    public int appletHeight = 600;
+    public int appletWidth = 853;
+
     private JFrame frame;
     private DrawPanel drawPanel;
 
 	private Thread animatorThread;
 	private Thread currentThread = null;
-    public int appletHeight = 600;
-    public int appletWidth = 853;
     public boolean gameStart=false;
     public boolean called=false;
 
@@ -47,7 +55,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
         frame.setResizable(false);
-        frame.setSize(853, 625);
+        frame.setSize(frameWidth, frameHeight);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.addKeyListener(this);
@@ -73,10 +81,10 @@ public class PingPong extends JFrame implements KeyListener,Runnable
         pp.setBallImage(this.artifacts.get("BallImage"));
         pp.setBrickImage(this.artifacts.get("BrickImage"));
         pp.setPaddleImage(this.artifacts.get("PaddleImage"));
-        pp.setPaddleWidth(174);
-        pp.setPaddleHeight(30);
+        pp.setPaddleWidth(paddleWidth);
+        pp.setPaddleHeight(paddleHeight);
         pp.initializeBrickArray();
-        pp.setPaddleMoveAmount(30);
+        pp.setPaddleMoveAmount(paddleMovementAmount);
         pp.setPaddleLocation(appletHeight, appletWidth);
         msg.setGameActive();
     }
@@ -163,7 +171,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable
     }
 
     public String checkForEndOfLevel() {
-        int numLives = 3;
+        int numLives = NUM_LIVES;
         if (pp.getBricksLeft())
             return decreaseLives();
         return setEndOfLevel(numLives);

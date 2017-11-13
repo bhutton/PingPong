@@ -17,8 +17,9 @@ public class TestPaddle {
 	private final Ball pp = new Ball();
 	
 	@Test
-	public void testSetPaddleImg() {
-		String 	paddleImg = "./src/com/pingpong/images/paddle.png";
+	public void testSetPaddleImg() throws IOException {
+		String current = new java.io.File( "." ).getCanonicalPath();
+		String paddleImg = current + "/src/com/pingpong/images/paddle.png";
 		BufferedImage imgPaddle1 = null, imgPaddle2 = null;
 		
 		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); } 
