@@ -20,14 +20,19 @@ public class TestBackGround {
 
 	@Test
 	public void backgroundImg() throws IOException {
+		File basePath = new File(
+				PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+		);
+
 		String current = new java.io.File( "." ).getCanonicalPath();
 		String backgroundImg = current + "/src/com/pingpong/images/background-1.png";
 		BufferedImage imgBackground1 = null, imgBackground2 = null;
 		
 		try { imgBackground1 = ImageIO.read(new File(backgroundImg)); } 
 		catch (IOException e) { e.printStackTrace(); }
-		
-		bg.setBackgroundImage(backgroundImg);
+
+		bg.loadBackGrounds(basePath);
+		bg.getBackGroundImageFileName();
 		imgBackground2 = bg.getBackground(); 
 
 		byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
