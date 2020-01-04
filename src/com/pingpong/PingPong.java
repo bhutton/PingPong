@@ -12,8 +12,7 @@ import java.util.HashMap;
 import javax.swing.*;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class PingPong extends JFrame implements KeyListener,Runnable
-{
+public class PingPong extends JFrame implements KeyListener, Runnable {
     private static final int NUM_LIVES = 3;
     private static final int paddleWidth = 174;
     private static final int paddleHeight = 30;
@@ -27,28 +26,26 @@ public class PingPong extends JFrame implements KeyListener,Runnable
     private JFrame frame;
     private DrawPanel drawPanel;
 
-	private Thread animatorThread;
-	private Thread currentThread = null;
-    public boolean gameStart=false;
-    public boolean called=false;
+    private Thread animatorThread;
+    private Thread currentThread = null;
+    public boolean gameStart = false;
+    public boolean called = false;
 
-    private HashMap<String,String> artifacts = new HashMap<>();
+    private HashMap<String, String> artifacts = new HashMap<>();
 
-    public final Ball pp = new Ball();
-	private final Messages msg = new Messages();
-	public final Background bg = new Background();
-	private final File basePath = new File(
-	        PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
+    public final Ball ball = new Ball();
+    private final Messages message = new Messages();
+    public final Background background = new Background();
+    private final File basePath = new File(
+            PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
     );
-	public final Level level = new Level();
+    public final Level level = new Level();
 
-	public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         new PingPong().go();
     }
 
-    private void go()
-    {
+    private void go() {
         drawPanel = new PingPong.DrawPanel();
 
         frame = new JFrame("com/pingpong");
@@ -62,53 +59,53 @@ public class PingPong extends JFrame implements KeyListener,Runnable
 
         String imagePath = "/com/pingpong/images/";
 
-        artifacts.put("BallImage",this.basePath + imagePath + "ball.png");
-        artifacts.put("BrickImage",this.basePath + imagePath + "brick.png");
-        artifacts.put("PaddleImage",this.basePath + imagePath + "paddle.png");
-        artifacts.put("GameOverImage",this.basePath + imagePath + "game-over.jpg");
-        artifacts.put("GameOverMessage",this.basePath + imagePath + "game-over-message.png");
+        artifacts.put("BallImage", this.basePath + imagePath + "ball.png");
+        artifacts.put("BrickImage", this.basePath + imagePath + "brick.png");
+        artifacts.put("PaddleImage", this.basePath + imagePath + "paddle.png");
+        artifacts.put("GameOverImage", this.basePath + imagePath + "game-over.jpg");
+        artifacts.put("GameOverMessage", this.basePath + imagePath + "game-over-message.png");
 
-        this.bg.loadBackGrounds(this.basePath);
+        this.background.loadBackGrounds(this.basePath);
         initialiseGame();
 
         run();
     }
 
-    private void initialiseGame()
-    {
-        bg.setGameOverImage(this.artifacts.get("GameOverImage"));
-        msg.setGameOverImage(this.artifacts.get("GameOverMessage"));
-        pp.setBallImage(this.artifacts.get("BallImage"));
-        pp.setBrickImage(this.artifacts.get("BrickImage"));
-        pp.setPaddleImage(this.artifacts.get("PaddleImage"));
-        pp.setPaddleWidth(paddleWidth);
-        pp.setPaddleHeight(paddleHeight);
-        pp.initializeBrickArray();
-        pp.setPaddleMoveAmount(paddleMovementAmount);
-        pp.setPaddleLocation(appletHeight, appletWidth);
-        msg.setGameActive();
+    private void initialiseGame() {
+        background.setGameOverImage(this.artifacts.get("GameOverImage"));
+        message.setGameOverImage(this.artifacts.get("GameOverMessage"));
+        ball.setBallImage(this.artifacts.get("BallImage"));
+        ball.setBrickImage(this.artifacts.get("BrickImage"));
+        ball.setPaddleImage(this.artifacts.get("PaddleImage"));
+        ball.setPaddleWidth(paddleWidth);
+        ball.setPaddleHeight(paddleHeight);
+        ball.initializeBrickArray();
+        ball.setPaddleMoveAmount(paddleMovementAmount);
+        ball.setPaddleLocation(appletHeight, appletWidth);
+        message.setGameActive();
     }
 
-    public void keyPressed( KeyEvent e )
-    {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = pp.movePaddleLeft();
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = pp.movePaddleRight();
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = msg.setGameActive();
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) this.called = pp.ballSetStart();
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = ball.movePaddleLeft();
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = ball.movePaddleRight();
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = message.setGameActive();
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) this.called = ball.ballSetStart();
     }
-    public void keyReleased( KeyEvent e ) {	}
-    public void keyTyped( KeyEvent e ) { }
 
-    public void start()
-    {
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void start() {
         if (animatorThread == null)
             animatorThread = new Thread(this);
 
         animatorThread.start();
     }
 
-    public void startGameIfActive()
-    {
+    public void startGameIfActive() {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
         this.currentThread = Thread.currentThread();
     }
@@ -131,8 +128,7 @@ public class PingPong extends JFrame implements KeyListener,Runnable
         while (testThread()) {
             try {
                 Thread.sleep(10);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 break;
             }
 
@@ -144,50 +140,48 @@ public class PingPong extends JFrame implements KeyListener,Runnable
     }
 
     private void initializeGame() {
-        pp.setBallActive();
-        pp.ballSetStop();
-        pp.calculateCurrentLocation(appletWidth, appletHeight);
+        ball.setBallActive();
+        ball.ballSetStop();
+        ball.calculateCurrentLocation(appletWidth, appletHeight);
     }
 
     private void runGame() {
         this.gameStart = false;
 
-        while (pp.checkBallActive() && pp.getBricksLeft()) {
+        while (ball.checkBallActive() && ball.getBricksLeft()) {
 
             this.gameStart = true;
 
-            pp.ballCalculations(this.appletWidth, this.appletHeight);
+            ball.ballCalculations(this.appletWidth, this.appletHeight);
             frame.repaint();
 
             try {
                 Thread.sleep(10);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 break;
             }
         }
 
-        pp.initializeBall();
+        ball.initializeBall();
     }
 
     public String checkForEndOfLevel() {
-        int numLives = NUM_LIVES;
-        if (pp.getBricksLeft())
+        if (ball.getBricksLeft())
             return decreaseLives();
-        return setEndOfLevel(numLives);
+        return setEndOfLevel(NUM_LIVES);
     }
 
     private String setEndOfLevel(int numLives) {
-        pp.startGame(level.getLevel());
+        ball.startGame(level.getLevel());
         if (gameStart)
-            bg.getNextBackGroundImageFileName();
-        msg.setGameStart(level.getLevel(), level.getLives());
+            background.getNextBackGroundImageFileName();
+        message.setGameStart(level.getLevel(), level.getLives());
         level.newLevel(numLives);
         return "Level Finished";
     }
 
     private String decreaseLives() {
-        msg.setLives(level.decreaseLives());
+        message.setLives(level.decreaseLives());
 
         if (level.stillAlive())
             return "Game On";
@@ -198,21 +192,20 @@ public class PingPong extends JFrame implements KeyListener,Runnable
 
     public void setGameOver() {
         level.setGameStart();
-        msg.setGameOver(level.getLevel(), level.getLives());
-        pp.startGame(level.getLevel());
-        bg.setStart();
+        message.setGameOver(level.getLevel(), level.getLives());
+        ball.startGame(level.getLevel());
+        background.setStart();
     }
 
     class DrawPanel extends JPanel {
         public void paintComponent(Graphics g) {
-            bg.drawBackground(g, appletWidth, appletHeight);
+            background.drawBackground(g, appletWidth, appletHeight);
 
-            if (msg.getGameActive()) {
-                pp.drawWindow(g);
-                msg.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
-            }
-            else
-                msg.displayMessage(g, 300, 79, appletWidth, appletHeight);
+            if (message.getGameActive()) {
+                ball.drawWindow(g);
+                message.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
+            } else
+                message.displayMessage(g, 300, 79, appletWidth, appletHeight);
         }
     }
 }

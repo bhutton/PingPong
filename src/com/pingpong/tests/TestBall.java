@@ -5,286 +5,288 @@ import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+
 import static org.junit.Assert.*;
 
 import com.pingpong.elements.Ball;
 import org.junit.Test;
 
 public class TestBall {
-	
-	private final Ball pp = new Ball();
-	
-	@Test
-	public void testSetBallImg() throws IOException {
-		String current = new java.io.File( "." ).getCanonicalPath();
-		String 	ballImg = current + "/src/com/pingpong/images/ball.png";
-		BufferedImage imgBall1 = null, imgBall2 = null;
-		
-		try { imgBall1 = ImageIO.read(new File(ballImg)); } 
-		catch (IOException e) { e.printStackTrace(); }
-		
-		pp.setBallImage(ballImg);
-		imgBall2 = pp.getBall();
-		
-		byte[] byteArray1 = ((DataBufferByte) imgBall1.getData().getDataBuffer()).getData();
-		byte[] byteArray2 = ((DataBufferByte) imgBall2.getData().getDataBuffer()).getData();
-		
-		assertArrayEquals(byteArray1, byteArray2);
-	}
-	
-	@Test
-	public void testSetBallXValueAndGetReturn() {
-		int x = 10;
-		
-		pp.setBallXValue(x);
-		
-		assertEquals(x, pp.getBallXPosition());
-	}
-	
-	@Test
-	public void testSetBallYValueAndGetReturn() {
-		int y = 10;
-		
-		pp.setBallYValue(y);
-		
-		assertEquals(y, pp.getBrickYPosition());
-	}
-	
-	@Test
-	public void testIncrementingXValue() {
-		int x = 10;
-		
-		pp.setBallXValue(x);
-		pp.moveBallRight();
-		
-		assertEquals(11, pp.getBallXPosition());
-	}
-	
-	@Test
-	public void testIncrementingYValue() {
-		int y = 10;
-		
-		pp.setBallYValue(y);
-		pp.incY();
-		
-		assertEquals(13, pp.getBrickYPosition());
-	}
-	
-	@Test
-	public void testShiftingBallRight() {
-		int x = 10;
-		
-		pp.setBallXValue(x);
-		pp.moveBallLeftOrRight();
-		assertEquals(11, pp.getBallXPosition());
-	}
-	
-	@Test
-	public void testShiftingBallLeft() {
-		int x = 10;
-		
-		pp.setBallXValue(x);
-		pp.setLeft();
-		pp.moveBallLeftOrRight();
-		assertEquals(9, pp.getBallXPosition());
-	}
-	
-	@Test
-	public void testCheckBallDirectionAfterReachingBricks() {
-		int x = 10, y = 10;
-		
-		pp.createWall(4);
-		pp.setBallUp();
-		pp.setBallXValue(x);
-		pp.setBallYValue(y);		
-		
-		assertEquals(false, pp.getDown());
-		assertEquals(true, pp.setBallDirectionOnReachingBricks());
-	}
 
-	@Test
-	public void TestBallBouncesOffSideOfBrickWhenGoingDown() {
-		pp.createWall(2);
-		pp.setBallX(1);
-		pp.setBallY(1);
+    private final Ball ball = new Ball();
 
-		pp.setBallDown(true);
-		pp.setBallRight(true);
-		assertEquals(true, pp.getRight());
-		assertEquals(true, pp.setBallDirectionOnReachingBricks());
-		assertEquals(false, pp.getRight());
-	}
-	
-	@Test
-	public void testCheckBallDirectionAfterReachingPaddle() {
-		int x = 450, y = 800;
-		
-		pp.createWall(2);
-		pp.setDown();
-		pp.setBallXValue(x);
-		pp.setBallYValue(y);	
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-		
-		assertEquals(true, pp.getDown());
-		assertEquals(false, pp.setBallDirectionAfterReachingPaddle());
-	}
-	
-	@Test
-	public void testCheckBallDirectionAfterMissingPaddle() {
-		int x = 0, y = 800;
-		
-		pp.createWall(2);
-		pp.setDown();
-		pp.setBallXValue(x);
-		pp.setBallYValue(y);	
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-		
-		assertEquals(true, pp.getDown());
-		assertEquals(true, pp.setBallDirectionAfterReachingPaddle());
-	}
-	
-	@Test
-	public void testCheckStart() {
-		int brickHeight = 50;
-		int y = ((brickHeight + 5) * 4);
-		
-		pp.setBallYValue(0);
-		pp.checkStart();
-		
-		assertEquals(y,pp.getBrickYPosition());
-	}
-	
-	@Test
-	public void testCheckBallHitsRightSideOfScreen() {
-		int appletWidth = 800;
-		
-		pp.setBallXValue(800);
-		pp.setRight();
-		pp.checkRight(appletWidth);
-		assertEquals(false, pp.getRight());
-	}
-	
-	@Test
-	public void testCheckBallHitsLeftSideOfScreen() {
-		pp.setBallXValue(0);
-		pp.setLeft();
-		pp.checkLeft();
-		assertEquals(true, pp.getRight());
-	}
-	
-	@Test
-	public void testCheckBallHitsTopOfScreen() {
-		pp.setBallUp();
-		pp.setBallYValue(0);
-		pp.checkTop();
-		assertEquals(true,pp.getDown());
-	}
-	
-	@Test
-	public void testCheckBallHitsBottomOfScreen() {
-		int appletHeight = 600;
-		pp.setBallDown(true);
-		pp.setBallYValue(600);
-		pp.checkBottom(appletHeight);
-		assertEquals(false,pp.getDown());
-	}
-	
-	@Test
-	public void testCheckEdges() {
-		pp.setBallXValue(600);
-		pp.setBallYValue(600);
-		pp.setRight();
-		pp.setDown();
-		
-		assertEquals(true,pp.getRight());
-		assertEquals(true,pp.getDown());
-		assertEquals(true,pp.checkBallActive());
-		
-		pp.checkEdges(600, 600);
-		
-		assertEquals(false,pp.getRight());
-		assertEquals(false,pp.getDown());
-		assertEquals(false,pp.checkBallActive());
-		
-		pp.setBallXValue(0);
-		pp.checkEdges(600, 600);
-		
-		assertEquals(true,pp.getRight());
-		assertEquals(false,pp.getDown());
-		assertEquals(false,pp.checkBallActive());
-		
-		pp.setBallYValue(0);
-		pp.checkEdges(600, 600);
-		assertEquals(true,pp.getRight());
-		assertEquals(false,pp.getDown());
-		assertEquals(false,pp.checkBallActive());
-	}
-	
-	@Test
-	public void testUpdateBallCoordinates() {
-		pp.ballSetStart();
-		pp.setBallXValue(600);
-		pp.setBallYValue(600);
-		pp.setRight();
-		pp.setDown();
-		pp.updateBallCoordinates();
-		assertEquals(601,pp.getBallXPosition());
-		assertEquals(603,pp.getBrickYPosition());
-		
-		pp.setLeft();
-		pp.setBallUp();
-		pp.updateBallCoordinates();
-		assertEquals(600,pp.getBallXPosition());
-		assertEquals(600,pp.getBrickYPosition());
-	}
-	
-	@Test
-	public void testCheckBallActive() {
-		pp.checkBallActive();
-	}
-	
-	@Test
-	public void testSetBallInActive() {
-		assertEquals(false,pp.setBallInActive());
-	}
-	
-	@Test
-	public void testSetBallActive() {
-		assertEquals(true,pp.setBallActive());
-	}
-	
-	@Test
-	public void testInitializeBall() {
-		pp.initializeBall();
-		
-		assertTrue(pp.getBallX() == pp.getPaddleX());
-		assertTrue(pp.getBallY() == pp.getPaddleY());
-	}
-	
-	@Test
-	public void testSetStart() {
-		assertEquals(true, pp.ballSetStart());
-	}
-	
-	@Test
-	public void testBallMovesWithPaddle() {
-		pp.initializeBall();
-		pp.setPaddleWidth(120);
-		pp.setPaddleLocation(800, 600);
-		pp.ballSetStop();
-		pp.setPaddleMoveAmount(30);
-		
-		assertEquals(false, pp.getBallStatus());
-		
-		pp.movePaddleRight();
-		pp.calculateCurrentLocation(800, 600);
-		
-		assertEquals(270, pp.getPaddleX());
-		assertEquals(270 + pp.getPaddleWidth() / 2 - 30, pp.getBallXPosition());
-	}
+    @Test
+    public void testSetBallImg() throws IOException, NullPointerException {
+        String current = new java.io.File(".").getCanonicalPath();
+        String ballImg = current + "/src/com/pingpong/images/ball.png";
+        BufferedImage imgBall1 = ImageIO.read(new File(ballImg));
+
+//        try {
+//            imgBall1 = ImageIO.read(new File(ballImg));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        ball.setBallImage(ballImg);
+        BufferedImage imgBall2 = ball.getBall();
+
+        byte[] byteArray1 = ((DataBufferByte) imgBall1.getData().getDataBuffer()).getData();
+        byte[] byteArray2 = ((DataBufferByte) imgBall2.getData().getDataBuffer()).getData();
+
+        assertArrayEquals(byteArray1, byteArray2);
+    }
+
+    @Test
+    public void testSetBallXValueAndGetReturn() {
+        int x = 10;
+
+        ball.setBallXValue(x);
+
+        assertEquals(x, ball.getBallXPosition());
+    }
+
+    @Test
+    public void testSetBallYValueAndGetReturn() {
+        int y = 10;
+
+        ball.setBallYValue(y);
+
+        assertEquals(y, ball.getBrickYPosition());
+    }
+
+    @Test
+    public void testIncrementingXValue() {
+        int x = 10;
+
+        ball.setBallXValue(x);
+        ball.moveBallRight();
+
+        assertEquals(11, ball.getBallXPosition());
+    }
+
+    @Test
+    public void testIncrementingYValue() {
+        int y = 10;
+
+        ball.setBallYValue(y);
+        ball.incY();
+
+        assertEquals(13, ball.getBrickYPosition());
+    }
+
+    @Test
+    public void testShiftingBallRight() {
+        int x = 10;
+
+        ball.setBallXValue(x);
+        ball.moveBallLeftOrRight();
+        assertEquals(11, ball.getBallXPosition());
+    }
+
+    @Test
+    public void testShiftingBallLeft() {
+        int x = 10;
+
+        ball.setBallXValue(x);
+        ball.setLeft();
+        ball.moveBallLeftOrRight();
+        assertEquals(9, ball.getBallXPosition());
+    }
+
+    @Test
+    public void testCheckBallDirectionAfterReachingBricks() {
+        int x = 10, y = 10;
+
+        ball.createWall(4);
+        ball.setBallUp();
+        ball.setBallXValue(x);
+        ball.setBallYValue(y);
+
+        assertFalse(ball.getDown());
+        assertTrue(ball.setBallDirectionOnReachingBricks());
+    }
+
+    @Test
+    public void TestBallBouncesOffSideOfBrickWhenGoingDown() {
+        ball.createWall(2);
+        ball.setBallX(1);
+        ball.setBallY(1);
+
+        ball.setBallDown(true);
+        ball.setBallRight(true);
+        assertTrue(ball.getRight());
+        assertTrue(ball.setBallDirectionOnReachingBricks());
+        assertFalse(ball.getRight());
+    }
+
+    @Test
+    public void testCheckBallDirectionAfterReachingPaddle() {
+        int x = 450, y = 800;
+
+        ball.createWall(2);
+        ball.setDown();
+        ball.setBallXValue(x);
+        ball.setBallYValue(y);
+        ball.setPaddleLocation(600, 600);
+        ball.setPaddleWidth(200);
+        ball.setPaddleHeight(30);
+
+        assertTrue(ball.getDown());
+        assertFalse(ball.setBallDirectionAfterReachingPaddle());
+    }
+
+    @Test
+    public void testCheckBallDirectionAfterMissingPaddle() {
+        int x = 0, y = 800;
+
+        ball.createWall(2);
+        ball.setDown();
+        ball.setBallXValue(x);
+        ball.setBallYValue(y);
+        ball.setPaddleLocation(600, 600);
+        ball.setPaddleWidth(200);
+        ball.setPaddleHeight(30);
+
+        assertTrue(ball.getDown());
+        assertTrue(ball.setBallDirectionAfterReachingPaddle());
+    }
+
+    @Test
+    public void testCheckStart() {
+        int brickHeight = 50;
+        int y = ((brickHeight + 5) * 4);
+
+        ball.setBallYValue(0);
+        ball.checkStart();
+
+        assertEquals(y, ball.getBrickYPosition());
+    }
+
+    @Test
+    public void testCheckBallHitsRightSideOfScreen() {
+        int appletWidth = 800;
+
+        ball.setBallXValue(800);
+        ball.setRight();
+        ball.checkRight(appletWidth);
+        assertFalse(ball.getRight());
+    }
+
+    @Test
+    public void testCheckBallHitsLeftSideOfScreen() {
+        ball.setBallXValue(0);
+        ball.setLeft();
+        ball.checkLeft();
+        assertTrue(ball.getRight());
+    }
+
+    @Test
+    public void testCheckBallHitsTopOfScreen() {
+        ball.setBallUp();
+        ball.setBallYValue(0);
+        ball.checkTop();
+        assertTrue(ball.getDown());
+    }
+
+    @Test
+    public void testCheckBallHitsBottomOfScreen() {
+        int appletHeight = 600;
+        ball.setBallDown(true);
+        ball.setBallYValue(600);
+        ball.checkBottom(appletHeight);
+        assertFalse(ball.getDown());
+    }
+
+    @Test
+    public void testCheckEdges() {
+        ball.setBallXValue(600);
+        ball.setBallYValue(600);
+        ball.setRight();
+        ball.setDown();
+
+        assertTrue(ball.getRight());
+        assertTrue(ball.getDown());
+        assertTrue(ball.checkBallActive());
+
+        ball.checkEdges(600, 600);
+
+        assertFalse(ball.getRight());
+        assertFalse(ball.getDown());
+        assertFalse(ball.checkBallActive());
+
+        ball.setBallXValue(0);
+        ball.checkEdges(600, 600);
+
+        assertTrue(ball.getRight());
+        assertFalse(ball.getDown());
+        assertFalse(ball.checkBallActive());
+
+        ball.setBallYValue(0);
+        ball.checkEdges(600, 600);
+        assertTrue(ball.getRight());
+        assertFalse(ball.getDown());
+        assertFalse(ball.checkBallActive());
+    }
+
+    @Test
+    public void testUpdateBallCoordinates() {
+        ball.ballSetStart();
+        ball.setBallXValue(600);
+        ball.setBallYValue(600);
+        ball.setRight();
+        ball.setDown();
+        ball.updateBallCoordinates();
+        assertEquals(601, ball.getBallXPosition());
+        assertEquals(603, ball.getBrickYPosition());
+
+        ball.setLeft();
+        ball.setBallUp();
+        ball.updateBallCoordinates();
+        assertEquals(600, ball.getBallXPosition());
+        assertEquals(600, ball.getBrickYPosition());
+    }
+
+    @Test
+    public void testCheckBallActive() {
+        ball.checkBallActive();
+    }
+
+    @Test
+    public void testSetBallInActive() { assertFalse(ball.setBallInActive()); }
+
+    @Test
+    public void testSetBallActive() {
+        assertTrue(ball.setBallActive());
+    }
+
+    @Test
+    public void testInitializeBall() {
+        ball.initializeBall();
+
+        assertEquals(ball.getBallX(), ball.getPaddleX());
+        assertEquals(ball.getBallY(), ball.getPaddleY());
+    }
+
+    @Test
+    public void testSetStart() {
+        assertTrue(ball.ballSetStart());
+    }
+
+    @Test
+    public void testBallMovesWithPaddle() {
+        ball.initializeBall();
+        ball.setPaddleWidth(120);
+        ball.setPaddleLocation(800, 600);
+        ball.ballSetStop();
+        ball.setPaddleMoveAmount(30);
+
+        assertFalse(ball.getBallStatus());
+
+        ball.movePaddleRight();
+        ball.calculateCurrentLocation(800, 600);
+
+        assertEquals(270, ball.getPaddleX());
+        assertEquals(270 + ball.getPaddleWidth() / 2 - 30, ball.getBallXPosition());
+    }
 
 }
