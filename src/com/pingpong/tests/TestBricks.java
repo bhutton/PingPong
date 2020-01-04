@@ -1,7 +1,6 @@
 package com.pingpong.tests;
 
 import static org.junit.Assert.*;
-//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -258,5 +257,4 @@ public class TestBricks {
 		ball.createWall(2);
 		assertTrue(ball.getBricksLeft());
 	}
-	
 }
