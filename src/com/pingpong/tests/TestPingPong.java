@@ -2,7 +2,6 @@ package com.pingpong.tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -17,112 +16,112 @@ import static org.mockito.Mockito.*;
 
 public class TestPingPong {
 	
-	private final com.pingpong.PingPong pp = new PingPong();
+	private final com.pingpong.PingPong pingPong = new PingPong();
 	private final Graphics g = mock(Graphics.class);
 	
 	@Test
 	public void testPaint() {
-		pp.paint(g);
+		pingPong.paint(g);
 	}
 	
 	@Test
 	public void testGetDimensions() {
-		pp.setSize(800,600);
-		Dimension appletSize = pp.getSize();
-		pp.appletHeight = appletSize.height;
-	    pp.appletWidth = appletSize.width;
+		pingPong.setSize(800,600);
+		Dimension appletSize = pingPong.getSize();
+		pingPong.appletHeight = appletSize.height;
+	    pingPong.appletWidth = appletSize.width;
 		
-		assertEquals(800, pp.appletWidth);
-		assertEquals(600, pp.appletHeight);
+		assertEquals(800, pingPong.appletWidth);
+		assertEquals(600, pingPong.appletHeight);
 	}
 	
 	@Test
 	public void testStartThread() {
-		pp.start();
-		pp.startGameIfActive();
-		assertNotNull(pp.getThread());
+		pingPong.start();
+		pingPong.startGameIfActive();
+		assertNotNull(pingPong.getThread());
 	}
 	
 	@Test
 	public void testMovePaddleLeft() {
-		pp.ball.setPaddleWidth(200);
-	    pp.ball.setPaddleHeight(30);
-	    pp.ball.setPaddleMoveAmount(50);
+		pingPong.ball.setPaddleWidth(200);
+	    pingPong.ball.setPaddleHeight(30);
+	    pingPong.ball.setPaddleMoveAmount(50);
 		
-		pp.ball.setPaddleLocation(800,600);
-		assertEquals(200, pp.ball.getPaddleX());
-		pp.ball.movePaddleLeft();
-		assertEquals(150, pp.ball.getPaddleX());
+		pingPong.ball.setPaddleLocation(800,600);
+		assertEquals(200, pingPong.ball.getPaddleX());
+		pingPong.ball.movePaddleLeft();
+		assertEquals(150, pingPong.ball.getPaddleX());
 	}
 	
 	@Test
 	public void testMovePaddleRight() {
-		pp.ball.setPaddleWidth(200);
-	    pp.ball.setPaddleHeight(30);
-	    pp.ball.setPaddleMoveAmount(50);
+		pingPong.ball.setPaddleWidth(200);
+	    pingPong.ball.setPaddleHeight(30);
+	    pingPong.ball.setPaddleMoveAmount(50);
 		
-		pp.ball.setPaddleLocation(800,600);
-		assertEquals(200, pp.ball.getPaddleX());
-		pp.ball.movePaddleRight();
-		assertEquals(250, pp.ball.getPaddleX());
+		pingPong.ball.setPaddleLocation(800,600);
+		assertEquals(200, pingPong.ball.getPaddleX());
+		pingPong.ball.movePaddleRight();
+		assertEquals(250, pingPong.ball.getPaddleX());
 	}
 	
 	@Test
 	public void testKeyPressedLeft() {
-		pp.setFocusable(true);
-	    pp.requestFocus();
+		pingPong.setFocusable(true);
+	    pingPong.requestFocus();
 	    
 	    KeyEvent key = new KeyEvent(
-	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z'
+				pingPong, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z'
         );
-	    pp.keyPressed(key);
+	    pingPong.keyPressed(key);
 	    
-	    assertTrue(pp.called);
+	    assertTrue(pingPong.called);
 	}
 	
 	@Test
 	public void testKeyPressRight() {
-		pp.setFocusable(true);
-	    pp.requestFocus();
+		pingPong.setFocusable(true);
+	    pingPong.requestFocus();
 	    
 	    KeyEvent key = new KeyEvent(
-	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z'
+				pingPong, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z'
         );
-	    pp.keyPressed(key);
+	    pingPong.keyPressed(key);
 	    
-	    assertTrue(pp.called);
+	    assertTrue(pingPong.called);
 	}
 	
 	@Test
 	public void testKeyPressEnter() {
-		pp.setFocusable(true);
-	    pp.requestFocus();
+		pingPong.setFocusable(true);
+	    pingPong.requestFocus();
 	    
 	    KeyEvent key = new KeyEvent(
-	            pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z'
+				pingPong, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z'
         );
-	    pp.keyPressed(key);
+	    pingPong.keyPressed(key);
 	    
-	    assertTrue(pp.called);
+	    assertTrue(pingPong.called);
 	}
 	
 	@Test
 	public void testKeyPressSpace() {
-		pp.setFocusable(true);
-	    pp.requestFocus();
+		pingPong.setFocusable(true);
+	    pingPong.requestFocus();
 	    
 	    KeyEvent key = new KeyEvent(
-	    		pp, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_SPACE,'Z'
+				pingPong, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_SPACE,'Z'
         );
-	    pp.keyPressed(key);
+	    pingPong.keyPressed(key);
 	    
-	    assertTrue(pp.called);
+	    assertTrue(pingPong.called);
 	}
 	
 	@Test
 	public void testLevel() {
-		pp.level.incrementLevel();
-		assertEquals(2, pp.level.getLevel());
+		pingPong.level.incrementLevel();
+		assertEquals(2, pingPong.level.getLevel());
 	}
 
 	@Test
@@ -133,13 +132,13 @@ public class TestPingPong {
         String backGroundImg = basePath
                 + "/com/pingpong/images/background-1.png";
 
-        pp.background.setBackgroundImage(backGroundImg);
-	    pp.ball.initializeBrickArray();
-	    pp.ball.createWall(3);
+        pingPong.background.setBackgroundImage(backGroundImg);
+	    pingPong.ball.initializeBrickArray();
+	    pingPong.ball.createWall(3);
 
-	    pp.level.setLives(2);
+	    pingPong.level.setLives(2);
 
-	    assertEquals("Game On", pp.checkForEndOfLevel());
+	    assertEquals("Game On", pingPong.checkForEndOfLevel());
     }
 
     @Test
@@ -148,19 +147,19 @@ public class TestPingPong {
                 getProtectionDomain().getCodeSource().
                 getLocation().getPath());
 
-        pp.background.loadBackGrounds(basePath);
-        String backGroundImage = pp.background.getBackGroundImageFileName();
-        pp.background.setBackgroundImage(pp.background.getBackGroundImageFileName());
-        pp.background.getNextBackGroundImageFileName();
+        pingPong.background.loadBackGrounds(basePath);
+        String backGroundImage = pingPong.background.getBackGroundImageFileName();
+        pingPong.background.setBackgroundImage(pingPong.background.getBackGroundImageFileName());
+        pingPong.background.getNextBackGroundImageFileName();
 
-        pp.ball.initializeBrickArray();
-        pp.ball.zeroBrickArray();
-        pp.ball.createWall(3);
-        pp.level.setLives(1);
+        pingPong.ball.initializeBrickArray();
+        pingPong.ball.zeroBrickArray();
+        pingPong.ball.createWall(3);
+        pingPong.level.setLives(1);
 
-        assertEquals("Game Over", pp.checkForEndOfLevel());
-        assertEquals(true, pp.ball.brickArrayPopulated());
-        assertEquals(backGroundImage, pp.background.getBackGroundImageFileName());
+        assertEquals("Game Over", pingPong.checkForEndOfLevel());
+        assertEquals(true, pingPong.ball.brickArrayPopulated());
+        assertEquals(backGroundImage, pingPong.background.getBackGroundImageFileName());
     }
 
     @Test
@@ -170,13 +169,13 @@ public class TestPingPong {
 		);
         BufferedImage imgBackground1, imgBackground2;
 
-        pp.background.loadBackGrounds(basePath);
-        imgBackground1 = pp.background.getBackground();
-        pp.gameStart = true;
+        pingPong.background.loadBackGrounds(basePath);
+        imgBackground1 = pingPong.background.getBackground();
+        pingPong.gameStart = true;
 
-        assertEquals("Level Finished", pp.checkForEndOfLevel());
+        assertEquals("Level Finished", pingPong.checkForEndOfLevel());
 
-        imgBackground2 = pp.background.getBackground();
+        imgBackground2 = pingPong.background.getBackground();
 
         byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
         byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
@@ -191,17 +190,16 @@ public class TestPingPong {
 		);
         BufferedImage imgBackground1, imgBackground2;
 
-        pp.background.loadBackGrounds(basePath);
-        pp.background.setBackgroundImage(pp.background.getBackGroundImageFileName());
-        imgBackground1 = pp.background.getBackground();
+        pingPong.background.loadBackGrounds(basePath);
+        pingPong.background.setBackgroundImage(pingPong.background.getBackGroundImageFileName());
+        imgBackground1 = pingPong.background.getBackground();
 
-        pp.ball.zeroBrickArray();
-        pp.level.setLives(0);
-        //pp.bg.setBackgroundIndex(3);
+        pingPong.ball.zeroBrickArray();
+        pingPong.level.setLives(0);
 
-        assertEquals("Level Finished", pp.checkForEndOfLevel());
+        assertEquals("Level Finished", pingPong.checkForEndOfLevel());
 
-        imgBackground2 = pp.background.getBackground();
+        imgBackground2 = pingPong.background.getBackground();
         byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
         byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
 
@@ -213,12 +211,12 @@ public class TestPingPong {
         final File basePath = new File(
         		PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
 		);
-        pp.background.loadBackGrounds(basePath);
-        pp.level.setLives(1);
-        pp.gameStart = true;
-        String background = pp.background.getBackGroundImageFileName();
-        pp.checkForEndOfLevel();
-        assertNotEquals(null, pp.background.getBackGroundImageFileName());
-        assertNotEquals(background, pp.background.getBackGroundImageFileName());
+        pingPong.background.loadBackGrounds(basePath);
+        pingPong.level.setLives(1);
+        pingPong.gameStart = true;
+        String background = pingPong.background.getBackGroundImageFileName();
+        pingPong.checkForEndOfLevel();
+        assertNotEquals(null, pingPong.background.getBackGroundImageFileName());
+        assertNotEquals(background, pingPong.background.getBackGroundImageFileName());
     }
 }

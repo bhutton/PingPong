@@ -15,19 +15,19 @@ import org.junit.Test;
 
 public class TestBricks {
 	
-	private final Ball pp = new Ball();
+	private final Ball ball = new Ball();
 
 	@Test
 	public void testSetBrickImg() throws IOException {
 		String current = new java.io.File( "." ).getCanonicalPath();
 		String paddleImg = current + "/src/com/pingpong/images/brick.png";
-		BufferedImage imgBrick1 = null, imgBrick2 = null;
+		BufferedImage imgBrick1 = ImageIO.read(new File(paddleImg)), imgBrick2;
 		
 		try { imgBrick1 = ImageIO.read(new File(paddleImg)); } 
 		catch (IOException e) { e.printStackTrace(); }
 		
-		pp.setBallImage(paddleImg);
-		imgBrick2 = pp.getBall();
+		ball.setBallImage(paddleImg);
+		imgBrick2 = ball.getBall();
 		
 		byte[] byteArray1 = ((DataBufferByte) imgBrick1.getData().getDataBuffer()).getData();
 		byte[] byteArray2 = ((DataBufferByte) imgBrick2.getData().getDataBuffer()).getData();
@@ -37,226 +37,226 @@ public class TestBricks {
 	
 	@Test
 	public void setWallDimensions() {
-		pp.setWallDimensions(8,2);
+		ball.setWallDimensions(8,2);
 		
-		assertEquals(8, pp.getNumCols());
-		assertEquals(2, pp.getNumRows());
+		assertEquals(8, ball.getNumCols());
+		assertEquals(2, ball.getNumRows());
 	}
 	
 	@Test
 	public void testInitializeBrickArray() {
-		pp.initializeBrickArray();
-		assertTrue(pp.returnSizeOfBrickArray() > 0);
+		ball.initializeBrickArray();
+		assertTrue(ball.returnSizeOfBrickArray() > 0);
 	}
 	
 	@Test
 	public void testSetBrickColumnLocation() {
-		pp.setBrickColumnLocation(2);
-		assertEquals(2, pp.returnBrickColumnLocation());
+		ball.setBrickColumnLocation(2);
+		assertEquals(2, ball.returnBrickColumnLocation());
 	}
 	
 	@Test
 	public void testSetBrickRowLocation() {
-		pp.setBrickRowLocation(2);
-		assertEquals(2, pp.returnBrickRowLocation());
+		ball.setBrickRowLocation(2);
+		assertEquals(2, ball.returnBrickRowLocation());
 	}
 	
 	@Test
 	public void testSetXCoordinateOfCurrentLocation() {
-		pp.setBrickColumnLocation(2);
-		pp.setBrickRowLocation(2);
-		pp.setBrickXCoordinates(2);
-		assertEquals(2, pp.getBrickXCoordinates());
+		ball.setBrickColumnLocation(2);
+		ball.setBrickRowLocation(2);
+		ball.setBrickXCoordinates(2);
+		assertEquals(2, ball.getBrickXCoordinates());
 	}
 	
 	@Test
 	public void testSetYCoordinateOfCurrentLocation() {
-		pp.setBrickColumnLocation(2);
-		pp.setBrickRowLocation(2);
-		pp.setBrickYCoordinates(2);
-		assertEquals(2, pp.getBrickYCoordinates());
+		ball.setBrickColumnLocation(2);
+		ball.setBrickRowLocation(2);
+		ball.setBrickYCoordinates(2);
+		assertEquals(2, ball.getBrickYCoordinates());
 	}
 	
 	@Test
 	public void testSetBrickEnabled() {
 		int enabled = 0;
-		pp.setBrickColumnLocation(2);
-		pp.setBrickRowLocation(2);
-		pp.setBrickEnabled(enabled);
-		assertEquals(true, pp.getActive());
+		ball.setBrickColumnLocation(2);
+		ball.setBrickRowLocation(2);
+		ball.setBrickEnabled(enabled);
+		assertTrue(ball.getActive());
 	}
 	
 	@Test
 	public void testSetBrickTaken() {
 		int taken = 1;
-		pp.setBrickColumnLocation(2);
-		pp.setBrickRowLocation(2);
-		pp.setBrickEnabled(taken);
-		assertEquals(false, pp.getActive());
+		ball.setBrickColumnLocation(2);
+		ball.setBrickRowLocation(2);
+		ball.setBrickEnabled(taken);
+		assertFalse(ball.getActive());
 	}
 	
 	@Test
 	public void testCreateWall() {
-		pp.createWall(2);
-		assertTrue(pp.getNumCols() > 0);
-		assertTrue(pp.getNumRows() > 0);
+		ball.createWall(2);
+		assertTrue(ball.getNumCols() > 0);
+		assertTrue(ball.getNumRows() > 0);
 	}
 	
 	@Test
 	public void testReturnXLocationOfSpecificBrick() {
-		pp.createWall(2);
-		pp.setBrickRowLocation(1);
-		pp.setBrickColumnLocation(2);
-		assertTrue(pp.getBrickXPosition() > 0);
+		ball.createWall(2);
+		ball.setBrickRowLocation(1);
+		ball.setBrickColumnLocation(2);
+		assertTrue(ball.getBrickXPosition() > 0);
 	}
 	
 	@Test
 	public void testReturnYLocationOfSpecificBrick() {
-		pp.createWall(2);
-		pp.setBrickRowLocation(1);
-		pp.setBrickColumnLocation(1);
-		assertTrue(pp.getBrickYCoordinates() > 0);
+		ball.createWall(2);
+		ball.setBrickRowLocation(1);
+		ball.setBrickColumnLocation(1);
+		assertTrue(ball.getBrickYCoordinates() > 0);
 	}
 	
 	@Test
 	public void testGetNumberOfRows() {
-		pp.createWall(2);
-		assertTrue(pp.getNumRows() > 0);
+		ball.createWall(2);
+		assertTrue(ball.getNumRows() > 0);
 	}
 	
 	@Test
 	public void testGetNumberOfCols() {
-		pp.createWall(2);
-		assertTrue(pp.getNumCols() > 0);
+		ball.createWall(2);
+		assertTrue(ball.getNumCols() > 0);
 	}
 	
 	@Test
 	public void testIncrementingRows() {
-		pp.createWall(2);
-		pp.setRowLoc(1);
-		pp.incRowLoc();
-		assertEquals(2, pp.getRowLoc());
+		ball.createWall(2);
+		ball.setRowLoc(1);
+		ball.incRowLoc();
+		assertEquals(2, ball.getRowLoc());
 	}
 	
 	@Test
 	public void testIncrementingCols() {
-		pp.createWall(2);
-		pp.setColLoc(1);
-		pp.incColLoc();
-		assertEquals(2, pp.getColLoc());
+		ball.createWall(2);
+		ball.setColLoc(1);
+		ball.incColLoc();
+		assertEquals(2, ball.getColLoc());
 	}
 	
 	@Test
 	public void testGetWallHeight() {
-		pp.createWall(2);
-		assertTrue(pp.wallHeight() > 0);
+		ball.createWall(2);
+		assertTrue(ball.wallHeight() > 0);
 	}
 	
 	@Test
 	public void testCheckBricks() {
-		pp.createWall(2);
-		pp.setBallY(60);
-		pp.setBrickYCoordinates(60);
-		pp.setBallX(200);
-		pp.setBallUp();
-		pp.setBrickRowLocation(1);
-		pp.setBallRight(true);
-		pp.setBallDown(false);
-		assertEquals(false, pp.getDown());
-		assertEquals(true, pp.checkBricks(55));
+		ball.createWall(2);
+		ball.setBallY(60);
+		ball.setBrickYCoordinates(60);
+		ball.setBallX(200);
+		ball.setBallUp();
+		ball.setBrickRowLocation(1);
+		ball.setBallRight(true);
+		ball.setBallDown(false);
+		assertFalse(ball.getDown());
+		assertTrue(ball.checkBricks(55));
 	}
 	
 	@Test
 	public void testBallGoesPastTakenBrickLocation() {
 		
-		pp.setBallX(50);
-		pp.setBallY(120);
-		pp.setBallXValue(50);
-		pp.setBallYValue(120);
-		pp.setBrickYCoordinates(120);
+		ball.setBallX(50);
+		ball.setBallY(120);
+		ball.setBallXValue(50);
+		ball.setBallYValue(120);
+		ball.setBrickYCoordinates(120);
 		
-		pp.setBallDown(false);
+		ball.setBallDown(false);
 		
-		assertEquals(false,pp.checkBricks(55));
+		assertEquals(false, ball.checkBricks(55));
 		
 		// Check that ball bounces
-		pp.setBallDirectionOnReachingBricks();
-		assertEquals(true,pp.checkBricks(55));
+		ball.setBallDirectionOnReachingBricks();
+		assertEquals(true, ball.checkBricks(55));
 		
 		// Check that ball goes through
-		pp.setBallDown(false);
-		assertEquals(false,pp.checkBricks(55));
+		ball.setBallDown(false);
+		assertEquals(false, ball.checkBricks(55));
 	}
 	
 	@Test
 	public void testCheckSetBallX() {
-		pp.setBallX(1);
-		assertEquals(1, pp.getBallX());
+		ball.setBallX(1);
+		assertEquals(1, ball.getBallX());
 	}
 	
 	@Test
 	public void testCheckSetBallY() {
-		pp.setBallY(1);
-		assertEquals(1, pp.getBallY());
+		ball.setBallY(1);
+		assertEquals(1, ball.getBallY());
 	}
 	
 	@Test
 	public void testSetBallDown() {
-		pp.setBallDown(true);
-		assertEquals(true, pp.getBallDown());
-		pp.setBallDown(false);
-		assertEquals(false, pp.getBallDown());
+		ball.setBallDown(true);
+		assertEquals(true, ball.getBallDown());
+		ball.setBallDown(false);
+		assertEquals(false, ball.getBallDown());
 	}
 	
 	@Test
 	public void testSetBallRight() {
-		pp.setBallRight(true);
-		assertEquals(true, pp.getBallRight());
-		pp.setBallRight(false);
-		assertEquals(false, pp.getBallRight());
+		ball.setBallRight(true);
+		assertEquals(true, ball.getBallRight());
+		ball.setBallRight(false);
+		assertEquals(false, ball.getBallRight());
 	}
 	
 	@Test
 	public void testCheckActive() {
-		pp.createWall(2);
-		pp.setBallX(1);
-		pp.setBallY(1);
+		ball.createWall(2);
+		ball.setBallX(1);
+		ball.setBallY(1);
 
-		pp.setBallDown(false);
-		assertEquals(true, pp.checkActive(20, 90, false));
-		assertEquals(false, pp.checkActive(20, 90, false));
+		ball.setBallDown(false);
+		assertEquals(true, ball.checkActive(20, 90, false));
+		assertEquals(false, ball.checkActive(20, 90, false));
 	}
 
 	@Test
 	public void TestBallBouncesRightWhenGoingDown() {
-		pp.createWall(2);
-		pp.setBallX(1);
-		pp.setBallY(1);
+		ball.createWall(2);
+		ball.setBallX(1);
+		ball.setBallY(1);
 
-		pp.setBallDown(true);
-		pp.setBallRight(true);
-		assertEquals(true, pp.getBallRight());
-		assertEquals(true, pp.checkActive(20, 90, pp.getBallRight()));
-		assertEquals(false, pp.getBallRight());
+		ball.setBallDown(true);
+		ball.setBallRight(true);
+		assertEquals(true, ball.getBallRight());
+		assertEquals(true, ball.checkActive(20, 90, ball.getBallRight()));
+		assertEquals(false, ball.getBallRight());
 	}
 	
 	@Test
 	public void testGetActive() {
-		pp.initializeBrickArray();
-		pp.createWall(2);
-		pp.setBrickColumnLocation(0);
-		pp.setBrickRowLocation(1);
-		assertEquals(true, pp.getActive());
-		pp.setBrickTaken();
-		assertEquals(false, pp.getActive());
+		ball.initializeBrickArray();
+		ball.createWall(2);
+		ball.setBrickColumnLocation(0);
+		ball.setBrickRowLocation(1);
+		assertTrue(ball.getActive());
+		ball.setBrickTaken();
+		assertFalse(ball.getActive());
 	}
 	
 	@Test
 	public void testAnyBricksLeft() {
-		pp.initializeBrickArray();
-		assertEquals(false, pp.getBricksLeft());
-		pp.createWall(2);
-		assertEquals(true, pp.getBricksLeft());
+		ball.initializeBrickArray();
+		assertFalse(ball.getBricksLeft());
+		ball.createWall(2);
+		assertTrue(ball.getBricksLeft());
 	}
 	
 }

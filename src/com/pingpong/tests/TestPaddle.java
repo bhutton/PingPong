@@ -14,20 +14,20 @@ import org.junit.Test;
 
 public class TestPaddle {
 	
-	private final Ball pp = new Ball();
+	private final Ball ball = new Ball();
 	
 	@Test
 	public void testSetPaddleImg() throws IOException {
 		String current = new java.io.File( "." ).getCanonicalPath();
 		String paddleImg = current + "/src/com/pingpong/images/paddle.png";
-		BufferedImage imgPaddle1 = null, imgPaddle2 = null;
+		BufferedImage imgPaddle1 = ImageIO.read(new File(paddleImg)), imgPaddle2;
 		
-		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); } 
+		try { imgPaddle1 = ImageIO.read(new File(paddleImg)); }
 		catch (IOException e) { e.printStackTrace(); }
-		
-		pp.setBallImage(paddleImg);
-		imgPaddle2 = pp.getBall();
-		
+
+		ball.setBallImage(paddleImg);
+		imgPaddle2 = ball.getBall();
+
 		byte[] byteArray1 = ((DataBufferByte) imgPaddle1.getData().getDataBuffer()).getData();
 		byte[] byteArray2 = ((DataBufferByte) imgPaddle2.getData().getDataBuffer()).getData();
 		
@@ -36,96 +36,96 @@ public class TestPaddle {
 	
 	@Test
 	public void testCheckPaddleReturnsTrue() {				
-		pp.setPaddleLocation(800, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-		assertEquals(true, pp.checkPaddle(true, 40, 50));
+		ball.setPaddleLocation(800, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+		assertTrue(ball.checkPaddle(true, 40, 50));
 	}
 	
 	@Test
 	public void testBallReachesPaddle() {
-		pp.setPaddleLocation(800, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    assertEquals(false, pp.checkPaddle(true, 400, 800));
+		ball.setPaddleLocation(800, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+		assertFalse(ball.checkPaddle(true, 400, 800));
 	}
 	
 	@Test
 	public void testBallShortOfPaddle() {
-		pp.setPaddleLocation(800, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    assertEquals(true, pp.checkPaddle(true, 400, 0));
+		ball.setPaddleLocation(800, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+		assertTrue(ball.checkPaddle(true, 400, 0));
 	}
 	
 	@Test
 	public void testBallHitsPaddle() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setBallXValue(300);
-	    pp.setBallYValue(600);
-	    assertEquals(false,pp.setBallDirectionAfterReachingPaddle());
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setBallXValue(300);
+	    ball.setBallYValue(600);
+	    assertEquals(false, ball.setBallDirectionAfterReachingPaddle());
 	}
 	
 	@Test
 	public void testBallMissesPaddle() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setBallXValue(0);
-	    pp.setBallYValue(600);
-	    assertEquals(true,pp.setBallDirectionAfterReachingPaddle());
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setBallXValue(0);
+	    ball.setBallYValue(600);
+	    assertEquals(true, ball.setBallDirectionAfterReachingPaddle());
 	}
 	
 	@Test
 	public void testPaddleAtLeftScreenEdge() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setPaddleMoveAmount(30);
-	    pp.setPaddleX(0);
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setPaddleMoveAmount(30);
+	    ball.setPaddleX(0);
 	    
-	    assertEquals(0, pp.getPaddleX());
-	    pp.movePaddleLeft();
-	    assertEquals(0, pp.getPaddleX());
+	    assertEquals(0, ball.getPaddleX());
+	    ball.movePaddleLeft();
+	    assertEquals(0, ball.getPaddleX());
 	}
 	
 	@Test
 	public void testPaddleAtRightScreenEdge() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setPaddleMoveAmount(30);
-	    pp.setPaddleX(400);
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setPaddleMoveAmount(30);
+	    ball.setPaddleX(400);
 	    
-	    assertEquals(400, pp.getPaddleX());
-	    pp.movePaddleRight();
-	    assertEquals(400, pp.getPaddleX());
+	    assertEquals(400, ball.getPaddleX());
+	    ball.movePaddleRight();
+	    assertEquals(400, ball.getPaddleX());
 	}
 	
 	@Test
 	public void testPaddleMovesLeft() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setPaddleMoveAmount(30);
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setPaddleMoveAmount(30);
 	    
-	    assertEquals(300, pp.getPaddleX());
-	    pp.movePaddleLeft();
-	    assertEquals(270, pp.getPaddleX());
+	    assertEquals(300, ball.getPaddleX());
+	    ball.movePaddleLeft();
+	    assertEquals(270, ball.getPaddleX());
 	}
 	
 	@Test
 	public void testPaddleMovesRight() {
-		pp.setPaddleLocation(600, 600);
-		pp.setPaddleWidth(200);
-	    pp.setPaddleHeight(30);
-	    pp.setPaddleMoveAmount(30);
+		ball.setPaddleLocation(600, 600);
+		ball.setPaddleWidth(200);
+	    ball.setPaddleHeight(30);
+	    ball.setPaddleMoveAmount(30);
 	    
-	    assertEquals(300, pp.getPaddleX());
-	    pp.movePaddleRight();
-	    assertEquals(330, pp.getPaddleX());
+	    assertEquals(300, ball.getPaddleX());
+	    ball.movePaddleRight();
+	    assertEquals(330, ball.getPaddleX());
 	}
 	
 }
