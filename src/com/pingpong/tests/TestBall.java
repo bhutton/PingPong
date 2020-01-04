@@ -21,12 +21,6 @@ public class TestBall {
         String ballImg = current + "/src/com/pingpong/images/ball.png";
         BufferedImage imgBall1 = ImageIO.read(new File(ballImg));
 
-//        try {
-//            imgBall1 = ImageIO.read(new File(ballImg));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         ball.setBallImage(ballImg);
         BufferedImage imgBall2 = ball.getBall();
 
