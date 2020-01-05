@@ -47,9 +47,9 @@ public class TestMessages {
 	
 	@Test
 	public void testSetGameOver() {
-		assertEquals(true, messages.setGameActive());
-		assertEquals(false, messages.setGameOver(1,1));
-		assertEquals(false, messages.getGameActive());
+		assertTrue(messages.setGameActive());
+		assertFalse(messages.setGameOver(1,1));
+		assertFalse(messages.getGameActive());
 	}
 
 	@Test
