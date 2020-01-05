@@ -112,8 +112,7 @@ public class Ball extends Paddle {
 	
 	public Boolean setBallDirectionAfterReachingPaddle() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
-		down = checkPaddle(down, x, y);
-		return down;
+		return checkPaddle(down, x, y);
 	}
 
 	public Ball checkStart() {
