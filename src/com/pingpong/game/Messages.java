@@ -49,7 +49,7 @@ public class Messages {
 		return "Press Enter to Try Again";
 	}
 	
-	public void displayMessage(Graphics g, int width, int height, int appletWidth, int appletHeight) {
+	public void displayGameOverMessage(Graphics g, int width, int height, int appletWidth, int appletHeight) {
 		int xGameOver = appletWidth / 2 - (width/2);
 		int yGameOver = appletHeight / 2 - (height/2);
 		int xStartMessage = appletWidth / 2 - 80;
@@ -80,7 +80,7 @@ public class Messages {
 		g.setColor(Color.BLACK);
 		g.fill3DRect(0, appletHeight-30, appletWidth, appletHeight, true);
 		g.setColor(Color.WHITE);
-		g.drawString("Lives: " + Integer.toString(getLives()), appletWidth-150, appletHeight-10);
-		g.drawString("Level: " + Integer.toString(getLevel()), appletWidth-70, appletHeight-10);
+		g.drawString("Lives: " + getLives(), appletWidth-150, appletHeight-10);
+		g.drawString("Level: " + getLevel(), appletWidth-70, appletHeight-10);
 	}
 }

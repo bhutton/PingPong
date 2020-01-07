@@ -205,7 +205,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
                 ball.drawWindow(g);
                 message.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
             } else
-                message.displayMessage(g, 300, 79, appletWidth, appletHeight);
+                message.displayGameOverMessage(g, 300, 79, appletWidth, appletHeight);
         }
     }
 }

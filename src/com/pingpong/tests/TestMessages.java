@@ -81,7 +81,7 @@ public class TestMessages {
 		int xGameOver = 0;
 		int yGameOver = 0;
 
-		messages.displayMessage(graphicsMock, 20, 20, 20, 20);
+		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
 		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, yStartMessage);
