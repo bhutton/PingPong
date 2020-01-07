@@ -1,7 +1,6 @@
 package com.pingpong.tests;
 
 import static org.junit.Assert.*;
-//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;

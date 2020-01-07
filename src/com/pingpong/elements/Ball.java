@@ -1,5 +1,7 @@
 package com.pingpong.elements;
 
+import com.pingpong.Score;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +16,7 @@ public class Ball extends Paddle {
     private final int incY=3;
     private final int width=50;
 	private boolean right = true, down = true, ballIsActive = true, ballStart = false;
+	private Score score = new Score();
 	
 	private BufferedImage imgBall = null;
 
@@ -101,6 +104,7 @@ public class Ball extends Paddle {
 	public Boolean setBallDirectionOnReachingBricks() {
 		this.setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		this.down = checkBricks(this.width);
+		this.score.incrementScore(1);
 
 		if (this.getBallRight())
 			this.setRight();
@@ -224,4 +228,8 @@ public class Ball extends Paddle {
         setBallDirectionOnReachingBricks();
         setBallDirectionAfterReachingPaddle();
     }
+
+	public int getScore() {
+		return score.getScore();
+	}
 }

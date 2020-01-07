@@ -91,6 +91,8 @@ public class TestBall {
     public void testCheckBallDirectionAfterReachingBricks() {
         int x = 10, y = 10;
 
+        assertEquals(0, ball.getScore());
+
         ball.createWall(4);
         ball.setBallUp();
         ball.setBallXValue(x);
@@ -98,6 +100,7 @@ public class TestBall {
 
         assertFalse(ball.getDown());
         assertTrue(ball.setBallDirectionOnReachingBricks());
+        assertEquals(1, ball.getScore());
     }
 
     @Test
