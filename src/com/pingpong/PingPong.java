@@ -195,6 +195,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
         level.setGameStart();
         message.setGameOver(level.getLevel(), level.getLives());
         ball.startGame(level.getLevel());
+        ball.setScore(0);
         background.setStart();
     }
 

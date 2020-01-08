@@ -195,15 +195,20 @@ public class TestPingPong {
         imgBackground1 = pingPong.background.getBackground();
 
         pingPong.ball.zeroBrickArray();
-        pingPong.level.setLives(0);
+        pingPong.ball.setScore(10);
+		assertEquals(10, pingPong.ball.getScore());
 
-        assertEquals("Level Finished", pingPong.checkForEndOfLevel());
+		pingPong.setGameOver();
+		pingPong.level.setLives(0);
+
+        assertEquals("Game Over", pingPong.checkForEndOfLevel());
 
         imgBackground2 = pingPong.background.getBackground();
         byte[] byteArray1 = ((DataBufferByte) imgBackground1.getData().getDataBuffer()).getData();
         byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
 
         assertArrayEquals(byteArray1, byteArray2);
+        assertEquals(0, pingPong.ball.getScore());
     }
 
     @Test

@@ -392,4 +392,8 @@ public class Bricks {
 	public void setBrickStatus(int col, int row, int currentStatus, int newStatus) {
 		this.brickArray[col][row][currentStatus] = newStatus;
 	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 }
