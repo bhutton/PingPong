@@ -16,6 +16,7 @@ public class Messages {
 	
 	private int level;
     private int lives;
+    private int score;
 	
 	public void setGameOverImage(String gameOverImg) {
 		try { imgGameOver = ImageIO.read(new File(gameOverImg)); } 
@@ -82,5 +83,14 @@ public class Messages {
 		g.setColor(Color.WHITE);
 		g.drawString("Lives: " + getLives(), appletWidth-150, appletHeight-10);
 		g.drawString("Level: " + getLevel(), appletWidth-70, appletHeight-10);
+		g.drawString("Score: " + getScore(), appletWidth-230, appletHeight-10);
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	private int getScore() {
+		return this.score;
 	}
 }

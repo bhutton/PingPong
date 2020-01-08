@@ -219,4 +219,5 @@ public class TestPingPong {
         assertNotEquals(null, pingPong.background.getBackGroundImageFileName());
         assertNotEquals(background, pingPong.background.getBackGroundImageFileName());
     }
+
 }

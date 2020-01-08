@@ -153,6 +153,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
             this.gameStart = true;
 
             ball.ballCalculations(this.appletWidth, this.appletHeight);
+            message.setScore(ball.getScore());
             frame.repaint();
 
             try {

@@ -106,14 +106,18 @@ public class Ball extends Paddle {
 		this.down = checkBricks(this.width);
 		this.score.incrementScore(1);
 
+		setDirection();
+
+		return down;
+	}
+
+	private void setDirection() {
 		if (this.getBallRight())
 			this.setRight();
 		else
 			this.setLeft();
-
-		return down;
 	}
-	
+
 	public Boolean setBallDirectionAfterReachingPaddle() {
 		setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
 		down = checkPaddle(down, x, y);
@@ -228,8 +232,4 @@ public class Ball extends Paddle {
         setBallDirectionOnReachingBricks();
         setBallDirectionAfterReachingPaddle();
     }
-
-	public int getScore() {
-		return score.getScore();
-	}
 }

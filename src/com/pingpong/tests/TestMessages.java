@@ -60,6 +60,9 @@ public class TestMessages {
 	@Test
 	public void testDisplayGameStatsAtBottomOfScreen() {
 		messages.displayGameStatsAtBottomOfScreen(graphicsMock, 800, 600);
+		verify(graphicsMock).drawString("Lives: " + 0, 650, 590);
+		verify(graphicsMock).drawString("Level: " + 0, 730, 590);
+		verify(graphicsMock).drawString("Score: " + 0, 570, 590);
 	}
 	
 	@Test

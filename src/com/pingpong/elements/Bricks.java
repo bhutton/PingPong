@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class Bricks {
 	
 	// Contains the x,y coordinates and whether the brick is active or not.
-	final private int[][][] brickArray = new int[225][830][3];
+	final public int[][][] brickArray = new int[225][830][3];
 	
 	private int brickColumnLocation = 0, 
 				brickRowLocation = 0, 
@@ -25,6 +25,7 @@ public class Bricks {
 
 	private BufferedImage imgBrick = null;
 	private int ballWidth;
+	private int score;
 
 	public Bricks() {
 		initializeBrickArray();
@@ -181,7 +182,7 @@ public class Bricks {
 	public int getNumRows() {
 		return this.numRows;
 	}
-	
+
 	public int getNumCols() {
 		return this.numCols;
 	}
@@ -335,6 +336,7 @@ public class Bricks {
 		for (int row = this.numRows-1; row >= 0; row--) {
 			if (this.brickArray[brickColumnLocation][row][2] == brickIsActive) {
 				this.brickArray[brickColumnLocation][row][2] = brickHasBeenTaken;
+				this.score++;
 						
 				return true;
 			}
@@ -375,7 +377,15 @@ public class Bricks {
 		return true;
 	}
 
+	public int getScore() {
+		return this.score;
+	}
 
-	
+	public void setNumRows(int rows) {
+		this.numRows = rows;
+	}
 
+	public void setNumCols(int cols) {
+		this.numCols = cols;
+	}
 }
