@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TestScore {
     @Test
@@ -50,5 +50,17 @@ public class TestScore {
         Score score = new Score();
         score.getHighestScores();
         assertEquals(highScores, score.toString());
+    }
+
+    @Test
+    public void checkCurrentAgainstExistingScores() throws IOException {
+        Score score = new Score();
+
+        score.incrementScore(5);
+        score.getHighestScores();
+        assertFalse(score.checkAgainstExisting());
+
+        score.incrementScore(15);
+        assertTrue(score.checkAgainstExisting());
     }
 }

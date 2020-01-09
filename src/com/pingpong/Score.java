@@ -53,4 +53,10 @@ public class Score {
 
         return score.toString();
     }
+
+    public boolean checkAgainstExisting() {
+        for(Map.Entry<String, Integer> line: scores.entrySet())
+            if(score > line.getValue()) return true;
+        return false;
+    }
 }
