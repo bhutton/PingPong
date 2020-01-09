@@ -42,4 +42,13 @@ public class TestScore {
 
         assertEquals(highScores, score.getHighestScores());
     }
+
+    @Test
+    public void displayScores() throws IOException {
+        String highScores = "fred\t10\nbloggs\t20\n";
+
+        Score score = new Score();
+        score.getHighestScores();
+        assertEquals(highScores, score.toString());
+    }
 }
