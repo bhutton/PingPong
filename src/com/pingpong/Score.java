@@ -50,6 +50,7 @@ public class Score {
             score.append(line.getValue());
             score.append("\n");
         }
+
         return score.toString();
     }
 }
