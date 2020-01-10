@@ -56,13 +56,8 @@ public class Messages {
 		int yGameOver = appletHeight / 2 - (height);
 		FontMetrics metrics = g.getFontMetrics();
 
-		int returnMessageLength = 0;
-		int returnScoresLength = 0;
-
-		if(metrics != null) {
-			returnMessageLength = metrics.stringWidth(returnMessage());
-			returnScoresLength = metrics.stringWidth(returnScores());
-		}
+		int returnMessageLength = calculateStringLength(metrics, returnMessage());
+		int returnScoresLength = calculateStringLength(metrics, returnScores());
 
 		int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
 		int yStartMessage = appletHeight / 2 + 50;
@@ -74,7 +69,14 @@ public class Messages {
 		g.drawString(returnMessage(), xStartMessage, yStartMessage);
 		g.drawString(returnScores(), xScoreMessage, yScoreMessage);
 	}
-	
+
+	private int calculateStringLength(FontMetrics metrics, String s) {
+		int returnMessageLength = 0;
+		if (metrics != null)
+			returnMessageLength = metrics.stringWidth(s);
+		return returnMessageLength;
+	}
+
 	public void setLevel(int level) {
 		this.level = level;
 	}
