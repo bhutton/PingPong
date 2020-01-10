@@ -4,7 +4,6 @@ import com.pingpong.Score;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -35,9 +34,9 @@ public class TestScore {
 
     @Test
     public void highestScores() throws IOException {
-        HashMap<String, Integer> highScores = new HashMap<>();
-        highScores.put("fred", 10);
-        highScores.put("bloggs", 20);
+        HashMap<Integer, String> highScores = new HashMap<>();
+        highScores.put(10, "fred");
+        highScores.put(20, "bloggs");
         Score score = new Score();
 
         assertEquals(highScores, score.getHighestScores());
@@ -45,7 +44,7 @@ public class TestScore {
 
     @Test
     public void displayScores() throws IOException {
-        String highScores = "fred\t10\nbloggs\t20\n";
+        String highScores = "20\tbloggs\n10\tfred\n";
 
         Score score = new Score();
         score.getHighestScores();
@@ -62,5 +61,16 @@ public class TestScore {
 
         score.incrementScore(15);
         assertTrue(score.checkAgainstExisting());
+    }
+
+    @Test
+    public void insertCurrentIntoExistingSet() throws IOException {
+        String highScores = "20\tbloggs\n15\ttest\n10\tfred\n";
+
+        Score score = new Score("test");
+        score.getHighestScores();
+        score.incrementScore(15);
+        score.checkAgainstExisting();
+        assertEquals(highScores, score.toString());
     }
 }

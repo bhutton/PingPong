@@ -6,13 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NavigableSet;
+import java.util.TreeMap;
 
 public class Score {
     private int score;
-    HashMap<String, Integer> scores;
+    HashMap<Integer, String> scores;
 
     public Score() {
         this.score = 0;
+    }
+
+    public Score(String fred) {
+
     }
 
     public int getScore() {
@@ -20,43 +26,57 @@ public class Score {
     }
 
     public void incrementScore(int score) {
-        this.score+=score;
+        this.score += score;
     }
 
-    public HashMap<String, Integer> getHighestScores() throws IOException {
+    public HashMap<Integer, String> getHighestScores() throws IOException {
         return loadScoresFromFile();
     }
 
-    private HashMap<String, Integer> loadScoresFromFile() throws IOException {
+    private HashMap<Integer, String> loadScoresFromFile() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/com/pingpong/file/highscores")));
         String line;
         scores = new HashMap<>();
         while ((line = reader.readLine()) != null) {
             if (line.contains("=")) {
                 String[] strings = line.split("=");
-                scores.put(strings[0], Integer.parseInt(strings[1]));
+                scores.put(Integer.parseInt(strings[1]), strings[0]);
             }
         }
+        sortDescending();
         return scores;
     }
 
     @Override
     public String toString() {
+        Map<Integer, String> reversedMap = sortDescending();
+
+        return buildString(reversedMap).toString();
+    }
+
+    private StringBuilder buildString(Map<Integer, String> reversedMap) {
         StringBuilder score = new StringBuilder();
 
-        for(Map.Entry<String, Integer> line : scores.entrySet()) {
+        for (Map.Entry<Integer, String> line : reversedMap.entrySet()) {
             score.append(line.getKey());
             score.append("\t");
             score.append(line.getValue());
             score.append("\n");
         }
+        return score;
+    }
 
-        return score.toString();
+    private Map<Integer, String> sortDescending() {
+        TreeMap<Integer, String> sortedMap = new TreeMap<>(scores);
+        return sortedMap.descendingMap();
     }
 
     public boolean checkAgainstExisting() {
-        for(Map.Entry<String, Integer> line: scores.entrySet())
-            if(score > line.getValue()) return true;
+        for (Map.Entry<Integer, String> line : scores.entrySet())
+            if (score > line.getKey()) {
+                scores.put(score, "test");
+                return true;
+            }
         return false;
     }
 }
