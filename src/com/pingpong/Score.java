@@ -36,14 +36,17 @@ public class Score {
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/com/pingpong/file/highscores")));
         String line;
         scores = new HashMap<>();
-        while ((line = reader.readLine()) != null) {
-            if (line.contains("=")) {
-                String[] strings = line.split("=");
-                scores.put(Integer.parseInt(strings[1]), strings[0]);
-            }
-        }
+        while ((line = reader.readLine()) != null)
+            splitString(line);
         sortDescending();
         return scores;
+    }
+
+    private void splitString(String line) {
+        if (line.contains("=")) {
+            String[] strings = line.split("=");
+            scores.put(Integer.parseInt(strings[1]), strings[0]);
+        }
     }
 
     @Override
