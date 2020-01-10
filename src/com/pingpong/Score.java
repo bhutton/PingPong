@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NavigableSet;
 import java.util.TreeMap;
 
 public class Score {
@@ -17,7 +16,7 @@ public class Score {
         this.score = 0;
     }
 
-    public Score(String fred) {
+    public Score(String name) {
 
     }
 
