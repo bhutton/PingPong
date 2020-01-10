@@ -79,14 +79,16 @@ public class TestMessages {
 
 	@Test
 	public void displayMessage() {
-		int xStartMessage = -70;
+		String highScores = "20\tbloggs\n10\tfred\n";
+		int xStartMessage = 10;
 		int yStartMessage = 60;
 		int xGameOver = 0;
-		int yGameOver = 0;
+		int yGameOver = -10;
 
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
 		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, yStartMessage);
+		verify(graphicsMock).drawString(highScores, xStartMessage, 30);
 	}
 }

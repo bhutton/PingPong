@@ -1,7 +1,8 @@
 package com.pingpong.game;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import com.pingpong.Score;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -49,16 +50,29 @@ public class Messages {
 	public String returnMessage() {
 		return "Press Enter to Try Again";
 	}
-	
+
 	public void displayGameOverMessage(Graphics g, int width, int height, int appletWidth, int appletHeight) {
 		int xGameOver = appletWidth / 2 - (width/2);
-		int yGameOver = appletHeight / 2 - (height/2);
-		int xStartMessage = appletWidth / 2 - 80;
+		int yGameOver = appletHeight / 2 - (height);
+		FontMetrics metrics = g.getFontMetrics();
+
+		int returnMessageLength = 0;
+		int returnScoresLength = 0;
+
+		if(metrics != null) {
+			returnMessageLength = metrics.stringWidth(returnMessage());
+			returnScoresLength = metrics.stringWidth(returnScores());
+		}
+
+		int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
 		int yStartMessage = appletHeight / 2 + 50;
-		
+		int xScoreMessage = (appletWidth / 2) - (returnScoresLength / 2);
+		int yScoreMessage = appletHeight / 2 + 20;
+
 		g.setColor(Color.GRAY);
 		g.drawImage(this.imgGameOver, xGameOver, yGameOver, null);
 		g.drawString(returnMessage(), xStartMessage, yStartMessage);
+		g.drawString(returnScores(), xScoreMessage, yScoreMessage);
 	}
 	
 	public void setLevel(int level) {
@@ -92,5 +106,15 @@ public class Messages {
 
 	private int getScore() {
 		return this.score;
+	}
+
+	public String returnScores() {
+		Score scores = new Score();
+		try {
+			scores.getHighestScores();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return scores.toString();
 	}
 }
