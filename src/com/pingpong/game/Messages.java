@@ -63,15 +63,21 @@ public class Messages {
         FontMetrics metrics = g.getFontMetrics();
 
         int returnMessageLength = calculateStringLength(metrics, returnMessage());
-        int returnScoresLength;
 
         int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
-        int xScoreMessage;
         int yScoreMessage = appletHeight / 2 + 20;
 
         g.setColor(Color.GRAY);
         g.drawImage(this.imgGameOver, xGameOver, yGameOver, null);
 
+        int y = displayScores(g, appletWidth, metrics, yScoreMessage);
+
+        g.drawString(returnMessage(), xStartMessage, y);
+    }
+
+    private int displayScores(Graphics g, int appletWidth, FontMetrics metrics, int yScoreMessage) {
+        int returnScoresLength;
+        int xScoreMessage;
         Score scores = new Score();
         int y = yScoreMessage;
         try {
@@ -84,8 +90,7 @@ public class Messages {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        g.drawString(returnMessage(), xStartMessage, y);
+        return y;
     }
 
     private int calculateStringLength(FontMetrics metrics, String s) {
