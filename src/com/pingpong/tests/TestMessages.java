@@ -79,9 +79,7 @@ public class TestMessages {
 
 	@Test
 	public void displayMessage() {
-		String highScores = "20\tbloggs\n10\tfred\n";
 		int xStartMessage = 10;
-		int yStartMessage = 60;
 		int xGameOver = 0;
 		int yGameOver = -10;
 
