@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -62,20 +60,16 @@ public class Messages {
         int yGameOver = appletHeight / 2 - (height);
         FontMetrics metrics = g.getFontMetrics();
 
-        int returnMessageLength = calculateStringLength(metrics, returnMessage());
-
-        int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
-        int yScoreMessage = appletHeight / 2 + 20;
-
         g.setColor(Color.GRAY);
         g.drawImage(this.imgGameOver, xGameOver, yGameOver, null);
 
-        int y = displayScores(g, appletWidth, metrics, yScoreMessage);
-
-        g.drawString(returnMessage(), xStartMessage, y);
+        displayMessages(g, appletWidth, appletHeight, metrics);
     }
 
-    private int displayScores(Graphics g, int appletWidth, FontMetrics metrics, int yScoreMessage) {
+    private void displayMessages(Graphics g, int appletWidth, int appletHeight, FontMetrics metrics) {
+        int yScoreMessage = appletHeight / 2 + 20;
+        int returnMessageLength = calculateStringLength(metrics, returnMessage());
+        int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
         int returnScoresLength;
         int xScoreMessage;
         Score scores = new Score();
@@ -90,7 +84,7 @@ public class Messages {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return y;
+        g.drawString(returnMessage(), xStartMessage, y);
     }
 
     private int calculateStringLength(FontMetrics metrics, String s) {
