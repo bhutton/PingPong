@@ -88,7 +88,8 @@ public class TestMessages {
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
-		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, yStartMessage);
-		verify(graphicsMock).drawString(highScores, xStartMessage, 30);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 30);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 50);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 70);
 	}
 }

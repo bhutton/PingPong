@@ -4,7 +4,9 @@ import com.pingpong.Score;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import static org.junit.Assert.*;
 
@@ -44,11 +46,14 @@ public class TestScore {
 
     @Test
     public void displayScores() throws IOException {
-        String highScores = "20\tbloggs\n10\tfred\n";
+        TreeMap<Integer, String> highScores = new TreeMap<>();
+        highScores.descendingMap();
+        highScores.put(20, "bloggs");
+        highScores.put(10, "fred");
+
 
         Score score = new Score();
-        score.getHighestScores();
-        assertEquals(highScores, score.toString());
+        assertEquals(highScores, score.getHighestScores());
     }
 
     @Test
