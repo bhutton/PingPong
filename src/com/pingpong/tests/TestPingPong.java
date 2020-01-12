@@ -17,11 +17,11 @@ import static org.mockito.Mockito.*;
 public class TestPingPong {
 	
 	private final com.pingpong.PingPong pingPong = new PingPong();
-	private final Graphics g = mock(Graphics.class);
+	private final Graphics graphicsMock = mock(Graphics.class);
 	
 	@Test
 	public void testPaint() {
-		pingPong.paint(g);
+		pingPong.paint(graphicsMock);
 	}
 	
 	@Test
