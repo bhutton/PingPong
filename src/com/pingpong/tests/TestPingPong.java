@@ -208,6 +208,12 @@ public class TestPingPong {
         byte[] byteArray2 = ((DataBufferByte) imgBackground2.getData().getDataBuffer()).getData();
 
         assertArrayEquals(byteArray1, byteArray2);
+		KeyEvent key = new KeyEvent(
+				pingPong, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'\n'
+		);
+
+		pingPong.keyPressed(key);
+
         assertEquals(0, pingPong.ball.getScore());
     }
 

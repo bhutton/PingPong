@@ -34,7 +34,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
     private HashMap<String, String> artifacts = new HashMap<>();
 
     public final Ball ball = new Ball();
-    private final Messages message = new Messages();
+    public final Messages message = new Messages();
     public final Background background = new Background();
     private final File basePath = new File(
             PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
@@ -88,7 +88,10 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = ball.movePaddleLeft();
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = ball.movePaddleRight();
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = message.setGameActive();
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            ball.setScore(0);
+            this.called = message.setGameActive();
+        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) this.called = ball.ballSetStart();
     }
 
@@ -195,7 +198,6 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
         level.setGameStart();
         message.setGameOver(level.getLevel(), level.getLives());
         ball.startGame(level.getLevel());
-        ball.setScore(0);
         background.setStart();
     }
 
