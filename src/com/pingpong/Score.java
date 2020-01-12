@@ -1,9 +1,6 @@
 package com.pingpong;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,16 +26,21 @@ public class Score {
         this.score += score;
     }
 
-    public HashMap<Integer, String> getHighestScores() throws IOException {
+    public HashMap<Integer, String> getHighestScores() {
         return loadScoresFromFile();
     }
 
-    private HashMap<Integer, String> loadScoresFromFile() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/com/pingpong/file/highscores")));
-        String line;
-        scores = new HashMap<>();
-        while ((line = reader.readLine()) != null)
-            splitString(line);
+    private HashMap<Integer, String> loadScoresFromFile() {
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(new File("src/com/pingpong/file/highscores")));
+            String line;
+            scores = new HashMap<>();
+            while ((line = reader.readLine()) != null)
+                splitString(line);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return scores;
     }

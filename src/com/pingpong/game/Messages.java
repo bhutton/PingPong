@@ -78,12 +78,8 @@ public class Messages {
         int y = yScoreMessage;
         Score scores = new Score();
         scores.incrementScore(newScore);
-        HashMap<Integer, String> getScores = new HashMap<>();
-        try {
-            getScores = scores.getHighestScores();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HashMap<Integer, String> getScores;
+        getScores = scores.getHighestScores();
         scores.checkAgainstExisting();
         for (Map.Entry<Integer, String> score : getScores.entrySet()) {
             returnScoresLength = calculateStringLength(metrics, score.getKey() + "\t" + score.getValue());
@@ -134,13 +130,4 @@ public class Messages {
         return this.score;
     }
 
-    public String returnScores() {
-        Score scores = new Score();
-        try {
-            scores.getHighestScores();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scores.toString();
-    }
 }
