@@ -72,6 +72,7 @@ public class TestScore {
     public void insertCurrentIntoExistingSet() throws IOException {
         String highScores = "20\tbloggs\n15\ttest\n10\tfred\n";
 
+        //TODO use username environment variable to get local user
         Score score = new Score("test");
         score.getHighestScores();
         score.incrementScore(15);

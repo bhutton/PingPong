@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.pingpong.Score;
 import com.pingpong.game.Messages;
 import org.junit.Test;
 
@@ -89,5 +90,22 @@ public class TestMessages {
 		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 30);
 		verify(graphicsMock).drawString("10	fred", xStartMessage, 50);
 		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 70);
+	}
+
+	@Test
+	public void displayMessageWithNewHighScoreAdded() {
+		int xStartMessage = 10;
+		int xGameOver = 0;
+		int yGameOver = -10;
+
+		Score score = new Score();
+		messages.setScore(15);
+		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
+		verify(graphicsMock).setColor(Color.GRAY);
+		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 30);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 50);
+		verify(graphicsMock).drawString("15	test", xStartMessage, 70);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 90);
 	}
 }

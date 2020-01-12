@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -38,7 +39,7 @@ public class Score {
         scores = new HashMap<>();
         while ((line = reader.readLine()) != null)
             splitString(line);
-        sortDescending();
+
         return scores;
     }
 
@@ -79,6 +80,8 @@ public class Score {
                 scores.put(score, "test");
                 return true;
             }
+
+        sortDescending();
         return false;
     }
 }

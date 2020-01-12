@@ -6,7 +6,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 
@@ -63,26 +66,30 @@ public class Messages {
         g.setColor(Color.GRAY);
         g.drawImage(this.imgGameOver, xGameOver, yGameOver, null);
 
-        displayMessages(g, appletWidth, appletHeight, metrics);
+        displayMessages(g, appletWidth, appletHeight, metrics, getScore());
     }
 
-    private void displayMessages(Graphics g, int appletWidth, int appletHeight, FontMetrics metrics) {
+    private void displayMessages(Graphics g, int appletWidth, int appletHeight, FontMetrics metrics, int newScore) {
         int yScoreMessage = appletHeight / 2 + 20;
         int returnMessageLength = calculateStringLength(metrics, returnMessage());
         int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
         int returnScoresLength;
         int xScoreMessage;
-        Score scores = new Score();
         int y = yScoreMessage;
+        Score scores = new Score();
+        scores.incrementScore(newScore);
+        HashMap<Integer, String> getScores = new HashMap<>();
         try {
-            for (Map.Entry<Integer, String> score : scores.getHighestScores().entrySet()) {
-				returnScoresLength = calculateStringLength(metrics, score.getKey() + "\t" + score.getValue());
-				xScoreMessage = (appletWidth / 2) - (returnScoresLength / 2);
-                g.drawString(score.getKey() + "\t" + score.getValue(), xScoreMessage, y);
-                y += 20;
-            }
+            getScores = scores.getHighestScores();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        scores.checkAgainstExisting();
+        for (Map.Entry<Integer, String> score : getScores.entrySet()) {
+            returnScoresLength = calculateStringLength(metrics, score.getKey() + "\t" + score.getValue());
+            xScoreMessage = (appletWidth / 2) - (returnScoresLength / 2);
+            g.drawString(score.getKey() + "\t" + score.getValue(), xScoreMessage, y);
+            y += 20;
         }
         g.drawString(returnMessage(), xStartMessage, y);
     }
