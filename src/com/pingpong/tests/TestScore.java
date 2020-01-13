@@ -87,7 +87,6 @@ public class TestScore {
         String userScore = System.getProperty("user.name");
         String highScores = "20\tbloggs\n15\t" + userScore + "\n10\tfred\n";
 
-        //TODO use username environment variable to get local user
         Score score = new Score(System.getProperty("user.name"));
         score.getHighestScores();
         score.incrementScore(15);
