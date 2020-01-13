@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -104,6 +105,29 @@ public class TestScore {
         score.getHighestScores();
 
         String highScores = "20\tbloggs\n15\t" + userScore + "\n10\tfred\n";
+        assertEquals(highScores, score.toString());
+    }
+
+    @Test
+    public void addHighScoresToFileWithDifferentSet() throws IOException {
+        BufferedWriter bw;
+        File file = new File("src/com/pingpong/file/highscores");
+        FileWriter fw;
+        fw = new FileWriter(file);
+        bw = new BufferedWriter(fw);
+
+        bw.write("bloggs=20\n");
+        bw.write("fred=1\n");
+        bw.close();
+
+        String userScore = System.getProperty("user.name");
+        Score score = new Score(userScore);
+        score.getHighestScores();
+        score.incrementScore(15);
+        score.checkAgainstExisting();
+        score.getHighestScores();
+
+        String highScores = "20\tbloggs\n15\t" + userScore + "\n1\tfred\n";
         assertEquals(highScores, score.toString());
     }
 }

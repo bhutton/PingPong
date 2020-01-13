@@ -7,20 +7,37 @@ import static org.mockito.Mockito.verify;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import com.pingpong.Score;
 import com.pingpong.game.Messages;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestMessages {
 	
 	private final Messages messages = new Messages();
 	private final Graphics graphicsMock = mock(Graphics.class);
-	
+
+	@Before
+	public void setup() throws Exception {
+		BufferedWriter bw;
+		File file = new File("src/com/pingpong/file/highscores");
+		FileWriter fw;
+		fw = new FileWriter(file);
+		bw = new BufferedWriter(fw);
+
+		bw.write("bloggs=20\n");
+		bw.write("fred=10\n");
+		bw.close();
+	}
+
+
 	@Test
 	public void gameOverImg() throws IOException {
 		String current = new java.io.File( "." ).getCanonicalPath();

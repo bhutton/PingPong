@@ -80,30 +80,52 @@ public class Score {
     public boolean checkAgainstExisting() {
         BufferedWriter bw;
 
+        boolean response = false;
+        HashMap<Integer, String> newScore = new HashMap<>();
+
         try {
             if (scores.size() > 0) {
-                File file = new File("src/com/pingpong/file/highscores");
-                FileWriter fw;
-                fw = new FileWriter(file);
-                bw = new BufferedWriter(fw);
+                bw = createHighScoresFile();
 
                 for (Map.Entry<Integer, String> line : scores.entrySet()) {
                     bw.write(line.getValue() + "=" + line.getKey() + "\n");
-                    if (score > line.getKey()) {
-                        scores.put(score, username);
+                    newScore.put(line.getKey(), line.getValue());
+                    if (score > line.getKey() && !response) {
+                        newScore.put(score, username);
 
                         bw.write(username + "=" + score + "\n");
-                        bw.close();
-                        return true;
+                        response = true;
                     }
+
                 }
                 bw.close();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
+        scores = newScore;
         sortDescending();
+        return response;
+    }
+
+    private boolean addNewHighScore(BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
+        if (score > line.getKey()) {
+            scores.put(score, username);
+
+            bw.write(username + "=" + score + "\n");
+            bw.close();
+            return true;
+        }
         return false;
+    }
+
+    private BufferedWriter createHighScoresFile() throws IOException {
+        BufferedWriter bw;
+        File file = new File("src/com/pingpong/file/highscores");
+        FileWriter fw;
+        fw = new FileWriter(file);
+        bw = new BufferedWriter(fw);
+        return bw;
     }
 }

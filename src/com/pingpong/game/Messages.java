@@ -80,9 +80,9 @@ public class Messages {
 
         scores.incrementScore(newScore);
         HashMap<Integer, String> getScores;
-        getScores = scores.getHighestScores();
+        scores.getHighestScores();
         scores.checkAgainstExisting();
-        for (Map.Entry<Integer, String> score : getScores.entrySet()) {
+        for (Map.Entry<Integer, String> score : scores.getHighestScores().entrySet()) {
             returnScoresLength = calculateStringLength(metrics, score.getKey() + "\t" + score.getValue());
             xScoreMessage = (appletWidth / 2) - (returnScoresLength / 2);
             g.drawString(score.getKey() + "\t" + score.getValue(), xScoreMessage, y);
