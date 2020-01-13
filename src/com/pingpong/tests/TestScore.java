@@ -1,16 +1,12 @@
 package com.pingpong.tests;
 
 import com.pingpong.Score;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
