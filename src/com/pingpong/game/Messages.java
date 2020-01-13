@@ -79,7 +79,6 @@ public class Messages {
         Score scores = new Score(System.getProperty("user.name"));
 
         scores.incrementScore(newScore);
-        HashMap<Integer, String> getScores;
         scores.getHighestScores();
         scores.checkAgainstExisting();
         for (Map.Entry<Integer, String> score : scores.getHighestScores().entrySet()) {
