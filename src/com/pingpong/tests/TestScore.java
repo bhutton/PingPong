@@ -35,7 +35,7 @@ public class TestScore {
     }
 
     @Test
-    public void highestScores() throws IOException {
+    public void highestScores() {
         HashMap<Integer, String> highScores = new HashMap<>();
         highScores.put(10, "fred");
         highScores.put(20, "bloggs");
@@ -45,7 +45,7 @@ public class TestScore {
     }
 
     @Test
-    public void displayScores() throws IOException {
+    public void displayScores() {
         TreeMap<Integer, String> highScores = new TreeMap<>();
         highScores.descendingMap();
         highScores.put(20, "bloggs");
@@ -57,7 +57,7 @@ public class TestScore {
     }
 
     @Test
-    public void checkCurrentAgainstExistingScores() throws IOException {
+    public void checkCurrentAgainstExistingScores() {
         Score score = new Score();
 
         score.incrementScore(5);
@@ -69,11 +69,12 @@ public class TestScore {
     }
 
     @Test
-    public void insertCurrentIntoExistingSet() throws IOException {
-        String highScores = "20\tbloggs\n15\ttest\n10\tfred\n";
+    public void insertCurrentIntoExistingSet() {
+        String userScore = System.getProperty("user.name");
+        String highScores = "20\tbloggs\n15\t" + userScore + "\n10\tfred\n";
 
         //TODO use username environment variable to get local user
-        Score score = new Score("test");
+        Score score = new Score(System.getProperty("user.name"));
         score.getHighestScores();
         score.incrementScore(15);
         score.checkAgainstExisting();

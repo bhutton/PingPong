@@ -76,7 +76,8 @@ public class Messages {
         int returnScoresLength;
         int xScoreMessage;
         int y = yScoreMessage;
-        Score scores = new Score();
+        Score scores = new Score(System.getProperty("user.name"));
+
         scores.incrementScore(newScore);
         HashMap<Integer, String> getScores;
         getScores = scores.getHighestScores();

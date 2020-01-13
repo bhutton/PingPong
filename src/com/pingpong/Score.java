@@ -10,13 +10,14 @@ import java.util.TreeMap;
 public class Score {
     private int score;
     HashMap<Integer, String> scores;
+    private String username;
 
     public Score() {
         this.score = 0;
     }
 
-    public Score(String name) {
-
+    public Score(String username) {
+        this.username = username;
     }
 
     public int getScore() {
@@ -80,7 +81,7 @@ public class Score {
     public boolean checkAgainstExisting() {
         for (Map.Entry<Integer, String> line : scores.entrySet())
             if (score > line.getKey()) {
-                scores.put(score, "test");
+                scores.put(score, username);
                 return true;
             }
 

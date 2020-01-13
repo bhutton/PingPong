@@ -88,7 +88,6 @@ public class TestBricks {
 	@Test
 	public void testSetBrickTaken() {
 		int taken = 1;
-//		ball.brickArray[0][0][2] = 0;
 		ball.setBrickStatus(0, 0, 2, 0);
 		ball.setNumRows(1);
 		ball.setNumCols(1);
