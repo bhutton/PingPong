@@ -1,8 +1,6 @@
 package com.pingpong;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,12 +10,13 @@ public class Score {
     HashMap<Integer, String> scores;
     private String username;
 
-    public Score() {
-        this.score = 0;
-    }
+//    public Score() {
+//        this.score = 0;
+//    }
 
     public Score(String username) {
         this.username = username;
+        this.score = 0;
     }
 
     public int getScore() {
@@ -79,11 +78,30 @@ public class Score {
     }
 
     public boolean checkAgainstExisting() {
-        for (Map.Entry<Integer, String> line : scores.entrySet())
-            if (score > line.getKey()) {
-                scores.put(score, username);
-                return true;
+        BufferedWriter bw;
+
+        try {
+            if (scores.size() > 0) {
+                File file = new File("src/com/pingpong/file/highscores");
+                FileWriter fw;
+                fw = new FileWriter(file);
+                bw = new BufferedWriter(fw);
+
+                for (Map.Entry<Integer, String> line : scores.entrySet()) {
+                    bw.write(line.getValue() + "=" + line.getKey() + "\n");
+                    if (score > line.getKey()) {
+                        scores.put(score, username);
+
+                        bw.write(username + "=" + score + "\n");
+                        bw.close();
+                        return true;
+                    }
+                }
+                bw.close();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         sortDescending();
         return false;

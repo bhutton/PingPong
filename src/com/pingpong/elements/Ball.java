@@ -16,7 +16,7 @@ public class Ball extends Paddle {
     private final int incY=3;
     private final int width=50;
 	private boolean right = true, down = true, ballIsActive = true, ballStart = false;
-	private Score score = new Score();
+	private Score score = new Score(System.getProperty("user.name"));
 	
 	private BufferedImage imgBall = null;
 
