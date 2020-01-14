@@ -87,19 +87,26 @@ public class Score {
         HashMap<Integer, String> newScore = new HashMap<>();
 
         try {
+            int scoreLength = 1;
             if (scores.size() > 0) {
                 bw = createHighScoresFile();
 
-                for (Map.Entry<Integer, String> line : scores.entrySet()) {
-                    bw.write(line.getValue() + "=" + line.getKey() + "\n");
-                    newScore.put(line.getKey(), line.getValue());
+                Map<Integer, String> sortedScores = sortDescending();
 
-                    if (score > line.getKey() && !response) {
-                        newScore.put(score, username);
+                for (Map.Entry<Integer, String> line : sortedScores.entrySet()) {
+                    if(scoreLength < 10) {
+                        bw.write(line.getValue() + "=" + line.getKey() + "\n");
+                        newScore.put(line.getKey(), line.getValue());
 
-                        bw.write(username + "=" + score + "\n");
-                        response = true;
+                        if (score > line.getKey() && !response) {
+                            newScore.put(score, username);
+
+                            bw.write(username + "=" + score + "\n");
+                            response = true;
+                        }
                     }
+
+                    scoreLength++;
                 }
 
                 bw.close();
