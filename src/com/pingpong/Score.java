@@ -9,13 +9,16 @@ public class Score {
     private int score;
     HashMap<Integer, String> scores;
     private String username;
-
-//    public Score() {
-//        this.score = 0;
-//    }
+    private String path = "src/com/pingpong/file/highscores";
 
     public Score(String username) {
         this.username = username;
+        this.score = 0;
+    }
+
+    public Score(String username, String path) {
+        this.username = username;
+        this.path = path;
         this.score = 0;
     }
 
@@ -34,7 +37,7 @@ public class Score {
     private HashMap<Integer, String> loadScoresFromFile() {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(new File("src/com/pingpong/file/highscores")));
+            reader = new BufferedReader(new FileReader(new File(this.path)));
             String line;
             scores = new HashMap<>();
             while ((line = reader.readLine()) != null)
@@ -90,14 +93,15 @@ public class Score {
                 for (Map.Entry<Integer, String> line : scores.entrySet()) {
                     bw.write(line.getValue() + "=" + line.getKey() + "\n");
                     newScore.put(line.getKey(), line.getValue());
+
                     if (score > line.getKey() && !response) {
                         newScore.put(score, username);
 
                         bw.write(username + "=" + score + "\n");
                         response = true;
                     }
-
                 }
+
                 bw.close();
             }
         } catch (Exception e) {
@@ -122,7 +126,7 @@ public class Score {
 
     private BufferedWriter createHighScoresFile() throws IOException {
         BufferedWriter bw;
-        File file = new File("src/com/pingpong/file/highscores");
+        File file = new File(this.path);
         FileWriter fw;
         fw = new FileWriter(file);
         bw = new BufferedWriter(fw);

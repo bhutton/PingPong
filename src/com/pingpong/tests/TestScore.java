@@ -14,10 +14,12 @@ import java.util.TreeMap;
 import static org.junit.Assert.*;
 
 public class TestScore {
+    private String path = "src/com/pingpong/tests/file/highscores";
+
     @Before
     public void setup() throws Exception {
         BufferedWriter bw;
-        File file = new File("src/com/pingpong/file/highscores");
+        File file = new File(this.path);
         FileWriter fw;
         fw = new FileWriter(file);
         bw = new BufferedWriter(fw);
@@ -29,14 +31,14 @@ public class TestScore {
 
     @Test
     public void checkStartScore() {
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
 
         assertEquals(0, score.getScore());
     }
 
     @Test
     public void checkIncrementScore() {
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
 
         score.incrementScore(1);
         assertEquals(1, score.getScore());
@@ -44,7 +46,7 @@ public class TestScore {
 
     @Test
     public void checkIncrementScoreByTwo() {
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
 
         score.incrementScore(2);
         assertEquals(2, score.getScore());
@@ -55,7 +57,7 @@ public class TestScore {
         HashMap<Integer, String> highScores = new HashMap<>();
         highScores.put(10, "fred");
         highScores.put(20, "bloggs");
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
 
         assertEquals(highScores, score.getHighestScores());
     }
@@ -67,13 +69,13 @@ public class TestScore {
         highScores.put(20, "bloggs");
         highScores.put(10, "fred");
 
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
         assertEquals(highScores, score.getHighestScores());
     }
 
     @Test
     public void checkCurrentAgainstExistingScores() {
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
 
         score.incrementScore(5);
         score.getHighestScores();
@@ -88,7 +90,7 @@ public class TestScore {
         String userScore = System.getProperty("user.name");
         String highScores = "20\tbloggs\n15\t" + userScore + "\n10\tfred\n";
 
-        Score score = new Score(System.getProperty("user.name"));
+        Score score = new Score(System.getProperty("user.name"), this.path);
         score.getHighestScores();
         score.incrementScore(15);
         score.checkAgainstExisting();
@@ -98,7 +100,7 @@ public class TestScore {
     @Test
     public void addHighScoresToFile() {
         String userScore = System.getProperty("user.name");
-        Score score = new Score(userScore);
+        Score score = new Score(userScore, this.path);
         score.getHighestScores();
         score.incrementScore(15);
         score.checkAgainstExisting();
@@ -111,7 +113,7 @@ public class TestScore {
     @Test
     public void addHighScoresToFileWithDifferentSet() throws IOException {
         BufferedWriter bw;
-        File file = new File("src/com/pingpong/file/highscores");
+        File file = new File(this.path);
         FileWriter fw;
         fw = new FileWriter(file);
         bw = new BufferedWriter(fw);
@@ -121,7 +123,7 @@ public class TestScore {
         bw.close();
 
         String userScore = System.getProperty("user.name");
-        Score score = new Score(userScore);
+        Score score = new Score(userScore, this.path);
         score.getHighestScores();
         score.incrementScore(15);
         score.checkAgainstExisting();
@@ -130,4 +132,6 @@ public class TestScore {
         String highScores = "20\tbloggs\n15\t" + userScore + "\n1\tfred\n";
         assertEquals(highScores, score.toString());
     }
+
+    //TODO Limit size of highscores file
 }
