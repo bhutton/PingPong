@@ -92,23 +92,21 @@ public class Score {
     }
 
     private boolean updateScores() throws IOException {
-        boolean response = false;
         HashMap<Integer, String> newScore = new HashMap<>();
 
-        if (scores.size() > 0) {
-            response = processScores(response, newScore);
-        }
+        if (scores.size() > 0)
+            return processScores(newScore);
 
-        return response;
+        return false;
     }
 
-    private boolean processScores(boolean response, HashMap<Integer, String> newScore) throws IOException {
+    private boolean processScores(HashMap<Integer, String> newScore) throws IOException {
         Map<Integer, String> sortedScores = sortDescending();
         BufferedWriter bw = createHighScoresFile();
+        boolean response = false;
 
-        for (Map.Entry<Integer, String> line : sortedScores.entrySet()) {
+        for (Map.Entry<Integer, String> line : sortedScores.entrySet())
             response = checkHighScore(response, newScore, bw, line);
-        }
 
         bw.close();
         scores = newScore;
@@ -140,6 +138,7 @@ public class Score {
             writeScoreToFile(bw, username, score);
             response = true;
         }
+
         return response;
     }
 
