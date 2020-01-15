@@ -94,6 +94,9 @@ public class Score {
     private boolean updateScores() throws IOException {
         HashMap<Integer, String> newScore = new HashMap<>();
 
+        if (scores.size() == 0)
+            scores.put(score, username);
+
         if (scores.size() > 0)
             return processScores(newScore);
 

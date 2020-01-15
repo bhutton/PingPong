@@ -163,4 +163,24 @@ public class TestScore {
         String highScores = "15\t" + userScore + "\n" + "10\tfred\n9\tfred\n8\tfred\n7\tfred\n6\tfred\n5\tfred\n4\tfred\n3\tfred\n2\tfred\n";
         assertEquals(highScores, score.toString());
     }
+
+    @Test
+    public void addScoreToEmptySet() throws IOException {
+        BufferedWriter bw;
+        File file = new File(this.path);
+        FileWriter fw;
+        fw = new FileWriter(file);
+        bw = new BufferedWriter(fw);
+        bw.close();
+
+        String userScore = System.getProperty("user.name");
+        Score score = new Score(userScore, this.path);
+        score.getHighestScores();
+        score.incrementScore(15);
+        score.checkAgainstExisting();
+        score.getHighestScores();
+
+        String highScores = "15\t" + userScore + "\n";
+        assertEquals(highScores, score.toString());
+    }
 }
