@@ -116,7 +116,8 @@ public class Score {
         return response;
     }
 
-    private boolean checkHighScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
+    private boolean checkHighScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw,
+                                   Map.Entry<Integer, String> line) throws IOException {
         if (newScore.size() < 10) {
             writeScoreToFile(bw, line.getValue(), line.getKey());
             addExistingScore(newScore, line.getKey(), line.getValue());
@@ -134,7 +135,8 @@ public class Score {
         bw.write(value + "=" + key + "\n");
     }
 
-    private boolean addScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
+    private boolean addScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw,
+                             Map.Entry<Integer, String> line) throws IOException {
         if (score > line.getKey() && !response) {
             addExistingScore(newScore, score, username);
 
