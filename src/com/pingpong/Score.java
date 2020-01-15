@@ -52,7 +52,7 @@ public class Score {
     private void splitString(String line) {
         if (line.contains("=")) {
             String[] strings = line.split("=");
-            scores.put(Integer.parseInt(strings[1]), strings[0]);
+            addExistingScore(scores, Integer.parseInt(strings[1]), strings[0]);
         }
     }
 
@@ -81,54 +81,66 @@ public class Score {
     }
 
     public boolean checkAgainstExisting() {
-        BufferedWriter bw;
-
-        boolean response = false;
-        HashMap<Integer, String> newScore = new HashMap<>();
-
         try {
-            int scoreLength = 1;
-            if (scores.size() > 0) {
-                bw = createHighScoresFile();
-
-                Map<Integer, String> sortedScores = sortDescending();
-
-                for (Map.Entry<Integer, String> line : sortedScores.entrySet()) {
-                    if(scoreLength < 10) {
-                        bw.write(line.getValue() + "=" + line.getKey() + "\n");
-                        newScore.put(line.getKey(), line.getValue());
-
-                        if (score > line.getKey() && !response) {
-                            newScore.put(score, username);
-
-                            bw.write(username + "=" + score + "\n");
-                            response = true;
-                        }
-                    }
-
-                    scoreLength++;
-                }
-
-                bw.close();
-            }
+            return updateScores();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        scores = newScore;
         sortDescending();
+        return false;
+    }
+
+    private boolean updateScores() throws IOException {
+        boolean response = false;
+        HashMap<Integer, String> newScore = new HashMap<>();
+
+        if (scores.size() > 0) {
+            response = processScores(response, newScore);
+        }
+
         return response;
     }
 
-    private boolean addNewHighScore(BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
-        if (score > line.getKey()) {
-            scores.put(score, username);
+    private boolean processScores(boolean response, HashMap<Integer, String> newScore) throws IOException {
+        Map<Integer, String> sortedScores = sortDescending();
+        BufferedWriter bw = createHighScoresFile();
 
-            bw.write(username + "=" + score + "\n");
-            bw.close();
-            return true;
+        for (Map.Entry<Integer, String> line : sortedScores.entrySet()) {
+            response = checkHighScore(response, newScore, bw, line);
         }
-        return false;
+
+        bw.close();
+        scores = newScore;
+        return response;
+    }
+
+    private boolean checkHighScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
+        if (newScore.size() < 10) {
+            writeScoreToFile(bw, line.getValue(), line.getKey());
+            addExistingScore(newScore, line.getKey(), line.getValue());
+
+            response = addScore(response, newScore, bw, line);
+        }
+        return response;
+    }
+
+    private void addExistingScore(HashMap<Integer, String> newScore, Integer key, String value) {
+        newScore.put(key, value);
+    }
+
+    private void writeScoreToFile(BufferedWriter bw, String value, Integer key) throws IOException {
+        bw.write(value + "=" + key + "\n");
+    }
+
+    private boolean addScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw, Map.Entry<Integer, String> line) throws IOException {
+        if (score > line.getKey() && !response) {
+            addExistingScore(newScore, score, username);
+
+            writeScoreToFile(bw, username, score);
+            response = true;
+        }
+        return response;
     }
 
     private BufferedWriter createHighScoresFile() throws IOException {
