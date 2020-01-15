@@ -27,7 +27,7 @@ public class TestMessages {
 	@Before
 	public void setup() throws Exception {
 		BufferedWriter bw;
-		File file = new File("src/com/pingpong/file/highscores");
+		File file = new File("src/com/pingpong/tests/file/highscores");
 		FileWriter fw;
 		fw = new FileWriter(file);
 		bw = new BufferedWriter(fw);
@@ -101,6 +101,7 @@ public class TestMessages {
 		int xGameOver = 0;
 		int yGameOver = -10;
 
+		messages.setPath("src/com/pingpong/tests/file/highscores");
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
@@ -118,6 +119,7 @@ public class TestMessages {
 		String userScore = "15\t" + System.getProperty("user.name");
 
 		messages.setScore(15);
+		messages.setPath("src/com/pingpong/tests/file/highscores");
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);

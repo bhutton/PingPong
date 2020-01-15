@@ -19,6 +19,8 @@ public class Messages {
 
     private BufferedImage imgGameOver = null;
 
+    private String path = "src/com/pingpong/file/highscores";
+
     private int level;
     private int lives;
     private int score;
@@ -76,7 +78,7 @@ public class Messages {
         int returnScoresLength;
         int xScoreMessage;
         int y = yScoreMessage;
-        Score scores = new Score(System.getProperty("user.name"));
+        Score scores = new Score(System.getProperty("user.name"), path);
 
         scores.incrementScore(newScore);
         scores.getHighestScores();
@@ -130,4 +132,7 @@ public class Messages {
         return this.score;
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
