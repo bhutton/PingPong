@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static java.lang.String.format;
+
 public class Score {
     private int score;
     HashMap<Integer, String> scores;
@@ -131,8 +133,8 @@ public class Score {
         newScore.put(key, value);
     }
 
-    private void writeScoreToFile(BufferedWriter bw, String value, Integer key) throws IOException {
-        bw.write(value + "=" + key + "\n");
+    private void writeScoreToFile(BufferedWriter bw, String value, int key) throws IOException {
+        bw.write(format("%s=%d\n", value, key));
     }
 
     private boolean addScore(boolean response, HashMap<Integer, String> newScore, BufferedWriter bw,
