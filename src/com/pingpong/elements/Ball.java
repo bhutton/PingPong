@@ -230,9 +230,10 @@ public class Ball extends Paddle {
     }
 
     public double rotate() {
-        if(this.ballStart)
-            return angle += this.angle_multiplier;
-        return angle;
+        if (this.ballStart)
+            return this.angle += this.angle_multiplier;
+
+        return this.angle;
     }
 
     private void drawBall(Graphics g) {
