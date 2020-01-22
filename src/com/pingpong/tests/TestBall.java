@@ -167,6 +167,20 @@ public class TestBall {
     }
 
     @Test
+    public void ballSpinsRight() {
+        ball.setRight();
+
+        assertTrue(ball.rotate() > 0);
+    }
+
+    @Test
+    public void ballSpinsLeft() {
+        ball.setLeft();
+
+        assertTrue(ball.rotate() < 0);
+    }
+
+    @Test
     public void testCheckBallHitsLeftSideOfScreen() {
         ball.setBallXValue(0);
         ball.setLeft();

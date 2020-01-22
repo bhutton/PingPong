@@ -213,7 +213,6 @@ public class Ball extends Paddle {
 
     public static BufferedImage create(BufferedImage image, double angle,
                                        GraphicsConfiguration gc) {
-        double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
         int neww = (int) Math.floor(w);
         int newh = (int) Math.floor(h);
@@ -221,14 +220,17 @@ public class Ball extends Paddle {
         BufferedImage result = gc.createCompatibleImage(neww, newh, transparency);
         Graphics2D g = result.createGraphics();
         g.translate((neww - w) / 2, (newh - h) / 2);
-        g.rotate(angle, w / 2, h / 2);
+        g.rotate(angle, w / 2.0, h / 2.0);
         g.drawRenderedImage(image, null);
 
         return result;
     }
 
-    private double rotate() {
-        return angle += 0.1;
+    public double rotate() {
+        if (this.getRight())
+            return angle += 0.1;
+
+        return angle -= 0.1;
     }
 
     private void drawBall(Graphics g) {
