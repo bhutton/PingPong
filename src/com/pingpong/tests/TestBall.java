@@ -169,6 +169,7 @@ public class TestBall {
     @Test
     public void ballSpinsRight() {
         ball.setRight();
+        ball.ballSetStart();
 
         assertTrue(ball.rotate() > 0);
     }
@@ -176,8 +177,16 @@ public class TestBall {
     @Test
     public void ballSpinsLeft() {
         ball.setLeft();
+        ball.ballSetStart();
 
         assertTrue(ball.rotate() < 0);
+    }
+
+    @Test
+    public void ballOnlyRotatesWhenGameOn() {
+        ball.ballSetStop();
+
+        assertEquals(0.0, ball.rotate(), 0.0);
     }
 
     @Test

@@ -21,6 +21,7 @@ public class Ball extends Paddle {
 
     private BufferedImage imgBall = null;
     private double angle = 0;
+    private double angle_multiplier = 0.1;
 
     public Ball() {
         super();
@@ -100,10 +101,12 @@ public class Ball extends Paddle {
 
     public void setLeft() {
         this.right = false;
+        this.angle_multiplier = -0.1;
     }
 
     public void setRight() {
         this.right = true;
+        this.angle_multiplier = 0.1;
     }
 
     public Boolean setBallDirectionOnReachingBricks() {
@@ -227,10 +230,9 @@ public class Ball extends Paddle {
     }
 
     public double rotate() {
-        if (this.getRight())
-            return angle += 0.1;
-
-        return angle -= 0.1;
+        if(this.ballStart)
+            return angle += this.angle_multiplier;
+        return angle;
     }
 
     private void drawBall(Graphics g) {
