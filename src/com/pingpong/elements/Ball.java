@@ -2,13 +2,12 @@ package com.pingpong.elements;
 
 import com.pingpong.Score;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class Ball extends Paddle {
     private int x;
@@ -21,7 +20,7 @@ public class Ball extends Paddle {
 
     private BufferedImage imgBall = null;
     private double angle = 0;
-    private double angle_multiplier = 0.1;
+    private double angleMultiplier = 0.1;
 
     public Ball() {
         super();
@@ -101,20 +100,24 @@ public class Ball extends Paddle {
 
     public void setLeft() {
         this.right = false;
-        this.angle_multiplier = -0.1;
+        this.angleMultiplier = -0.1;
     }
 
     public void setRight() {
         this.right = true;
-        this.angle_multiplier = 0.1;
+        this.angleMultiplier = 0.1;
     }
 
     public Boolean setBallDirectionOnReachingBricks() {
         this.setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
         this.down = checkBricks(this.width);
         this.score.incrementScore(1);
+        this.setDirection();
 
-        setDirection();
+        if(this.angleMultiplier == 0.1)
+            this.angleMultiplier = -0.1;
+        else
+            this.angleMultiplier = 0.1;
 
         return down;
     }
@@ -231,7 +234,7 @@ public class Ball extends Paddle {
 
     public double rotate() {
         if (this.ballStart)
-            return this.angle += this.angle_multiplier;
+            return this.angle += this.angleMultiplier;
 
         return this.angle;
     }

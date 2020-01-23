@@ -95,9 +95,18 @@ public class TestBall {
         ball.setBallUp();
         ball.setBallXValue(x);
         ball.setBallYValue(y);
+        ball.ballSetStart();
+
+        double rotate = ball.rotate();
 
         assertFalse(ball.getDown());
+        assertTrue(ball.rotate() > rotate);
         assertTrue(ball.setBallDirectionOnReachingBricks());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() < rotate);
+        assertTrue(ball.setBallDirectionOnReachingBricks());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() > rotate);
     }
 
     @Test
