@@ -114,12 +114,16 @@ public class Ball extends Paddle {
         this.score.incrementScore(1);
         this.setDirection();
 
+        setAngle();
+
+        return down;
+    }
+
+    private void setAngle() {
         if(this.angleMultiplier == 0.1)
             this.angleMultiplier = -0.1;
         else
             this.angleMultiplier = 0.1;
-
-        return down;
     }
 
     private void setDirection() {
@@ -132,6 +136,7 @@ public class Ball extends Paddle {
     public Boolean setBallDirectionAfterReachingPaddle() {
         setBallX(x).setBallY(y).setBallDown(down).setBallRight(right);
         down = checkPaddle(down, x, y);
+        setAngle();
         return down;
     }
 

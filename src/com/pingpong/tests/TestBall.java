@@ -101,9 +101,11 @@ public class TestBall {
 
         assertFalse(ball.getDown());
         assertTrue(ball.rotate() > rotate);
+
         assertTrue(ball.setBallDirectionOnReachingBricks());
         rotate = ball.rotate();
         assertTrue(ball.rotate() < rotate);
+
         assertTrue(ball.setBallDirectionOnReachingBricks());
         rotate = ball.rotate();
         assertTrue(ball.rotate() > rotate);
@@ -127,6 +129,7 @@ public class TestBall {
         int x = 450, y = 800;
 
         ball.createWall(2);
+        ball.ballSetStart();
         ball.setDown();
         ball.setBallXValue(x);
         ball.setBallYValue(y);
@@ -136,6 +139,13 @@ public class TestBall {
 
         assertTrue(ball.getDown());
         assertFalse(ball.setBallDirectionAfterReachingPaddle());
+
+        double rotate = ball.rotate();
+        assertTrue(ball.rotate() < rotate);
+
+        assertFalse(ball.setBallDirectionAfterReachingPaddle());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() > rotate);
     }
 
     @Test
