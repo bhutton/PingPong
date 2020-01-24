@@ -62,7 +62,7 @@ public class Messages {
 
     public void displayGameOverMessage(Graphics g, int width, int height, int appletWidth, int appletHeight) {
         int xGameOver = appletWidth / 2 - (width / 2);
-        int yGameOver = appletHeight / 2 - (height);
+        int yGameOver = appletHeight / 3 - (height);
         FontMetrics metrics = g.getFontMetrics();
 
         g.setColor(Color.GRAY);
@@ -72,7 +72,7 @@ public class Messages {
     }
 
     private void displayMessages(Graphics g, int appletWidth, int appletHeight, FontMetrics metrics, int newScore) {
-        int yScoreMessage = appletHeight / 2 + 20;
+        int yScoreMessage = appletHeight / 3 + 20;
         int returnMessageLength = calculateStringLength(metrics, returnMessage());
         int xStartMessage = (appletWidth / 2) - (returnMessageLength / 2);
         int returnScoresLength;

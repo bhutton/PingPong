@@ -1,9 +1,10 @@
 package com.pingpong.tests;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import com.pingpong.game.Messages;
+import org.junit.Before;
+import org.junit.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -12,12 +13,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import com.pingpong.Score;
-import com.pingpong.game.Messages;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class TestMessages {
 	
@@ -99,22 +97,22 @@ public class TestMessages {
 	public void displayMessage() {
 		int xStartMessage = 10;
 		int xGameOver = 0;
-		int yGameOver = -10;
+		int yGameOver = -14;
 
 		messages.setPath("src/com/pingpong/tests/file/highscores");
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
-		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 30);
-		verify(graphicsMock).drawString("10	fred", xStartMessage, 50);
-		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 70);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 26);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 46);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 66);
 	}
 
 	@Test
 	public void displayMessageWithNewHighScoreAdded() {
 		int xStartMessage = 10;
 		int xGameOver = 0;
-		int yGameOver = -10;
+		int yGameOver = -14;
 
 		String userScore = "15\t" + System.getProperty("user.name");
 
@@ -123,9 +121,9 @@ public class TestMessages {
 		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
-		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 30);
-		verify(graphicsMock).drawString("10	fred", xStartMessage, 50);
-		verify(graphicsMock).drawString(userScore, xStartMessage, 70);
-		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 90);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 26);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 46);
+		verify(graphicsMock).drawString(userScore, xStartMessage, 66);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 86);
 	}
 }
