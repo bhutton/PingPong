@@ -1,7 +1,6 @@
 package com.pingpong.tests;
 
 import static org.junit.Assert.*;
-//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -89,10 +88,18 @@ public class TestBricks {
 	@Test
 	public void testSetBrickTaken() {
 		int taken = 1;
+		ball.setBrickStatus(0, 0, 2, 0);
+		ball.setNumRows(1);
+		ball.setNumCols(1);
+		assertEquals(0, ball.getScore());
+
 		ball.setBrickColumnLocation(2);
 		ball.setBrickRowLocation(2);
 		ball.setBrickEnabled(taken);
+		ball.setBrickTaken();
+
 		assertFalse(ball.getActive());
+		assertEquals(1, ball.getScore());
 	}
 	
 	@Test

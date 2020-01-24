@@ -95,9 +95,20 @@ public class TestBall {
         ball.setBallUp();
         ball.setBallXValue(x);
         ball.setBallYValue(y);
+        ball.ballSetStart();
+
+        double rotate = ball.rotate();
 
         assertFalse(ball.getDown());
+        assertTrue(ball.rotate() > rotate);
+
         assertTrue(ball.setBallDirectionOnReachingBricks());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() < rotate);
+
+        assertTrue(ball.setBallDirectionOnReachingBricks());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() > rotate);
     }
 
     @Test
@@ -118,6 +129,7 @@ public class TestBall {
         int x = 450, y = 800;
 
         ball.createWall(2);
+        ball.ballSetStart();
         ball.setDown();
         ball.setBallXValue(x);
         ball.setBallYValue(y);
@@ -127,6 +139,13 @@ public class TestBall {
 
         assertTrue(ball.getDown());
         assertFalse(ball.setBallDirectionAfterReachingPaddle());
+
+        double rotate = ball.rotate();
+        assertTrue(ball.rotate() < rotate);
+
+        assertFalse(ball.setBallDirectionAfterReachingPaddle());
+        rotate = ball.rotate();
+        assertTrue(ball.rotate() > rotate);
     }
 
     @Test
@@ -164,6 +183,29 @@ public class TestBall {
         ball.setRight();
         ball.checkRight(appletWidth);
         assertFalse(ball.getRight());
+    }
+
+    @Test
+    public void ballSpinsRight() {
+        ball.setRight();
+        ball.ballSetStart();
+
+        assertTrue(ball.rotate() > 0);
+    }
+
+    @Test
+    public void ballSpinsLeft() {
+        ball.setLeft();
+        ball.ballSetStart();
+
+        assertTrue(ball.rotate() < 0);
+    }
+
+    @Test
+    public void ballOnlyRotatesWhenGameOn() {
+        ball.ballSetStop();
+
+        assertEquals(0.0, ball.rotate(), 0.0);
     }
 
     @Test

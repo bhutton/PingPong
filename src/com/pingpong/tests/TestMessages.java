@@ -1,25 +1,41 @@
 package com.pingpong.tests;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import com.pingpong.game.Messages;
+import org.junit.Before;
+import org.junit.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import com.pingpong.game.Messages;
-import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class TestMessages {
 	
 	private final Messages messages = new Messages();
 	private final Graphics graphicsMock = mock(Graphics.class);
-	
+
+	@Before
+	public void setup() throws Exception {
+		BufferedWriter bw;
+		File file = new File("src/com/pingpong/tests/file/highscores");
+		FileWriter fw;
+		fw = new FileWriter(file);
+		bw = new BufferedWriter(fw);
+
+		bw.write("bloggs=20\n");
+		bw.write("fred=10\n");
+		bw.close();
+	}
+
+
 	@Test
 	public void gameOverImg() throws IOException {
 		String current = new java.io.File( "." ).getCanonicalPath();
@@ -60,6 +76,9 @@ public class TestMessages {
 	@Test
 	public void testDisplayGameStatsAtBottomOfScreen() {
 		messages.displayGameStatsAtBottomOfScreen(graphicsMock, 800, 600);
+		verify(graphicsMock).drawString("Lives: " + 0, 650, 590);
+		verify(graphicsMock).drawString("Level: " + 0, 730, 590);
+		verify(graphicsMock).drawString("Score: " + 0, 570, 590);
 	}
 	
 	@Test
@@ -76,14 +95,35 @@ public class TestMessages {
 
 	@Test
 	public void displayMessage() {
-		int xStartMessage = -70;
-		int yStartMessage = 60;
+		int xStartMessage = 10;
 		int xGameOver = 0;
-		int yGameOver = 0;
+		int yGameOver = -14;
 
-		messages.displayMessage(graphicsMock, 20, 20, 20, 20);
+		messages.setPath("src/com/pingpong/tests/file/highscores");
+		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
 		verify(graphicsMock).setColor(Color.GRAY);
 		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
-		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, yStartMessage);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 26);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 46);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 66);
+	}
+
+	@Test
+	public void displayMessageWithNewHighScoreAdded() {
+		int xStartMessage = 10;
+		int xGameOver = 0;
+		int yGameOver = -14;
+
+		String userScore = "15\t" + System.getProperty("user.name");
+
+		messages.setScore(15);
+		messages.setPath("src/com/pingpong/tests/file/highscores");
+		messages.displayGameOverMessage(graphicsMock, 20, 20, 20, 20);
+		verify(graphicsMock).setColor(Color.GRAY);
+		verify(graphicsMock).drawImage(null, xGameOver, yGameOver, null);
+		verify(graphicsMock).drawString("20	bloggs", xStartMessage, 26);
+		verify(graphicsMock).drawString("10	fred", xStartMessage, 46);
+		verify(graphicsMock).drawString(userScore, xStartMessage, 66);
+		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 86);
 	}
 }

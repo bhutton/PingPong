@@ -25,6 +25,7 @@ public class Bricks {
 
 	private BufferedImage imgBrick = null;
 	private int ballWidth;
+	private int score;
 
 	public Bricks() {
 		initializeBrickArray();
@@ -181,7 +182,7 @@ public class Bricks {
 	public int getNumRows() {
 		return this.numRows;
 	}
-	
+
 	public int getNumCols() {
 		return this.numCols;
 	}
@@ -334,7 +335,8 @@ public class Bricks {
 	public Boolean setBrickTaken() {		
 		for (int row = this.numRows-1; row >= 0; row--) {
 			if (this.brickArray[brickColumnLocation][row][2] == brickIsActive) {
-				this.brickArray[brickColumnLocation][row][2] = brickHasBeenTaken;
+				this.setBrickStatus(brickColumnLocation, row, 2, brickHasBeenTaken);
+				this.score++;
 						
 				return true;
 			}
@@ -375,7 +377,23 @@ public class Bricks {
 		return true;
 	}
 
+	public int getScore() {
+		return this.score;
+	}
 
-	
+	public void setNumRows(int rows) {
+		this.numRows = rows;
+	}
 
+	public void setNumCols(int cols) {
+		this.numCols = cols;
+	}
+
+	public void setBrickStatus(int col, int row, int currentStatus, int newStatus) {
+		this.brickArray[col][row][currentStatus] = newStatus;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 }

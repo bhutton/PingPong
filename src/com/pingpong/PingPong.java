@@ -34,7 +34,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
     private HashMap<String, String> artifacts = new HashMap<>();
 
     public final Ball ball = new Ball();
-    private final Messages message = new Messages();
+    public final Messages message = new Messages();
     public final Background background = new Background();
     private final File basePath = new File(
             PingPong.class.getProtectionDomain().getCodeSource().getLocation().getPath()
@@ -88,7 +88,10 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) this.called = ball.movePaddleLeft();
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) this.called = ball.movePaddleRight();
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) this.called = message.setGameActive();
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            ball.setScore(0);
+            this.called = message.setGameActive();
+        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) this.called = ball.ballSetStart();
     }
 
@@ -153,6 +156,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
             this.gameStart = true;
 
             ball.ballCalculations(this.appletWidth, this.appletHeight);
+            message.setScore(ball.getScore());
             frame.repaint();
 
             try {
@@ -205,7 +209,7 @@ public class PingPong extends JFrame implements KeyListener, Runnable {
                 ball.drawWindow(g);
                 message.displayGameStatsAtBottomOfScreen(g, appletWidth, appletHeight);
             } else
-                message.displayMessage(g, 300, 79, appletWidth, appletHeight);
+                message.displayGameOverMessage(g, 300, 79, appletWidth, appletHeight);
         }
     }
 }
