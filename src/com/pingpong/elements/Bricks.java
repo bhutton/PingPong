@@ -5,8 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
-public class Bricks {
+public class Bricks extends JPanel {
 	
 	// Contains the x,y coordinates and whether the brick is active or not.
 	final private int[][][] brickArray = new int[225][830][3];
@@ -16,7 +17,7 @@ public class Bricks {
 				numRows=0,
 				numCols;
 
-	private final int brickHeight=50,
+	private final int brickHeight=55,
                       brickIsActive=0,
                       brickHasBeenTaken=1;
 	
