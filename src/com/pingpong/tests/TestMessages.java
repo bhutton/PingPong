@@ -35,7 +35,6 @@ public class TestMessages {
 		bw.close();
 	}
 
-
 	@Test
 	public void gameOverImg() throws IOException {
 		String current = new java.io.File( "." ).getCanonicalPath();
@@ -125,5 +124,5 @@ public class TestMessages {
 		verify(graphicsMock).drawString("10	fred", xStartMessage, 46);
 		verify(graphicsMock).drawString(userScore, xStartMessage, 66);
 		verify(graphicsMock).drawString(messages.returnMessage(), xStartMessage, 86);
-	}
+ 	}
 }
