@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.pingpong.elements.Ball;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestPaddle {
 	

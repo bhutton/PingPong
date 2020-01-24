@@ -1,8 +1,8 @@
 package com.pingpong.tests;
 
 import com.pingpong.Score;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TestScore {
     private String path = "src/com/pingpong/tests/file/highscores";
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         BufferedWriter bw;
         File file = new File(this.path);

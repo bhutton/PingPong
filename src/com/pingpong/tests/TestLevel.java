@@ -3,7 +3,7 @@ package com.pingpong.tests;
 import static org.junit.Assert.*;
 
 import com.pingpong.game.Level;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestLevel {
 	

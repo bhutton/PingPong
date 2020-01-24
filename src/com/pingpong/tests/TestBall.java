@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import static org.junit.Assert.*;
 
 import com.pingpong.elements.Ball;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestBall {
 
