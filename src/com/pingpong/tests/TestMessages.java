@@ -1,8 +1,8 @@
 package com.pingpong.tests;
 
 import com.pingpong.game.Messages;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -22,7 +22,7 @@ public class TestMessages {
 	private final Messages messages = new Messages();
 	private final Graphics graphicsMock = mock(Graphics.class);
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		BufferedWriter bw;
 		File file = new File("src/com/pingpong/tests/file/highscores");

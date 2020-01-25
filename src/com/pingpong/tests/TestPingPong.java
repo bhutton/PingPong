@@ -1,20 +1,17 @@
 package com.pingpong.tests;
 
-import static org.junit.Assert.*;
+import com.pingpong.PingPong;
+import org.junit.jupiter.api.Test;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
-
-import com.pingpong.PingPong;
-import org.junit.Test;
-
 import java.util.Arrays;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class TestPingPong {
 
